@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-06 20:26+0700\n"
+"POT-Creation-Date: 2023-09-08 14:04+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\exammanagement\settings.py:120
+#: .\exammanagement\settings.py:132
 msgid "English"
 msgstr ""
 
-#: .\exammanagement\settings.py:121
+#: .\exammanagement\settings.py:133
 msgid "Vietnamese"
 msgstr ""
 
@@ -66,66 +66,122 @@ msgstr ""
 msgid "Exam management"
 msgstr ""
 
-#: .\main\templates\base_generic.html:35
+#: .\main\templates\base_generic.html:37
 msgid "Search for..."
 msgstr ""
 
-#: .\main\templates\base_generic.html:66
+#: .\main\templates\base_generic.html:68
 msgid "Edit profile"
 msgstr ""
 
-#: .\main\templates\base_generic.html:68
+#: .\main\templates\base_generic.html:70
 msgid "Logout"
 msgstr ""
 
-#: .\main\templates\base_generic.html:73
+#: .\main\templates\base_generic.html:75
 msgid "Signin"
 msgstr ""
 
-#: .\main\templates\base_generic.html:83 .\main\templates\base_generic.html:88
+#: .\main\templates\base_generic.html:85 .\main\templates\base_generic.html:90
 msgid "Subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:96
+#: .\main\templates\base_generic.html:98
 msgid "Add subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:103
+#: .\main\templates\base_generic.html:105
 msgid "Enrolled subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:107
+#: .\main\templates\base_generic.html:109
 msgid "User"
 msgstr ""
 
-#: .\main\templates\base_generic.html:113
+#: .\main\templates\base_generic.html:115
 msgid "User list"
 msgstr ""
 
-#: .\main\templates\base_generic.html:127
+#: .\main\templates\base_generic.html:129
 msgid "User history"
 msgstr ""
 
-#: .\main\templates\base_generic.html:139
+#: .\main\templates\base_generic.html:141
 msgid "Finished subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:140
+#: .\main\templates\base_generic.html:142
 msgid "Finished tests"
 msgstr ""
 
-#: .\main\templates\base_generic.html:155
+#: .\main\templates\base_generic.html:157
 msgid "Language"
 msgstr ""
 
-#: .\main\templates\base_generic.html:181
+#: .\main\templates\base_generic.html:186
 msgid "Logged in as"
 msgstr ""
 
-#: .\main\templates\base_generic.html:211
+#: .\main\templates\base_generic.html:216
 msgid "Copyright"
 msgstr ""
 
 #: .\main\templates\main\subject_list.html:24
 msgid "There are no subjects in the web."
+msgstr ""
+
+#: .\main\views.py:27
+msgid "Registration successful."
+msgstr ""
+
+#: .\main\views.py:30
+msgid "Unsuccessful registration. Invalid information."
+msgstr ""
+
+#: .\main\views.py:45
+msgid "You are now logged in as "
+msgstr ""
+
+#: .\main\views.py:48 .\main\views.py:50
+msgid "Invalid username or password."
+msgstr ""
+
+#: .\main\views.py:57
+msgid "You have successfully logged out."
+msgstr ""
+
+#: .\templates\registration\login.html:10
+msgid "Please enter your login and password!"
+msgstr ""
+
+#: .\templates\registration\login.html:13
+msgid "Forgot password?"
+msgstr ""
+
+#: .\templates\registration\login.html:20
+msgid "Don't have an account?"
+msgstr ""
+
+#: .\templates\registration\login.html:20
+msgid "Sign Up"
+msgstr ""
+
+#: .\templates\registration\register.html:11
+msgid "Let's create an accounts!"
+msgstr ""
+
+#: .\templates\registration\register.html:20
+msgid "If you already have an account,"
+msgstr ""
+
+#: .\templates\registration\register.html:20
+msgid "login"
+msgstr ""
+
+#: .\templates\registration\register.html:20
+msgid "instead"
+msgstr ""
+
+#: .\templates\registration_template.html:7
+msgid "Exam management - login"
 msgstr ""

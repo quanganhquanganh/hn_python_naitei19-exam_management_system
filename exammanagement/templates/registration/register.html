@@ -1,0 +1,22 @@
+{% extends "registration_template.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load bootstrap5 %}
+
+
+{% block content %}
+    <form method="post" action="{% url 'register' %}" class="mb-3 mt-md-4">
+        {% csrf_token %}
+        <h2 class="fw-bold mb-2 text-uppercase ">Exam management</h2>
+        <p class=" mb-5">{% trans "Let's create an accounts!" %}</p>
+        {% include "toast.html" %}
+        {{ register_form|crispy }}
+        <div class="d-grid">
+            <input class="btn btn-outline-dark" type="submit" value="Register" />
+        </div>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <div>
+        <p class="text-center">{% trans "If you already have an account," %} <a href="{% url 'login' %}">{% trans "login" %}</a> {% trans "instead" %}.</p>
+    </div>
+{% endblock %}
