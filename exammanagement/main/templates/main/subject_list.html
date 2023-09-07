@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block content %}
+    {% if subject_list %}
+        <div class="row gy-5">
+            {% for subject in subject_list %}
+                <div class="card m-3 col-6" id="course-{{ course.id }}" style="width: 18rem">
+                    <img src="https://elearningindustry.com/wp-content/uploads/2021/02/understanding-technology-terms-used-in-education.png" alt="..."  style="object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ subject.name }}</h5>
+                        <p class="card-text">{{ subject.description }}</p>
+                        <div class="d-flex justify-content-center">
+                            {% if user.is_superuser %}
+                                <button type="button" class="btn btn-danger me-1">Delete</button>
+                            {% endif %}
+                                <button type="button" class="btn btn-primary">Detail</button>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>{% trans "There are no subjects in the web." %}</p>
+    {% endif %}
+{% endblock %}
