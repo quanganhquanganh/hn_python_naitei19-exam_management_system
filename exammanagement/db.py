@@ -15,4 +15,4 @@ dataBase = mysql.connector.connect(
 cursorObject = dataBase.cursor()
 
 # creating database
-cursorObject.execute("CREATE DATABASE exammanagement")
+cursorObject.execute("CREATE DATABASE IF NOT EXISTS exammanagement")

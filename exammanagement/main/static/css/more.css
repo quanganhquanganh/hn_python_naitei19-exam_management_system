@@ -1,0 +1,18 @@
+.w-full {
+  width: 100%;
+}
+
+.w-half {
+  width: 50%;
+}
+
+.subject-bg {
+  background: url("/main/static/image/subject_bg.png") top left / cover
+    no-repeat;
+  min-height: 35vh;
+  position: relative;
+}
+
+.w-18r {
+  width: 18rem;
+}

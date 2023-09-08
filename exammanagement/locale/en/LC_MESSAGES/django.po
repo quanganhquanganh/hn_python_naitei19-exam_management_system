@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-08 14:04+0700\n"
+"POT-Creation-Date: 2023-09-11 11:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,23 +42,23 @@ msgstr ""
 msgid "Select genre for this subject"
 msgstr ""
 
-#: .\main\models.py:35
+#: .\main\models.py:41
 msgid "Title name of the chapter"
 msgstr ""
 
-#: .\main\models.py:38
+#: .\main\models.py:44
 msgid "Minimum correct answers to pass the test"
 msgstr ""
 
-#: .\main\models.py:40
+#: .\main\models.py:46
 msgid "Time limit for the test"
 msgstr ""
 
-#: .\main\models.py:86
+#: .\main\models.py:92
 msgid "Detail of the question"
 msgstr ""
 
-#: .\main\models.py:92
+#: .\main\models.py:98
 msgid "Content of the answer"
 msgstr ""
 
@@ -124,6 +124,32 @@ msgstr ""
 
 #: .\main\templates\base_generic.html:216
 msgid "Copyright"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:16
+msgid "Chapters list"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:30
+#: .\main\templates\main\subject_list.html:15
+msgid "Delete"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:31
+msgid "Update"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:34
+#: .\main\templates\main\subject_list.html:17
+msgid "Detail"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:39
+msgid "There are no chapters in this subject"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:45
+msgid "Add chapter"
 msgstr ""
 
 #: .\main\templates\main\subject_list.html:24

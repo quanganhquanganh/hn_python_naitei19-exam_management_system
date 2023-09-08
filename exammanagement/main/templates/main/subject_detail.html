@@ -1,0 +1,46 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block content %}
+    {% load static %}
+    <section class="img-fluid subject-bg">
+        <div class="container">
+            <p class="display-2 fw-bold pt-4">{{subject.name }}</p>
+            <p class="fs-4 pt-2">{{subject.description }}</p>
+        </div>
+    </section>
+    <section>
+        <p class="fs-3 fw-bold">{% trans "Chapters list" %}</p>
+        <div class="card" >
+        <div class="card-header w-full">
+            {{ subject.name }}
+        </div>
+           <ul id="chapters-list" class="list-group list-group-flush">
+                {% for chapter in chapters %}
+                    <li id="lesson-{{ chapter.id }}" class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span class="mr-3 fw-bold align-self-center">
+                                <a href="#">{{ chapter.name }}</a>
+                            </span>
+                            {% if user.is_superuser %}
+                            <div>
+                                <button type="button" class="btn btn-danger me-1">{% trans "Delete"%}</button>
+                                <button type="button" class="btn btn-primary">{% trans "Update"%}</button>
+                            </div>
+                            {% elif user.is_authenticated %}
+                                <button type="button" class="btn btn-primary">{% trans "Detail"%}</button>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% empty %}
+                    <h5>{% trans "There are no chapters in this subject" %}</h5>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if user.is_superuser %}
+            <div class="card mt-5 mb-3 w-half">
+                <button type="button" class="btn btn-primary">{% trans "Add chapter" %}</button>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
