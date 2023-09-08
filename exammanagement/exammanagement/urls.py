@@ -19,13 +19,19 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
+from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
     path('', RedirectView.as_view(url='main/')),
+    path('register', views.register_request, name="register"),
+    path('login', views.login_request, name="login"),
+    path('logout', views.logout_request, name="logout"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += i18n_patterns(
     path('main/', include('main.urls')),
+    path('register', views.register_request, name="register"),
+    path('login', views.login_request, name="login"),
 )

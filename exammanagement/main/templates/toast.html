@@ -1,0 +1,8 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class=" message-toast d-flex justify-content-between p-3 {{ message.tags }} alert-dismissible shadow fade show" role="alert">
+            {{ message | safe }}
+            <span aria-hidden="true" class="close">&times;</span>
+        </div>
+    {% endfor %}
+{% endif %}

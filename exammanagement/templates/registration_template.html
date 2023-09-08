@@ -1,0 +1,37 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% block title %}<title>{% translate "Exam management - login" %}</title>{% endblock %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <!-- Add additional CSS in static file -->
+        {% load sass_tags %}
+        {% load static %}
+        <link href="{% sass_src 'scss/styles.scss' %}" rel="stylesheet" type="text/css" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script language="javaScript" type="text/javascript" src="{% static 'javascript/jquery-3.7.1.js'%}"></script>
+        <script src="{% static 'javascript/script.js'%}"></script>
+    </head>
+
+    <body>
+        <div class="vh-100 d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="card bg-white">
+                            <div class="card-body p-5">
+                                {% block content %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
