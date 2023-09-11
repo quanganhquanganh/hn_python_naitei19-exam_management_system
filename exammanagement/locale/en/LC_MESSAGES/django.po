@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-11 11:33+0700\n"
+"POT-Creation-Date: 2023-09-11 14:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,12 +126,31 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:16
+#: .\main\templates\main\chapter_detail.html:11
+msgid "Total question"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:12
+msgid "Time limt"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:12
+msgid "minutes"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:13
+msgid "Minium correct answers"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:14
+msgid "Go test"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:15
 msgid "Chapters list"
 msgstr ""
 
 #: .\main\templates\main\subject_detail.html:30
-#: .\main\templates\main\subject_list.html:15
 msgid "Delete"
 msgstr ""
 
@@ -140,11 +159,10 @@ msgid "Update"
 msgstr ""
 
 #: .\main\templates\main\subject_detail.html:34
-#: .\main\templates\main\subject_list.html:17
 msgid "Detail"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:39
+#: .\main\templates\main\subject_detail.html:41
 msgid "There are no chapters in this subject"
 msgstr ""
 
