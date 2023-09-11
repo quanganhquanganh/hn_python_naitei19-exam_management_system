@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: exam-manage-db
+    image: mysql:8.0
+    restart: always
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_USER_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - exam-manage-network
+  web:
+    container_name: exam-manage-dev
+    build:
+      args:
+        REQUIREMENTS: ${REQUIREMENTS}
+      context: ./
+      dockerfile: dev.Dockerfile
+    image: "exam-manage-dev"
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_USER_PASSWORD: ${DB_USER_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+    command: bash -c "./exammanagement/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./:/var/task
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - exam-manage-network
+
+networks:
+  exam-manage-network:
+    driver: bridge
