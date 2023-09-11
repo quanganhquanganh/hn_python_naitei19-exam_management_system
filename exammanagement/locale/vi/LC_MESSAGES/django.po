@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-08 14:04+0700\n"
+"POT-Creation-Date: 2023-09-11 11:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,23 +42,23 @@ msgstr "Mô tả"
 msgid "Select genre for this subject"
 msgstr "Lựa chọn thể loại của chủ đề"
 
-#: .\main\models.py:35
+#: .\main\models.py:41
 msgid "Title name of the chapter"
 msgstr "Tiêu đề của chương"
 
-#: .\main\models.py:38
+#: .\main\models.py:44
 msgid "Minimum correct answers to pass the test"
 msgstr "Số câu đúng tối thiểu để qua bài test"
 
-#: .\main\models.py:40
+#: .\main\models.py:46
 msgid "Time limit for the test"
 msgstr "Thời gian làm bài test"
 
-#: .\main\models.py:86
+#: .\main\models.py:92
 msgid "Detail of the question"
 msgstr "Nội dung câu hỏi"
 
-#: .\main\models.py:92
+#: .\main\models.py:98
 msgid "Content of the answer"
 msgstr "Nội dung câu trả lời"
 
@@ -125,6 +125,32 @@ msgstr "Đăng nhập với tên"
 #: .\main\templates\base_generic.html:216
 msgid "Copyright"
 msgstr "Bản quyền"
+
+#: .\main\templates\main\subject_detail.html:16
+msgid "Chapters list"
+msgstr "Danh sách chương"
+
+#: .\main\templates\main\subject_detail.html:30
+#: .\main\templates\main\subject_list.html:15
+msgid "Delete"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:31
+msgid "Update"
+msgstr "Cập nhật"
+
+#: .\main\templates\main\subject_detail.html:34
+#: .\main\templates\main\subject_list.html:17
+msgid "Detail"
+msgstr "Chi tiết"
+
+#: .\main\templates\main\subject_detail.html:39
+msgid "There are no chapters in this subject"
+msgstr "Chưa có chương nào trong chủ đề này"
+
+#: .\main\templates\main\subject_detail.html:45
+msgid "Add chapter"
+msgstr "Thêm chương mới"
 
 #: .\main\templates\main\subject_list.html:24
 msgid "There are no subjects in the web."

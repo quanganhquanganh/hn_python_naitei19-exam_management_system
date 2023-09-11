@@ -29,6 +29,12 @@ class Subject(models.Model):
     def get_absolute_url(self):
         return reverse('subject-detail', args=[str(self.id)])
 
+    def display_genre(self):
+        """Create a string for the Genre. This is required to display genre in Admin."""
+        return ', '.join(genre.name for genre in self.genres.all())
+
+    display_genre.short_description = 'Genre'
+
 
 class Chapter(models.Model):
     name = models.CharField(

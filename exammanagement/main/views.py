@@ -1,10 +1,10 @@
+from main.models import Subject
+from .forms import NewUserForm
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from main.models import Subject
-
 from django.shortcuts import redirect, render
 from django.views import generic
-from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -56,3 +56,17 @@ def logout_request(request):
     logout(request)
     messages.info(request, _("You have successfully logged out."))
     return HttpResponseRedirect(reverse('index'))
+
+
+class SubjectDetailView(generic.DetailView):
+    model = Subject
+
+    def get_context_data(self, **kwargs):
+        context = super(SubjectDetailView, self).get_context_data(**kwargs)
+        context['chapters'] = context['subject'].chapter_set.all()
+        return context
+
+
+def subject_detail_view(request, primary_key):
+    subject = get_object_or_404(Subject, pk=primary_key)
+    return render(request, 'main/subject_detail.html', context={'subject': subject})
