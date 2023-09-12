@@ -23,6 +23,7 @@ class Subject(models.Model):
     description = models.TextField(max_length=1000, help_text=_('Description'), blank=True)
     genres = models.ManyToManyField(
         Genre, help_text=_('Select genre for this subject'))
+    enrollers = models.ManyToManyField(User, through='Enroll')
 
     def __str__(self):
         return self.name
@@ -61,7 +62,7 @@ class Chapter(models.Model):
 class Enroll(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    progress = models.PositiveIntegerField()
+    progress = models.PositiveIntegerField(default=0)
     SUBJECT_STATUS = (
         (1, 'Completed'),
         (0, 'Incomplete'),
@@ -70,8 +71,11 @@ class Enroll(models.Model):
         max_length=1,
         choices=SUBJECT_STATUS,
         blank=True,
-        default='i',
+        default=0,
     )
+
+    class Meta:
+        unique_together = ('user', 'subject')
 
 
 class Test(models.Model):
@@ -88,7 +92,7 @@ class Test(models.Model):
         max_length=1,
         choices=TEST_STATUS,
         blank=True,
-        default='i',
+        default=0,
     )
 
 

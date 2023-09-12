@@ -8,4 +8,6 @@ urlpatterns = [
          name='subject-detail'),
     path('chapter/<int:pk>', views.ChapterDetailView.as_view(),
          name='chapter-detail'),
+    path('subject/<int:subject_id>/enroll/',
+         views.enroll_subject, name='subject-registration'),
 ]

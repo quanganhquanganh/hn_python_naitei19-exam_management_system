@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-11 14:10+0700\n"
+"POT-Creation-Date: 2023-09-12 13:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,39 +26,43 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-#: .\main\models.py:13
+#: .\main\models.py:14
 msgid "Genre of the subject (IT, Japanese, etc)"
 msgstr ""
 
-#: .\main\models.py:21
+#: .\main\models.py:22
 msgid "Title name of the subject"
 msgstr ""
 
-#: .\main\models.py:22
+#: .\main\models.py:23
 msgid "Description"
 msgstr ""
 
-#: .\main\models.py:24
+#: .\main\models.py:25
 msgid "Select genre for this subject"
 msgstr ""
 
-#: .\main\models.py:41
+#: .\main\models.py:43
 msgid "Title name of the chapter"
 msgstr ""
 
-#: .\main\models.py:44
+#: .\main\models.py:46
 msgid "Minimum correct answers to pass the test"
 msgstr ""
 
-#: .\main\models.py:46
+#: .\main\models.py:48
 msgid "Time limit for the test"
 msgstr ""
 
-#: .\main\models.py:92
+#: .\main\models.py:59
+msgid "Minimum correct answers must be less than number of questions"
+msgstr ""
+
+#: .\main\models.py:101
 msgid "Detail of the question"
 msgstr ""
 
-#: .\main\models.py:98
+#: .\main\models.py:107
 msgid "Content of the answer"
 msgstr ""
 
@@ -66,63 +70,63 @@ msgstr ""
 msgid "Exam management"
 msgstr ""
 
-#: .\main\templates\base_generic.html:37
+#: .\main\templates\base_generic.html:38
 msgid "Search for..."
 msgstr ""
 
-#: .\main\templates\base_generic.html:68
+#: .\main\templates\base_generic.html:69
 msgid "Edit profile"
 msgstr ""
 
-#: .\main\templates\base_generic.html:70
+#: .\main\templates\base_generic.html:71
 msgid "Logout"
 msgstr ""
 
-#: .\main\templates\base_generic.html:75
+#: .\main\templates\base_generic.html:76
 msgid "Signin"
 msgstr ""
 
-#: .\main\templates\base_generic.html:85 .\main\templates\base_generic.html:90
+#: .\main\templates\base_generic.html:86 .\main\templates\base_generic.html:91
 msgid "Subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:98
+#: .\main\templates\base_generic.html:99
 msgid "Add subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:105
+#: .\main\templates\base_generic.html:106
 msgid "Enrolled subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:109
+#: .\main\templates\base_generic.html:110
 msgid "User"
 msgstr ""
 
-#: .\main\templates\base_generic.html:115
+#: .\main\templates\base_generic.html:116
 msgid "User list"
 msgstr ""
 
-#: .\main\templates\base_generic.html:129
+#: .\main\templates\base_generic.html:130
 msgid "User history"
 msgstr ""
 
-#: .\main\templates\base_generic.html:141
+#: .\main\templates\base_generic.html:142
 msgid "Finished subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:142
+#: .\main\templates\base_generic.html:143
 msgid "Finished tests"
 msgstr ""
 
-#: .\main\templates\base_generic.html:157
+#: .\main\templates\base_generic.html:158
 msgid "Language"
 msgstr ""
 
-#: .\main\templates\base_generic.html:186
+#: .\main\templates\base_generic.html:187
 msgid "Logged in as"
 msgstr ""
 
-#: .\main\templates\base_generic.html:216
+#: .\main\templates\base_generic.html:217
 msgid "Copyright"
 msgstr ""
 
@@ -146,27 +150,37 @@ msgstr ""
 msgid "Go test"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:15
+#: .\main\templates\main\subject_detail.html:14
+msgid "Enrolled"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:18
+msgid "Register"
+msgstr ""
+
+#: .\main\templates\main\subject_detail.html:32
 msgid "Chapters list"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:30
+#: .\main\templates\main\subject_detail.html:46
+#: .\main\templates\main\subject_list.html:15
 msgid "Delete"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:31
+#: .\main\templates\main\subject_detail.html:47
 msgid "Update"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:34
+#: .\main\templates\main\subject_detail.html:50
+#: .\main\templates\main\subject_list.html:17
 msgid "Detail"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:41
+#: .\main\templates\main\subject_detail.html:55
 msgid "There are no chapters in this subject"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:45
+#: .\main\templates\main\subject_detail.html:61
 msgid "Add chapter"
 msgstr ""
 
@@ -174,24 +188,28 @@ msgstr ""
 msgid "There are no subjects in the web."
 msgstr ""
 
-#: .\main\views.py:27
+#: .\main\views.py:29 .\main\views.py:93
 msgid "Registration successful."
 msgstr ""
 
-#: .\main\views.py:30
+#: .\main\views.py:32
 msgid "Unsuccessful registration. Invalid information."
 msgstr ""
 
-#: .\main\views.py:45
+#: .\main\views.py:47
 msgid "You are now logged in as "
 msgstr ""
 
-#: .\main\views.py:48 .\main\views.py:50
+#: .\main\views.py:50 .\main\views.py:52
 msgid "Invalid username or password."
 msgstr ""
 
-#: .\main\views.py:57
+#: .\main\views.py:59
 msgid "You have successfully logged out."
+msgstr ""
+
+#: .\main\views.py:96
+msgid "Subject is not exist."
 msgstr ""
 
 #: .\templates\registration\login.html:10
