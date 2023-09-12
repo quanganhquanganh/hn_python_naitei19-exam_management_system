@@ -1,7 +1,7 @@
-from main.models import Subject, Chapter
+from main.models import Subject, Chapter, Enroll
 from .forms import NewUserForm
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.views import generic
@@ -9,6 +9,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -64,12 +66,11 @@ class SubjectDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(SubjectDetailView, self).get_context_data(**kwargs)
         context['chapters'] = context['subject'].chapter_set.all()
+        context['enrollercount'] = context['subject'].enroll_set.all().count()
+        user = self.request.user
+        context['is_enrolled'] = context['subject'].enrollers.filter(
+            id=user.id).exists()
         return context
-
-
-def subject_detail_view(request, primary_key):
-    subject = get_object_or_404(Subject, pk=primary_key)
-    return render(request, 'main/subject_detail.html', context={'subject': subject})
 
 
 class ChapterDetailView(generic.DetailView):
@@ -79,3 +80,15 @@ class ChapterDetailView(generic.DetailView):
 def chapter_detail_view(request, primary_key):
     chapter = get_object_or_404(Chapter, pk=primary_key)
     return render(request, 'main/chapter_detail.html', context={'chapter': chapter})
+
+
+@login_required
+def enroll_subject(request, subject_id):
+    subject = get_object_or_404(Subject, id=subject_id)
+    user = request.user
+
+    if request.method == 'POST':
+        registration = Enroll(user=user, subject=subject)
+        registration.save()
+        return JsonResponse({'message': _("Registration successful.")})
+    return render(request, 'enroll_form.html', {'subject': subject})

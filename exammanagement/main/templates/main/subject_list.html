@@ -5,7 +5,7 @@
     {% if subject_list %}
         <div class="row gy-5">
             {% for subject in subject_list %}
-                <div class="card m-3 col-6" id="course-{{ course.id }}" class="w-18r">
+                <div class="card m-3 col-6 w-18r" id="course-{{ course.id }}">
                     <img src="/main/static/image/subject_bg.png" alt="..."  class="object-fit-cover">
                     <div class="card-body">
                         <h5 class="card-title">{{ subject.name }}</h5>
@@ -15,7 +15,7 @@
                                 <button type="button" class="btn btn-danger me-1">{% trans "Delete" %}</button>
                             {% endif %}
                             <a href="{{ subject.get_absolute_url }}"><button type="button" class="btn btn-primary">{% trans "Detail" %}</button></a>
-                    </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}

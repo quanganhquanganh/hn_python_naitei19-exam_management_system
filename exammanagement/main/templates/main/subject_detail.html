@@ -3,10 +3,29 @@
 
 {% block content %}
     {% load static %}
-    <section class="img-fluid subject-bg">
+    <section class="img-fluid pb-4 subject-bg">
         <div class="container">
             <p class="display-2 fw-bold pt-4">{{subject.name }}</p>
             <p class="fs-4 pt-2">{{subject.description }}</p>
+            {% if user.is_authenticated %}
+                <div class="d-flex">
+                    <div class="align-self-center ms-3">
+                        {% if is_enrolled %}
+                            <button class="btn btn-primary" disabled>{% trans "Enrolled" %}</button>
+                        {% else %}
+                            <form method="post" id="registration-form" data-registration-url="{% url 'subject-registration' subject.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-primary" id="enroll-button" type="submit">{% trans "Register" %}</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <div class="align-self-center ms-3">
+                        <span><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <span id="enrolling">{{ enrollercount }}</span>
+                    </div>
+                    <div class="align-self-center ms-3" id="registration-status"></div>
+                </div>
+            {% endif %}
         </div>
     </section>
     <section>
