@@ -20,7 +20,7 @@
                     <li id="lesson-{{ chapter.id }}" class="list-group-item">
                         <div class="d-flex justify-content-between">
                             <span class="mr-3 fw-bold align-self-center">
-                                <a href="#">{{ chapter.name }}</a>
+                                <a href="{{ chapter.get_absolute_url }}">{{ chapter.name }}</a>
                             </span>
                             {% if user.is_superuser %}
                             <div>
@@ -28,7 +28,7 @@
                                 <button type="button" class="btn btn-primary">{% trans "Update"%}</button>
                             </div>
                             {% elif user.is_authenticated %}
-                                <button type="button" class="btn btn-primary">{% trans "Detail"%}</button>
+                                <a href="{{ chapter.get_absolute_url }}"><button type="button" class="btn btn-primary">{% trans "Detail"%}</button></a>
                             {% endif %}
                         </div>
                     </li>

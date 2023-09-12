@@ -1,4 +1,4 @@
-from main.models import Subject
+from main.models import Subject, Chapter
 from .forms import NewUserForm
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -70,3 +70,12 @@ class SubjectDetailView(generic.DetailView):
 def subject_detail_view(request, primary_key):
     subject = get_object_or_404(Subject, pk=primary_key)
     return render(request, 'main/subject_detail.html', context={'subject': subject})
+
+
+class ChapterDetailView(generic.DetailView):
+    model = Chapter
+
+
+def chapter_detail_view(request, primary_key):
+    chapter = get_object_or_404(Chapter, pk=primary_key)
+    return render(request, 'main/chapter_detail.html', context={'chapter': chapter})
