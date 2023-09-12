@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-11 14:10+0700\n"
+"POT-Creation-Date: 2023-09-12 04:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,215 +18,224 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\exammanagement\settings.py:132
+#: exammanagement/exammanagement/settings.py:132
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: .\exammanagement\settings.py:133
+#: exammanagement/exammanagement/settings.py:133
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: .\main\models.py:13
+#: exammanagement/main/models.py:14
 msgid "Genre of the subject (IT, Japanese, etc)"
 msgstr "Thể loại của chủ đề (IT, Tiếng Nhật,...)"
 
-#: .\main\models.py:21
+#: exammanagement/main/models.py:22
 msgid "Title name of the subject"
 msgstr "Tiêu đề của chủ đề"
 
-#: .\main\models.py:22
+#: exammanagement/main/models.py:23
 msgid "Description"
 msgstr "Mô tả"
 
-#: .\main\models.py:24
+#: exammanagement/main/models.py:25
 msgid "Select genre for this subject"
 msgstr "Lựa chọn thể loại của chủ đề"
 
-#: .\main\models.py:41
+#: exammanagement/main/models.py:42
 msgid "Title name of the chapter"
 msgstr "Tiêu đề của chương"
 
-#: .\main\models.py:44
+#: exammanagement/main/models.py:45
 msgid "Minimum correct answers to pass the test"
 msgstr "Số câu đúng tối thiểu để qua bài test"
 
-#: .\main\models.py:46
+#: exammanagement/main/models.py:47
 msgid "Time limit for the test"
 msgstr "Thời gian làm bài test"
 
-#: .\main\models.py:92
+#: exammanagement/main/models.py:58
+#, fuzzy
+#| msgid "Minimum correct answers to pass the test"
+msgid "Minimum correct answers must be less than number of questions"
+msgstr "Số câu đúng tối thiểu để qua bài test phải nhỏ hơn số câu hỏi"
+
+#: exammanagement/main/models.py:97
 msgid "Detail of the question"
 msgstr "Nội dung câu hỏi"
 
-#: .\main\models.py:98
+#: exammanagement/main/models.py:103
 msgid "Content of the answer"
 msgstr "Nội dung câu trả lời"
 
-#: .\main\templates\base_generic.html:5
+#: exammanagement/main/templates/base_generic.html:5
 msgid "Exam management"
 msgstr ""
 
-#: .\main\templates\base_generic.html:37
+#: exammanagement/main/templates/base_generic.html:38
 msgid "Search for..."
 msgstr "Tìm kiếm..."
 
-#: .\main\templates\base_generic.html:68
+#: exammanagement/main/templates/base_generic.html:69
 msgid "Edit profile"
 msgstr "Chỉnh sửa thông tin"
 
-#: .\main\templates\base_generic.html:70
+#: exammanagement/main/templates/base_generic.html:71
 msgid "Logout"
 msgstr "Đăng xuất"
 
-#: .\main\templates\base_generic.html:75
+#: exammanagement/main/templates/base_generic.html:76
 msgid "Signin"
 msgstr "Đăng nhập"
 
-#: .\main\templates\base_generic.html:85 .\main\templates\base_generic.html:90
+#: exammanagement/main/templates/base_generic.html:86
+#: exammanagement/main/templates/base_generic.html:91
 msgid "Subjects"
 msgstr "Các chủ đề"
 
-#: .\main\templates\base_generic.html:98
+#: exammanagement/main/templates/base_generic.html:99
 msgid "Add subjects"
 msgstr "Thêm chủ đề"
 
-#: .\main\templates\base_generic.html:105
+#: exammanagement/main/templates/base_generic.html:106
 msgid "Enrolled subjects"
 msgstr "Các chủ đề đã tham gia"
 
-#: .\main\templates\base_generic.html:109
+#: exammanagement/main/templates/base_generic.html:110
 msgid "User"
 msgstr "Người dùng"
 
-#: .\main\templates\base_generic.html:115
+#: exammanagement/main/templates/base_generic.html:116
 msgid "User list"
 msgstr "Danh sách người dùng"
 
-#: .\main\templates\base_generic.html:129
+#: exammanagement/main/templates/base_generic.html:130
 msgid "User history"
 msgstr "Lịch sử người dùng"
 
-#: .\main\templates\base_generic.html:141
+#: exammanagement/main/templates/base_generic.html:142
 msgid "Finished subjects"
 msgstr "Các chủ đề đã hoàn thành"
 
-#: .\main\templates\base_generic.html:142
+#: exammanagement/main/templates/base_generic.html:143
 msgid "Finished tests"
 msgstr "Các bài test đã hoàn thành"
 
-#: .\main\templates\base_generic.html:157
+#: exammanagement/main/templates/base_generic.html:158
 msgid "Language"
 msgstr "Ngôn ngữ"
 
-#: .\main\templates\base_generic.html:186
+#: exammanagement/main/templates/base_generic.html:187
 msgid "Logged in as"
 msgstr "Đăng nhập với tên"
 
-#: .\main\templates\base_generic.html:216
+#: exammanagement/main/templates/base_generic.html:217
 msgid "Copyright"
 msgstr "Bản quyền"
 
-#: .\main\templates\main\chapter_detail.html:11
+#: exammanagement/main/templates/main/chapter_detail.html:11
 msgid "Total question"
 msgstr "Tổng số câu hỏi"
 
-#: .\main\templates\main\chapter_detail.html:12
+#: exammanagement/main/templates/main/chapter_detail.html:12
 msgid "Time limt"
 msgstr "Thời gian"
 
-#: .\main\templates\main\chapter_detail.html:12
+#: exammanagement/main/templates/main/chapter_detail.html:12
 msgid "minutes"
 msgstr "phút"
 
-#: .\main\templates\main\chapter_detail.html:13
+#: exammanagement/main/templates/main/chapter_detail.html:13
 msgid "Minium correct answers"
 msgstr "Số câu đúng tối thiểu"
 
-#: .\main\templates\main\chapter_detail.html:14
+#: exammanagement/main/templates/main/chapter_detail.html:14
 msgid "Go test"
 msgstr "Làm bài"
 
-#: .\main\templates\main\subject_detail.html:15
+#: exammanagement/main/templates/main/subject_detail.html:13
 msgid "Chapters list"
 msgstr "Danh sách chương"
 
-#: .\main\templates\main\subject_detail.html:30
+#: exammanagement/main/templates/main/subject_detail.html:27
+#: exammanagement/main/templates/main/subject_list.html:15
 msgid "Delete"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:31
+#: exammanagement/main/templates/main/subject_detail.html:28
 msgid "Update"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:34
+#: exammanagement/main/templates/main/subject_detail.html:31
+#: exammanagement/main/templates/main/subject_list.html:17
 msgid "Detail"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:41
+#: exammanagement/main/templates/main/subject_detail.html:36
 msgid "There are no chapters in this subject"
 msgstr "Chưa có chương nào trong chủ đề này"
 
-#: .\main\templates\main\subject_detail.html:45
+#: exammanagement/main/templates/main/subject_detail.html:42
 msgid "Add chapter"
 msgstr "Thêm chương mới"
 
-#: .\main\templates\main\subject_list.html:24
+#: exammanagement/main/templates/main/subject_list.html:24
 msgid "There are no subjects in the web."
 msgstr "Chưa có chủ đề nào trong trang web này"
 
-#: .\main\views.py:27
+#: exammanagement/main/views.py:27
 msgid "Registration successful."
 msgstr "Đăng ký thành công"
 
-#: .\main\views.py:30
+#: exammanagement/main/views.py:30
 msgid "Unsuccessful registration. Invalid information."
 msgstr "Đăng ký không thành công. Thông tin không hợp lệ."
 
-#: .\main\views.py:45
+#: exammanagement/main/views.py:45
 msgid "You are now logged in as "
 msgstr "Bạn đã đăng nhập với tên"
 
-#: .\main\views.py:48 .\main\views.py:50
+#: exammanagement/main/views.py:48 exammanagement/main/views.py:50
 msgid "Invalid username or password."
 msgstr "Mật khẩu hoặc tên đăng nhập không đúng"
 
-#: .\main\views.py:57
+#: exammanagement/main/views.py:57
 msgid "You have successfully logged out."
 msgstr "Bạn đã đăng xuất thành công."
 
-#: .\templates\registration\login.html:10
+#: exammanagement/templates/registration/login.html:10
 msgid "Please enter your login and password!"
 msgstr "Hãy nhập mật khẩu và tên đăng nhập của bạn!"
 
-#: .\templates\registration\login.html:13
+#: exammanagement/templates/registration/login.html:13
 msgid "Forgot password?"
 msgstr "Quên mật khẩu?"
 
-#: .\templates\registration\login.html:20
+#: exammanagement/templates/registration/login.html:20
 msgid "Don't have an account?"
 msgstr "Không có mật khẩu?"
 
-#: .\templates\registration\login.html:20
+#: exammanagement/templates/registration/login.html:20
 msgid "Sign Up"
 msgstr "Đăng ký"
 
-#: .\templates\registration\register.html:11
+#: exammanagement/templates/registration/register.html:11
 msgid "Let's create an accounts!"
 msgstr "Hãy tạo một tài khoản!"
 
-#: .\templates\registration\register.html:20
+#: exammanagement/templates/registration/register.html:20
 msgid "If you already have an account,"
 msgstr "Nếu bạn đã có tài khoản hãy,"
 
-#: .\templates\registration\register.html:20
+#: exammanagement/templates/registration/register.html:20
 msgid "login"
 msgstr "đăng nhập"
 
-#: .\templates\registration\register.html:20
+#: exammanagement/templates/registration/register.html:20
 msgid "instead"
 msgstr "thay thế"
 
-#: .\templates\registration_template.html:7
+#: exammanagement/templates/registration_template.html:7
 msgid "Exam management - login"
 msgstr ""
 
