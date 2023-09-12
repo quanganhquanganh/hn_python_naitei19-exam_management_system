@@ -28,6 +28,7 @@ urlpatterns = [
     path('register', views.register_request, name="register"),
     path('login', views.login_request, name="login"),
     path('logout', views.logout_request, name="logout"),
+    path('i18n/', include('django.conf.urls.i18n')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += i18n_patterns(

@@ -31,11 +31,21 @@ up:
 logs:
 	docker-compose logs -f web
 
+# Logs for db container
+logs-db:
+	docker-compose logs -f db
+
 down:
 	docker-compose down
 
+translate:
+	docker-compose exec web python exammanagement/manage.py makemessages -l vi
+
 migrate:
 	docker-compose exec web python exammanagement/manage.py migrate
+
+rollback:
+	docker-compose exec web python exammanagement/manage.py migrate main $(name)
 
 make_migrations:
 	docker-compose exec web python exammanagement/manage.py makemigrations

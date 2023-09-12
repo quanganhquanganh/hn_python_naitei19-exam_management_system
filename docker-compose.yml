@@ -12,7 +12,7 @@ services:
       MYSQL_PASSWORD: ${DB_USER_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
-      - ./mysql:/var/lib/mysql
+      - exam-manage-db:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
@@ -47,3 +47,7 @@ services:
 networks:
   exam-manage-network:
     driver: bridge
+
+volumes:
+  exam-manage-db:
+    driver: local

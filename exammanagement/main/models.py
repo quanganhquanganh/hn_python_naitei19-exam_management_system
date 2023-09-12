@@ -4,6 +4,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -19,7 +20,7 @@ class Genre(models.Model):
 class Subject(models.Model):
     name = models.CharField(
         max_length=200, help_text=_('Title name of the subject'))
-    description = models.TextField(max_length=1000, help_text=_('Description'))
+    description = models.TextField(max_length=1000, help_text=_('Description'), blank=True)
     genres = models.ManyToManyField(
         Genre, help_text=_('Select genre for this subject'))
 
@@ -44,13 +45,17 @@ class Chapter(models.Model):
         help_text=_('Minimum correct answers to pass the test'))
     time_limit = models.PositiveIntegerField(
         help_text=_('Time limit for the test'))
-    num_questions = models.PositiveIntegerField()
+    num_questions = models.PositiveIntegerField(default=20)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('chapter-detail', args=[str(self.id)])
+    
+    def clean(self):
+        if self.min_correct_ans > self.num_questions:
+            raise ValidationError(_('Minimum correct answers must be less than number of questions'))
 
 
 class Enroll(models.Model):
@@ -97,7 +102,7 @@ class Answer(models.Model):
     content = models.TextField(
         max_length=1000, help_text=_('Content of the answer'))
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
-    is_correct = models.BooleanField()
+    is_correct = models.BooleanField(default=False)
 
 
 class Choice(models.Model):
