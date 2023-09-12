@@ -16,3 +16,19 @@
 .w-18r {
   width: 18rem !important;
 }
+
+.w-150 {
+  width: 150px !important;
+}
+
+.h-20 {
+  height: 20px !important;
+}
+
+.fs-1r {
+  font-size: 1rem !important;
+}
+
+.profile-bg {
+  background-color: #eee !important;
+}

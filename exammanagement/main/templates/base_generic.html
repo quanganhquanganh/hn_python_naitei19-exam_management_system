@@ -66,7 +66,7 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdown"
                         >
-                            <li><a class="dropdown-item" href="#">{% trans "Edit profile" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user-profile' %}">{% trans "Profile" %}</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                         </ul>
