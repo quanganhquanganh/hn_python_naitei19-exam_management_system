@@ -38,9 +38,6 @@ logs-db:
 down:
 	docker-compose down
 
-translate:
-	docker-compose exec web python exammanagement/manage.py makemessages -l vi
-
 migrate:
 	docker-compose exec web python exammanagement/manage.py migrate
 
@@ -53,11 +50,17 @@ make_migrations:
 show_migrations:
 	docker-compose exec web python exammanagement/manage.py showmigrations
 
+merge_migrations:
+	docker-compose exec web python exammanagement/manage.py makemigrations --merge
+
 seed_migrations:
 	docker-compose exec web python exammanagement/manage.py makemigrations --empty main --name $(name)
 
 createsuperuser:
 	docker-compose exec web python exammanagement/manage.py createsuperuser
+
+translate: $(PRE_DEV_TARGET)
+	$(if $(PRE_DEV_TARGET),$(DOCKER_RUN_DEV)) python exammanagement/manage.py makemessages -l vi
 
 test: $(PRE_DEV_TARGET)
 	$(if $(PRE_DEV_TARGET),$(DOCKER_RUN_DEV)) python exammanagement/manage.py test

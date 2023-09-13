@@ -12,3 +12,6 @@ crispy-bootstrap5
 mysqlclient==2.0
 python-dotenv
 jsonfield
+pyexcel==0.6.7
+pyexcel-xlsx==0.6.0
+openpyxl==3.0.10
