@@ -92,3 +92,16 @@ def enroll_subject(request, subject_id):
         registration.save()
         return JsonResponse({'message': _("Registration successful.")})
     return render(request, 'enroll_form.html', {'subject': subject})
+
+
+def user_profile(request):
+    user = request.user
+    enrolled_subjects = Enroll.objects.filter(
+        user=user)
+
+    context = {
+        'user': user,
+        'enrolled_subjects': enrolled_subjects,
+    }
+
+    return render(request, 'main/user_profile.html', context)

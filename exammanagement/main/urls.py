@@ -10,4 +10,5 @@ urlpatterns = [
          name='chapter-detail'),
     path('subject/<int:subject_id>/enroll/',
          views.enroll_subject, name='subject-registration'),
+    path('profile/', views.user_profile, name='user-profile'),
 ]

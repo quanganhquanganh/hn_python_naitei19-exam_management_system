@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 13:39+0700\n"
+"POT-Creation-Date: 2023-09-12 14:22+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,29 +42,23 @@ msgstr "Mô tả"
 msgid "Select genre for this subject"
 msgstr "Lựa chọn thể loại của chủ đề"
 
-#: .\main\models.py:43
+#: .\main\models.py:42
 msgid "Title name of the chapter"
 msgstr "Tiêu đề của chương"
 
-#: .\main\models.py:46
+#: .\main\models.py:45
 msgid "Minimum correct answers to pass the test"
 msgstr "Số câu đúng tối thiểu để qua bài test"
 
-#: .\main\models.py:48
+#: .\main\models.py:47
 msgid "Time limit for the test"
 msgstr "Thời gian làm bài test"
 
-#: .\main\models.py:59
-#, fuzzy
-#| msgid "Minimum correct answers to pass the test"
-msgid "Minimum correct answers must be less than number of questions"
-msgstr "Số câu đúng tối thiểu để qua bài test"
-
-#: .\main\models.py:101
+#: .\main\models.py:96
 msgid "Detail of the question"
 msgstr "Nội dung câu hỏi"
 
-#: .\main\models.py:107
+#: .\main\models.py:102
 msgid "Content of the answer"
 msgstr "Nội dung câu trả lời"
 
@@ -77,7 +71,9 @@ msgid "Search for..."
 msgstr "Tìm kiếm..."
 
 #: .\main\templates\base_generic.html:69
-msgid "Edit profile"
+#, fuzzy
+#| msgid "Edit profile"
+msgid "Profile"
 msgstr "Chỉnh sửa thông tin"
 
 #: .\main\templates\base_generic.html:71
@@ -153,12 +149,14 @@ msgid "Go test"
 msgstr "Làm bài"
 
 #: .\main\templates\main\subject_detail.html:14
+#, fuzzy
+#| msgid "Enrolled subjects"
 msgid "Enrolled"
-msgstr "Đã tham gia"
+msgstr "Các chủ đề đã tham gia"
 
 #: .\main\templates\main\subject_detail.html:18
 msgid "Register"
-msgstr "Đăng ký"
+msgstr ""
 
 #: .\main\templates\main\subject_detail.html:32
 msgid "Chapters list"
@@ -190,23 +188,47 @@ msgstr "Thêm chương mới"
 msgid "There are no subjects in the web."
 msgstr "Chưa có chủ đề nào trong trang web này"
 
-#: .\main\views.py:29 .\main\views.py:93
+#: .\main\templates\main\user_profile.html:14
+msgid "Edit profile"
+msgstr "Chỉnh sửa thông tin"
+
+#: .\main\templates\main\user_profile.html:23
+msgid "Username"
+msgstr "Tên người dùng"
+
+#: .\main\templates\main\user_profile.html:31
+msgid "Email"
+msgstr ""
+
+#: .\main\templates\main\user_profile.html:43
+msgid "Enrolled Subjects Status"
+msgstr "Trạng thái các chủ đề đã tham gia"
+
+#: .\main\templates\main\user_profile.html:53
+msgid "Not enrolled any subject yet"
+msgstr "Chưa tham gia chủ đề nào"
+
+#: .\main\templates\main\user_profile.html:61
+msgid "Test history"
+msgstr "Lịch sử làm bài"
+
+#: .\main\views.py:28
 msgid "Registration successful."
 msgstr "Đăng ký thành công"
 
-#: .\main\views.py:32
+#: .\main\views.py:31
 msgid "Unsuccessful registration. Invalid information."
 msgstr "Đăng ký không thành công. Thông tin không hợp lệ."
 
-#: .\main\views.py:47
+#: .\main\views.py:46
 msgid "You are now logged in as "
 msgstr "Bạn đã đăng nhập với tên"
 
-#: .\main\views.py:50 .\main\views.py:52
+#: .\main\views.py:49 .\main\views.py:51
 msgid "Invalid username or password."
 msgstr "Mật khẩu hoặc tên đăng nhập không đúng"
 
-#: .\main\views.py:59
+#: .\main\views.py:58
 msgid "You have successfully logged out."
 msgstr "Bạn đã đăng xuất thành công."
 
