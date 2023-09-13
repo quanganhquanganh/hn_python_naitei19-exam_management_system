@@ -20,21 +20,11 @@ class Migration(migrations.Migration):
                 ("updated_at", models.DateTimeField(auto_now=True)),
             ],
         ),
-        migrations.RenameField(
-            model_name="answer",
-            old_name="question_id",
-            new_name="question",
-        ),
-        migrations.RenameField(
-            model_name="question",
-            old_name="chapter_id",
-            new_name="chapter",
-        ),
         migrations.AlterField(
             model_name="enroll",
             name="status",
             field=models.IntegerField(
-                blank=True, choices=[(1, "Completed"), (0, "Incomplete")], default="i"
+                blank=True, choices=[(1, "Completed"), (0, "Incomplete")], default=0
             ),
         ),
         migrations.AlterField(
@@ -52,7 +42,7 @@ class Migration(migrations.Migration):
             model_name="test",
             name="status",
             field=models.IntegerField(
-                blank=True, choices=[(1, "Completed"), (0, "Incomplete")], default="i"
+                blank=True, choices=[(1, "Completed"), (0, "Incomplete")], default=0
             ),
         ),
     ]

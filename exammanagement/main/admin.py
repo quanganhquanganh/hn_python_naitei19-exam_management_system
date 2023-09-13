@@ -1,8 +1,9 @@
-from .models import Subject, Genre, Chapter
+from .models import Subject, Genre, Chapter, Test
 from django.contrib import admin
 
 # Register your models here.
 from .models import Subject, Chapter, Genre, Question, Answer, QuestionSetImport
+
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
@@ -16,6 +17,7 @@ class GenreAdmin(admin.ModelAdmin):
         }),
     )
 
+
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')
@@ -28,17 +30,21 @@ class SubjectAdmin(admin.ModelAdmin):
         }),
     )
 
+
 @admin.register(Chapter)
 class ChapterAdmin(admin.ModelAdmin):
-    list_display = ('name', 'subject', 'min_correct_ans', 'time_limit', 'num_questions')
+    list_display = ('name', 'subject', 'min_correct_ans',
+                    'time_limit', 'num_questions')
     list_filter = ('subject',)
     search_fields = ('name',)
-    ordering = ('name', 'subject', 'min_correct_ans', 'time_limit', 'num_questions')
+    ordering = ('name', 'subject', 'min_correct_ans',
+                'time_limit', 'num_questions')
     fieldsets = (
         (None, {
             'fields': ('name', 'subject', 'min_correct_ans', 'time_limit', 'num_questions')
         }),
     )
+
 
 class AnswerInline(admin.TabularInline):
     model = Answer
@@ -56,3 +62,4 @@ class QuestionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(QuestionSetImport)
+admin.site.register(Test)

@@ -1,4 +1,8 @@
-from main.models import Subject, Chapter, Enroll
+import random
+from random import sample
+import datetime
+
+from main.models import Answer, Choice, Question, Subject, Chapter, Enroll, Test
 from .forms import NewUserForm
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, JsonResponse
@@ -11,6 +15,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+import logging
+from django.views.decorators.csrf import requires_csrf_token
+
+logger = logging.getLogger("mylogger")
 
 # Create your views here.
 
@@ -105,3 +114,139 @@ def user_profile(request):
     }
 
     return render(request, 'main/user_profile.html', context)
+
+
+@login_required
+def create_exam_view(request, pk):
+    chapter = get_object_or_404(Chapter, id=pk)
+    user = request.user
+    # del request.session['is-examing']
+    if request.method == 'POST':
+        # kiem tra nguoi dung da dang ky chu de chua
+        if not chapter.subject.enrollers.filter(
+                id=user.id).exists():
+            messages.error(request, _(
+                'You must enroll the subject of this test first.'))
+            return render(request, 'main/chapter_detail.html',
+                          context={'chapter': chapter})
+        if 'is-examing' not in request.session:  # neu dang chua lam bai kiem tra nao thi tao bai moi
+            request.session.get('is-examing', True)
+            test = Test(user=user, chapter=chapter,
+                        created_at=timezone.now(), total_score=0)
+            test.save()
+            if test:
+                return HttpResponseRedirect(reverse('take-exam', args=[str(test.id)]))
+            else:
+                messages.error(request, _('Some errors have occured'))
+        # neu dang lam check xem bai dang lam co thuoc chapter khong, neu thuoc thi tiep tuc bai kiem tra, neu khong thi khong cho tao
+        elif request.session['is-examing']:
+            examing_test = Test.objects.filter(status__exact=0).last()
+            if examing_test.chapter.id == chapter.id:
+                test = examing_test
+                return HttpResponseRedirect(reverse('take-exam', args=[str(test.id)]))
+            else:
+                messages.error(request, _(
+                    'You have a test is still doing. Please submit that test before create a new test.'))
+        else:
+            test = Test(user=user, chapter=chapter,
+                        created_at=timezone.now(), total_score=0)
+            test.save()
+            if test:
+                return HttpResponseRedirect(reverse('take-exam', args=[str(test.id)]))
+            else:
+                messages.error(request, _('Some errors have occured'))
+    return render(request, 'main/chapter_detail.html', context={'chapter': chapter})
+
+
+def __random_question(test):
+    sample_list = []
+    for question in Question.objects.filter(chapter=test.chapter):
+        sample_list.append(question)
+    questions = random.sample(sample_list, 8)
+    return questions
+
+
+# cac session de luu thong tin dong ho dem nguoc
+def __countdown_session(request, test):
+    exam_start_time = request.session.get(
+        'exam_start_time', test.created_at.timestamp())
+    exam_duration_minutes = request.session.get(
+        'exam_duration_minutes', test.chapter.time_limit)
+    current_time = timezone.now().timestamp()
+    elapsed_time_seconds = current_time - exam_start_time
+    remaining_time_seconds = (
+        exam_duration_minutes * 60) - elapsed_time_seconds
+    return remaining_time_seconds
+
+
+# neu khong co chocie trong session thi tao cau hoi ngau nhien va tao cac choice cho test
+def __when_not_had_choice(request, test):
+    exam_choice_ids = []
+    questions = __random_question(test)
+    for question in questions:
+        choice = Choice(user=request.user,
+                        question=question, test=test)
+        choice.save()
+        exam_choice_ids.append(choice.id)
+    request.session['exam-choice-ids'] = exam_choice_ids
+    return exam_choice_ids
+
+
+def __delete_test_sesstion(request):
+    if 'exam-choice-ids' in request.session:
+        del request.session['exam-choice-ids']
+    if 'exam_start_time' in request.session:
+        del request.session['exam_start_time']
+    if 'exam_duration_minutes' in request.session:
+        del request.session['exam_duration_minutes']
+
+
+# khi submit thi xoa tat ca cac session cua test va luu trang thai test va choice
+def __submit_test(request, test, choices):
+    for choice in choices:
+        answer_key = f'question_{choice.question.id}'
+        answer_id = request.POST.get(
+            answer_key)
+        choice.answer = Answer.objects.filter(id=answer_id).first()
+        choice.save()
+    __delete_test_sesstion(request)
+    request.session['is-examing'] = False
+    test.status = 1
+    test.completed_at = timezone.now()
+    test.save()
+    test1 = test
+    choices1 = choices
+    return test1, choices1
+
+
+@login_required
+@requires_csrf_token
+def take_exam_view(request, pk):
+    test = get_object_or_404(Test, id=pk)
+    if test.status == 0:
+        request.session['is-examing'] = True
+        # kiem tra xem da ton tai choice trong session
+        if 'exam-choice-ids' not in request.session:
+            exam_choice_ids = __when_not_had_choice(request, test)
+        else:
+            exam_choice_ids = list(request.session['exam-choice-ids'])
+        logger.info(exam_choice_ids)
+        choices = Choice.objects.filter(id__in=exam_choice_ids)
+
+        if request.method == 'POST':
+            # Handle user responses
+            test1, choices1 = __submit_test(request, test, choices)
+            return render(request, 'main/test-results.html', context={
+                'test': test1,
+                'choices': choices1,
+            })
+        remaining_time_seconds = __countdown_session(request, test)
+        context = {'test': test, 'choices': choices,
+                   'remaining_time_seconds': max(remaining_time_seconds, 0), }
+        if 'user_responses' in request.session:
+            user_responses = dict(request.session['user_responses'])
+            context['user_responses'] = user_responses
+            logger.info(user_responses)
+        return render(request, 'main/take_exam.html', context=context)
+    else:
+        return render(request, 'main/test-results.html', context={'test': test})

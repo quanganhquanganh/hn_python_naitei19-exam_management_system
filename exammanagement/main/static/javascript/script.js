@@ -28,4 +28,24 @@ jQuery(document).ready(function ($) {
       },
     });
   });
+  const countdownElement = $("#countdown");
+  let remainingTime = countdownElement.data("remaining-seconds");
+  let intTime = parseInt(remainingTime);
+  function submitExamAndRedirect() {
+    $("#countdown").text("Countdown expired");
+    // Automatically submit the exam form
+    $("#exam-form").submit();
+  }
+  updateCountdown = function () {
+    if (intTime > 0) {
+      const minutes = Math.floor(intTime / 60);
+      const seconds = intTime % 60;
+      countdownElement.text(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
+      --intTime;
+      setTimeout(updateCountdown, 1000);
+    } else {
+      submitExamAndRedirect();
+    }
+  };
+  updateCountdown();
 });

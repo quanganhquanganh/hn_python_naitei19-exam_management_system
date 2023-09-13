@@ -11,4 +11,7 @@ urlpatterns = [
     path('subject/<int:subject_id>/enroll/',
          views.enroll_subject, name='subject-registration'),
     path('profile/', views.user_profile, name='user-profile'),
+    path('create-exam/chapter/<int:pk>',
+         views.create_exam_view, name='create-exam'),
+    path('exam/<int:pk>', views.take_exam_view, name='take-exam')
 ]

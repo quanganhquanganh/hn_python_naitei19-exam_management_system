@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 14:22+0700\n"
+"POT-Creation-Date: 2023-09-14 08:30+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,40 +26,64 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-#: .\main\models.py:14
+#: .\main\models.py:15
 msgid "Genre of the subject (IT, Japanese, etc)"
 msgstr ""
 
-#: .\main\models.py:22
+#: .\main\models.py:23
 msgid "Title name of the subject"
 msgstr ""
 
-#: .\main\models.py:23
+#: .\main\models.py:25
 msgid "Description"
 msgstr ""
 
-#: .\main\models.py:25
+#: .\main\models.py:27
 msgid "Select genre for this subject"
 msgstr ""
 
-#: .\main\models.py:42
+#: .\main\models.py:45
 msgid "Title name of the chapter"
 msgstr ""
 
-#: .\main\models.py:45
+#: .\main\models.py:48
 msgid "Minimum correct answers to pass the test"
 msgstr ""
 
-#: .\main\models.py:47
+#: .\main\models.py:50
 msgid "Time limit for the test"
 msgstr ""
 
-#: .\main\models.py:96
+#: .\main\models.py:62
+msgid "Minimum correct answers must be less than number of questions"
+msgstr ""
+
+#: .\main\models.py:107
 msgid "Detail of the question"
 msgstr ""
 
-#: .\main\models.py:102
+#: .\main\models.py:113
 msgid "Content of the answer"
+msgstr ""
+
+#: .\main\models.py:148
+msgid "Not enough columns"
+msgstr ""
+
+#: .\main\models.py:154
+msgid "All fields are required"
+msgstr ""
+
+#: .\main\models.py:158
+msgid "Question ID already exists"
+msgstr ""
+
+#: .\main\models.py:165
+msgid "Correct answers must be a list of numbers separated by comma"
+msgstr ""
+
+#: .\main\models.py:169
+msgid "All answers are required"
 msgstr ""
 
 #: .\main\templates\base_generic.html:5
@@ -142,7 +166,7 @@ msgstr ""
 msgid "Minium correct answers"
 msgstr ""
 
-#: .\main\templates\main\chapter_detail.html:14
+#: .\main\templates\main\chapter_detail.html:16
 msgid "Go test"
 msgstr ""
 
@@ -184,19 +208,27 @@ msgstr ""
 msgid "There are no subjects in the web."
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:14
+#: .\main\templates\main\take_exam.html:9
+msgid "Chapter"
+msgstr ""
+
+#: .\main\templates\main\test-results.html:5
+msgid "Test result"
+msgstr ""
+
+#: .\main\templates\main\user_profile.html:15
 msgid "Edit profile"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:23
+#: .\main\templates\main\user_profile.html:24
 msgid "Username"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:31
+#: .\main\templates\main\user_profile.html:32
 msgid "Email"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:43
+#: .\main\templates\main\user_profile.html:44
 msgid "Enrolled Subjects Status"
 msgstr ""
 
@@ -208,28 +240,38 @@ msgstr ""
 msgid "Test history"
 msgstr ""
 
-#: .\main\views.py:28
+#: .\main\views.py:38 .\main\views.py:102
 msgid "Registration successful."
 msgstr ""
 
-#: .\main\views.py:31
+#: .\main\views.py:41
 msgid "Unsuccessful registration. Invalid information."
 msgstr ""
 
-#: .\main\views.py:46
+#: .\main\views.py:56
 msgid "You are now logged in as "
 msgstr ""
 
-#: .\main\views.py:49 .\main\views.py:51
+#: .\main\views.py:59 .\main\views.py:61
 msgid "Invalid username or password."
 msgstr ""
 
-#: .\main\views.py:58
+#: .\main\views.py:68
 msgid "You have successfully logged out."
 msgstr ""
 
-#: .\main\views.py:96
-msgid "Subject is not exist."
+#: .\main\views.py:140
+msgid "You must enroll the subject of this test first."
+msgstr ""
+
+#: .\main\views.py:151 .\main\views.py:162
+msgid "Some errors have occured"
+msgstr ""
+
+#: .\main\views.py:154
+msgid ""
+"You have a test is still doing. Please submit that test before create a new "
+"test."
 msgstr ""
 
 #: .\templates\registration\login.html:10
