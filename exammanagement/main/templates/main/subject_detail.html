@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
+{% load keyvalue_action %}
 
 {% block content %}
     {% load static %}
@@ -40,6 +41,9 @@
                         <div class="d-flex justify-content-between">
                             <span class="mr-3 fw-bold align-self-center">
                                 <a href="{{ chapter.get_absolute_url }}">{{ chapter.name }}</a>
+                                {% if chapter.test_set|in_category:user|in_contain_more:chapter.min_correct_ans %}
+                                    <i class="fa-solid fa-check text-success ms-2"></i>
+                                {% endif %}
                             </span>
                             {% if user.is_superuser %}
                             <div>

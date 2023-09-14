@@ -1,6 +1,36 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
+{% load keyvalue_action %}
 
 {% block content %}
-    <h2>{% trans "Test result" %}</h2>
+    <div class="p-4 shadow-4 rounded-3 my-4 exam-bg">
+        <h2 class="text-center">{% trans "Chapter" %}: {{ test.chapter.name }} - {{ test.chapter.subject.name }}</h2>
+        <h2 class="{% if test.total_score >= test.chapter.min_correct_ans %} text-success {% else %} text-danger {% endif %} text-center">
+            {% trans "Total score" %}: {{ test.total_score }} / {{ test.choice_set.all.count }}
+        </h2>
+        <h4 class="text-secondary fs-6">{% trans "Created at" %}: {{ test.created_at }}</h4>
+        <h4 class="text-secondary fs-6">{% trans "Completed at" %}: {{ test.completed_at }}</h4>
+        {% for c in choices %}
+            <div class="d-flex w-100 align-items-center">
+                <div class="col-auto flex-shrink-1 flex-grow-1">
+                    <h5 class="">{{ forloop.counter }}. {{c.question.description}}</h5>
+                </div>
+            </div>
+            {% for answer in c.question.answer_set.all %}
+                <div class="form-check mx-4 d-flex align-items-center">
+                    <input class="form-check-input"
+                        disabled 
+                        type="radio" 
+                        name="question_{{ c.question.id }}" 
+                        value="{{ answer.id }}"
+                        {% if c.answer.id == answer.id %} checked {% endif %}
+                    >
+                    <label class="{% if c.answer.id == answer.id %} {% if answer.is_correct %} text-success {% else %} text-danger {% endif %} {% endif %} form-check-label ml-3" 
+                        for="{{ answer.id }}">
+                        {{answer.content}}
+                    </label>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}

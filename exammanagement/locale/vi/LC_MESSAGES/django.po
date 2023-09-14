@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-14 08:30+0700\n"
+"POT-Creation-Date: 2023-09-14 20:27+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,37 +170,37 @@ msgstr "Số câu đúng tối thiểu"
 msgid "Go test"
 msgstr "Làm bài"
 
-#: .\main\templates\main\subject_detail.html:14
+#: .\main\templates\main\subject_detail.html:15
 msgid "Enrolled"
 msgstr "Đã tham gia"
 
-#: .\main\templates\main\subject_detail.html:18
+#: .\main\templates\main\subject_detail.html:19
 msgid "Register"
 msgstr "Đăng ký"
 
-#: .\main\templates\main\subject_detail.html:32
+#: .\main\templates\main\subject_detail.html:33
 msgid "Chapters list"
 msgstr "Danh sách chương"
 
-#: .\main\templates\main\subject_detail.html:46
+#: .\main\templates\main\subject_detail.html:50
 #: .\main\templates\main\subject_list.html:15
 msgid "Delete"
 msgstr "Xóa"
 
-#: .\main\templates\main\subject_detail.html:47
+#: .\main\templates\main\subject_detail.html:51
 msgid "Update"
 msgstr "Cập nhật"
 
-#: .\main\templates\main\subject_detail.html:50
+#: .\main\templates\main\subject_detail.html:54
 #: .\main\templates\main\subject_list.html:17
 msgid "Detail"
 msgstr "Chi tiết"
 
-#: .\main\templates\main\subject_detail.html:55
+#: .\main\templates\main\subject_detail.html:59
 msgid "There are no chapters in this subject"
 msgstr "Chưa có chương nào trong chủ đề này"
 
-#: .\main\templates\main\subject_detail.html:61
+#: .\main\templates\main\subject_detail.html:65
 msgid "Add chapter"
 msgstr "Thêm chương mới"
 
@@ -209,40 +209,51 @@ msgid "There are no subjects in the web."
 msgstr "Chưa có chủ đề nào trong trang web này"
 
 #: .\main\templates\main\take_exam.html:9
-#, fuzzy
-#| msgid "Chapters list"
+#: .\main\templates\main\test-results.html:7
 msgid "Chapter"
-msgstr "Danh sách chương"
+msgstr "Chương"
 
-#: .\main\templates\main\test-results.html:5
-#, fuzzy
-#| msgid "Test history"
-msgid "Test result"
-msgstr "Lịch sử làm bài"
+#: .\main\templates\main\test-results.html:9
+msgid "Total score"
+msgstr "Tổng số điểm"
 
-#: .\main\templates\main\user_profile.html:15
+#: .\main\templates\main\test-results.html:11
+msgid "Created at"
+msgstr "Được tạo lúc"
+
+#: .\main\templates\main\test-results.html:12
+msgid "Completed at"
+msgstr "Kết thúc lúc"
+
+#: .\main\templates\main\user_profile.html:16
 msgid "Edit profile"
 msgstr "Chỉnh sửa thông tin"
 
-#: .\main\templates\main\user_profile.html:24
+#: .\main\templates\main\user_profile.html:25
 msgid "Username"
 msgstr "Tên người dùng"
 
-#: .\main\templates\main\user_profile.html:32
+#: .\main\templates\main\user_profile.html:33
 msgid "Email"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:44
+#: .\main\templates\main\user_profile.html:45
 msgid "Enrolled Subjects Status"
 msgstr "Trạng thái các chủ đề đã tham gia"
 
-#: .\main\templates\main\user_profile.html:53
+#: .\main\templates\main\user_profile.html:55
 msgid "Not enrolled any subject yet"
 msgstr "Chưa tham gia chủ đề nào"
 
-#: .\main\templates\main\user_profile.html:61
+#: .\main\templates\main\user_profile.html:63
 msgid "Test history"
 msgstr "Lịch sử làm bài"
+
+#: .\main\templates\main\user_profile.html:76
+#, fuzzy
+#| msgid "Not enrolled any subject yet"
+msgid "Not make any test yet"
+msgstr "Chưa tham gia chủ đề nào"
 
 #: .\main\views.py:38 .\main\views.py:102
 msgid "Registration successful."
@@ -264,15 +275,15 @@ msgstr "Mật khẩu hoặc tên đăng nhập không đúng"
 msgid "You have successfully logged out."
 msgstr "Bạn đã đăng xuất thành công."
 
-#: .\main\views.py:140
+#: .\main\views.py:131
 msgid "You must enroll the subject of this test first."
 msgstr "Bạn phải tham gia vào chủ đề trước"
 
-#: .\main\views.py:151 .\main\views.py:162
+#: .\main\views.py:142 .\main\views.py:159
 msgid "Some errors have occured"
 msgstr "Một vài lỗi đã xảy ra"
 
-#: .\main\views.py:154
+#: .\main\views.py:151
 msgid ""
 "You have a test is still doing. Please submit that test before create a new "
 "test."
@@ -315,6 +326,9 @@ msgstr "thay thế"
 #: .\templates\registration_template.html:7
 msgid "Exam management - login"
 msgstr ""
+
+#~ msgid "Test result"
+#~ msgstr "Kết quả làm bài"
 
 #~ msgid "Subject is not exist."
 #~ msgstr "Chủ đề không tồn tại."
