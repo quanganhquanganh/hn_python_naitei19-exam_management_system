@@ -21,7 +21,8 @@ class Genre(models.Model):
 class Subject(models.Model):
     name = models.CharField(
         max_length=200, help_text=_('Title name of the subject'))
-    description = models.TextField(max_length=1000, help_text=_('Description'), blank=True)
+    description = models.TextField(
+        max_length=1000, help_text=_('Description'), blank=True)
     genres = models.ManyToManyField(
         Genre, help_text=_('Select genre for this subject'))
     enrollers = models.ManyToManyField(User, through='Enroll')
@@ -54,10 +55,11 @@ class Chapter(models.Model):
 
     def get_absolute_url(self):
         return reverse('chapter-detail', args=[str(self.id)])
-    
+
     def clean(self):
         if self.min_correct_ans > self.num_questions:
-            raise ValidationError(_('Minimum correct answers must be less than number of questions'))
+            raise ValidationError(
+                _('Minimum correct answers must be less than number of questions'))
 
 
 class Enroll(models.Model):
@@ -83,7 +85,7 @@ class Test(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.PROTECT)
     total_score = models.IntegerField()
     created_at = models.DateTimeField()
-    completed_at = models.DateTimeField()
+    completed_at = models.DateTimeField(null=True, blank=True)
     TEST_STATUS = (
         (1, 'Completed'),
         (0, 'Incomplete'),
@@ -94,10 +96,13 @@ class Test(models.Model):
         default=0,
     )
 
+    def get_absolute_url(self):
+        return reverse('take-exam', args=[str(self.id)])
+
 
 class Question(models.Model):
-    id = models.CharField(primary_key=True, 
-        max_length=100, default=uuid.uuid4, editable=False)
+    id = models.CharField(primary_key=True,
+                          max_length=100, default=uuid.uuid4, editable=False)
     description = models.TextField(
         max_length=1000, help_text=_('Detail of the question'))
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
@@ -114,7 +119,8 @@ class Choice(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True)
+
 
 class QuestionSetImport(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -127,7 +133,7 @@ class QuestionSetImport(models.Model):
         try:
             data = get_data(self.filename.file)
         except Exception as e:
-            raise ValidationError(_('Invalid file format'))
+            raise ValidationError(str(e))
 
         # The data will be in the following format
         # Column A: Subject
@@ -141,19 +147,22 @@ class QuestionSetImport(models.Model):
             if len(row) < 5:
                 raise ValidationError(_('Not enough columns'))
 
-            subject_name, chapter_name, question_id, question_description, correct_answers = row[:5]
+            subject_name, chapter_name, question_id, question_description, correct_answers = row[
+                :5]
 
             if subject_name == '' or chapter_name == '' or question_id == '' or question_description == '' or correct_answers == '':
                 raise ValidationError(_('All fields are required'))
-            
+
             question = Question.objects.filter(id=question_id).first()
             if question is not None:
                 raise ValidationError(_('Question ID already exists'))
 
             try:
-                correct_answers = [int(float(x)) for x in str(correct_answers).split(',')]
+                correct_answers = [int(float(x))
+                                   for x in str(correct_answers).split(',')]
             except Exception as e:
-                raise ValidationError(_('Correct answers must be a list of numbers separated by comma'))
+                raise ValidationError(
+                    _('Correct answers must be a list of numbers separated by comma'))
 
             for index, answer in enumerate(row[5:]):
                 if answer == '':
@@ -163,25 +172,31 @@ class QuestionSetImport(models.Model):
         data = get_data(self.filename.file)
 
         for row in data['Sheet1']:
-            subject_name, chapter_name, question_id, question_description, correct_answers = row[:5]
+            subject_name, chapter_name, question_id, question_description, correct_answers = row[
+                :5]
 
             subject = Subject.objects.filter(name=subject_name).first()
             if subject is None:
                 subject = Subject(name=subject_name)
                 subject.save()
 
-            chapter = Chapter.objects.filter(name=chapter_name, subject=subject).first()
+            chapter = Chapter.objects.filter(
+                name=chapter_name, subject=subject).first()
             if chapter is None:
-                chapter = Chapter(name=chapter_name, subject=subject, num_questions=0, min_correct_ans=0, time_limit=0)
+                chapter = Chapter(name=chapter_name, subject=subject,
+                                  num_questions=0, min_correct_ans=0, time_limit=0)
                 chapter.save()
 
-            question = Question(id=question_id, description=question_description, chapter=chapter)
+            question = Question(
+                id=question_id, description=question_description, chapter=chapter)
             question.save()
 
-            correct_answers = [int(float(x)) for x in str(correct_answers).split(',')]
+            correct_answers = [int(float(x))
+                               for x in str(correct_answers).split(',')]
 
             for index, answer in enumerate(row[5:]):
-                answer = Answer(content=answer, question=question, is_correct=((index+1) in correct_answers))
+                answer = Answer(content=answer, question=question,
+                                is_correct=((index+1) in correct_answers))
                 answer.save()
 
         super(QuestionSetImport, self).save(*args, **kwargs)

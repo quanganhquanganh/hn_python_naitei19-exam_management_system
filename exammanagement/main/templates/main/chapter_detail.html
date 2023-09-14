@@ -11,7 +11,10 @@
                 <p class="card-text">{% trans "Total question" %}: {{ chapter.num_questions }}</p>
                 <p class="card-text">{% trans "Time limt" %}: {{ chapter.time_limit }} {% trans "minutes" %}</p>
                 <p class="card-text">{% trans "Minium correct answers" %}: {{ chapter.min_correct_ans }}</p>
-                <a href="#" class="btn btn-primary">{% trans "Go test" %}</a>
+                <form action="{% url 'create-exam' chapter.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">{% trans "Go test" %}</button>
+                  </form>
             </div>
         </div>
     </div>

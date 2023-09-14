@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% load keyvalue_action %}
+
+{% block content %}
+    <div class="p-4 shadow-4 rounded-3 my-4 exam-bg">
+        <form class="form" id="exam-form" method="POST">
+            {% csrf_token %}
+            <h2 class="text-center">{% trans "Chapter" %}: {{ test.chapter.name }} - {{ test.chapter.subject.name }}</h2>
+            <h2 class="text-center" id="countdown" data-remaining-seconds="{{ remaining_time_seconds }}"></h2>
+            {% for c in choices %}
+                <div class="d-flex w-100 align-items-center">
+                    <div class="col-auto flex-shrink-1 flex-grow-1">
+                        <h5 class="">{{ forloop.counter }}. {{c.question.description}}</h5>
+                    </div>
+                </div>
+                {% for answer in c.question.answer_set.all %}
+                    <div class="form-check mx-4 d-flex align-items-center">
+                        {% if user_response %}
+                        <input class="form-check-input" 
+                            type="radio" 
+                            name="question_{{ c.question.id }}" 
+                            value="{{ answer.id }}" {% if user_response|keyvalue:c.question.id == answer.id %} checked {% endif %}>
+                        {% else %}
+                            <input class="form-check-input" 
+                                type="radio" 
+                                name="question_{{ c.question.id }}" 
+                                value="{{ answer.id }}"
+                            >
+                        {% endif %}
+                        <label class="form-check-label ml-3" for="{{ answer.id }}">
+                            {{answer.content}}
+                        </label>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <input class="btn btn-primary btn-lg" style="border-radius: 0%;" type="submit" value="Submit Answers">
+        </form>
+    </div>
+{% endblock %}

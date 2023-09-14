@@ -32,3 +32,7 @@
 .profile-bg {
   background-color: #eee !important;
 }
+
+.exam-bg {
+  background-color: hsl(0, 0%, 94%);
+}
