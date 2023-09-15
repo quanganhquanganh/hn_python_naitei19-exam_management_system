@@ -106,8 +106,8 @@ def enroll_subject(request, subject_id):
 def user_profile(request):
     user = request.user
     enrolled_subjects = Enroll.objects.filter(
-        user=user)[:3]
-    tests = Test.objects.filter(user=user)[:3]
+        user=user).order_by("-id")[:3]
+    tests = Test.objects.filter(user=user).order_by("-completed_at")[:3]
 
     context = {
         'user': user,
@@ -212,8 +212,9 @@ def __submit_test(request, test, choices):
             answer_key)
         choice.answer = Answer.objects.filter(id=answer_id).first()
         choice.save()
-        if choice.answer.is_correct:
-            total_score += 1
+        if choice.answer:
+            if choice.answer.is_correct:
+                total_score += 1
     __delete_test_sesstion(request)
     request.session['is-examing'] = False
     test.status = 1
