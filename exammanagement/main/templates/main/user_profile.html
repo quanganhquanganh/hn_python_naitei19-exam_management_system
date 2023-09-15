@@ -1,6 +1,7 @@
 {% extends "base_generic.html"%}
 {% load i18n %}
 {% load static %}
+{% load keyvalue_action %}
 
 {% block content %}
     <section class="profile-bg">
@@ -43,10 +44,11 @@
                                 <div class="card-body">
                                     <p class="mb-4">{% trans "Enrolled Subjects Status" %}</p>
                                     {% for enroll in enrolled_subjects %}
-                                        <p class="mb-1 fs-1r"><a class="text-decoration-none" href="{{ enroll.subject.get_absolute_url }}">{{ enroll.subject.name }}</a> - {{ enroll.progress }}%</p>
+                                        <p class="mb-1 fs-1r"><a class="text-decoration-none" href="{{ enroll.subject.get_absolute_url }}">{{ enroll.subject.name }}</a> - {{ enroll.subject|in_progress:user }}%</p>
                                         <div class="progress rounded h-20">
-                                            <div class="progress-bar" style="width: {{ enroll.progress }}% ;" role="progressbar" aria-valuenow="{{ enroll.progress }}"
+                                            <div class="progress-bar" style="width: {{ enroll.subject|in_progress:user }}% ;" role="progressbar" aria-valuenow="{{ enroll.subject|in_progress:user }}"
                                                 aria-valuemin="0" aria-valuemax="100">
+                                                {{ enroll.subject|in_progress:user }}%
                                             </div>
                                         </div>
                                     {% empty %}
@@ -58,13 +60,21 @@
                         <div class="col-md-6">
                             <div class="card mb-4 mb-md-0">
                                 <div class="card-body">
-                                    <p class="mb-4">{% trans "Test history" %}</p>
-                                    <p class="mb-1 fs-1r">Unit 1 - 75%</p>
-                                    <div class="progress rounded h-20">
-                                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75"
-                                            aria-valuemin="0" aria-valuemax="100">
+                                        <p class="mb-4">{% trans "Test history" %}</p>
+                                        {% for test in tests %}
+                                        <p class="mb-1 fs-1r"><a class="text-decoration-none" href="{{ test.get_absolute_url }}">{{ test.chapter.subject.name }} {{ test.chapter.name }}</a> - {{ test.total_score}} / {{ test.choice_set.all.count }}</p>
+                                        <div class="progress rounded h-20">
+                                            <div class="progress-bar" style="width: {{ test.total_score|in_percent:test.choice_set.all.count }}%;" 
+                                            role="progressbar" 
+                                            aria-valuenow="{{ test.total_score|in_percent:test.choice_set.all.count }}"
+                                            aria-valuemin="0" aria-valuemax="100"
+                                            >
+                                            {{ test.total_score|in_percent:test.choice_set.all.count }}%
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% empty %}
+                                        <p>{% trans "Not make any test yet" %}</p>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

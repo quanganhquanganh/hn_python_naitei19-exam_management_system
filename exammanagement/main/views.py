@@ -106,11 +106,13 @@ def enroll_subject(request, subject_id):
 def user_profile(request):
     user = request.user
     enrolled_subjects = Enroll.objects.filter(
-        user=user)
+        user=user)[:3]
+    tests = Test.objects.filter(user=user)[:3]
 
     context = {
         'user': user,
         'enrolled_subjects': enrolled_subjects,
+        'tests': tests,
     }
 
     return render(request, 'main/user_profile.html', context)
@@ -203,16 +205,20 @@ def __delete_test_sesstion(request):
 
 # khi submit thi xoa tat ca cac session cua test va luu trang thai test va choice
 def __submit_test(request, test, choices):
+    total_score = 0
     for choice in choices:
         answer_key = f'question_{choice.question.id}'
         answer_id = request.POST.get(
             answer_key)
         choice.answer = Answer.objects.filter(id=answer_id).first()
         choice.save()
+        if choice.answer.is_correct:
+            total_score += 1
     __delete_test_sesstion(request)
     request.session['is-examing'] = False
     test.status = 1
     test.completed_at = timezone.now()
+    test.total_score = total_score
     test.save()
     test1 = test
     choices1 = choices
@@ -249,4 +255,6 @@ def take_exam_view(request, pk):
             logger.info(user_responses)
         return render(request, 'main/take_exam.html', context=context)
     else:
-        return render(request, 'main/test-results.html', context={'test': test})
+        choices = Choice.objects.filter(test=test)
+        logger.info(choices)
+        return render(request, 'main/test-results.html', context={'test': test, 'choices': choices})
