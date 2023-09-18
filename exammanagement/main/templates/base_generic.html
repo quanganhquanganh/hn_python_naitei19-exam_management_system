@@ -91,59 +91,16 @@
                                 {% trans "Subjects" %}
                             </a>
                             {% if request.user.is_authenticated %}
-                                {% if user.is_superuser %}
-                                    <a class="nav-link" href="#">
-                                        <div class="sb-nav-link-icon">
-                                            <i class="fas fa-tachometer-alt"></i>
-                                        </div>
-                                        {% trans "Add subjects" %}
-                                    </a>
-                                {% else %}
-                                    <a class="nav-link" href="#">
-                                        <div class="sb-nav-link-icon">
-                                            <i class="fas fa-tachometer-alt"></i>
-                                        </div>
-                                        {% trans "Enrolled subjects" %}
-                                    </a>
-                                {% endif %}
-                            {% endif %}
                             <div class="sb-sidenav-menu-heading">{% trans "User" %}</div>
-                            {% if user.is_superuser %}
-                                <a class="nav-link" href="#">
+                                <!-- href is subjects/enrolled -->
+                                <a class="nav-link" href="{% url 'enrolled-subjects' %}">
                                     <div class="sb-nav-link-icon">
                                         <i class="fas fa-tachometer-alt"></i>
                                     </div>
-                                    {% trans "User list" %}
+                                    {% trans "Enrolled subjects" %}
                                 </a>
-                            {% elif request.user.is_authenticated %}
-                            <a
-                            class="nav-link collapsed"
-                            href="#"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts"
-                            aria-expanded="false"
-                            aria-controls="collapseLayouts"
-                            >
-                                <div class="sb-nav-link-icon">
-                                    <i class="fas fa-columns"></i>
-                                </div>
-                                {% trans "User history" %}
-                                <div class="sb-sidenav-collapse-arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-                            </a>
-                            <div
-                            class="collapse"
-                            id="collapseLayouts"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion"
-                            >
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">{% trans "Finished subjects" %}</a>
-                                    <a class="nav-link" href="#">{% trans "Finished tests" %}</a>
-                                </nav>
-                            </div>
                             {% endif %}
+                            <div class="sb-sidenav-menu-heading">{% trans "Settings" %}</div>
                             <a
                             class="nav-link collapsed"
                             href="#"

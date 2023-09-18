@@ -5,7 +5,7 @@
     {% if subject_list %}
         <div class="row gy-5">
             {% for subject in subject_list %}
-                <div class="card m-3 col-6 w-18r" id="course-{{ course.id }}">
+                <div class="card m-3 col-6 w-18r" id="course-{{ subject.id }}">
                     <img src="/main/static/image/subject_bg.png" alt="..."  class="object-fit-cover">
                     <div class="card-body">
                         <h5 class="card-title">{{ subject.name }}</h5>
@@ -21,6 +21,6 @@
             {% endfor %}
         </div>
         {% else %}
-        <p>{% trans "There are no subjects in the web." %}</p>
+        <p>{% trans "No subjects" %}</p>
     {% endif %}
 {% endblock %}

@@ -60,18 +60,18 @@
                         <div class="col-md-6">
                             <div class="card mb-4 mb-md-0">
                                 <div class="card-body">
-                                        <p class="mb-4">{% trans "Test history" %}</p>
-                                        {% for test in tests %}
-                                        <p class="mb-1 fs-1r"><a class="text-decoration-none" href="{{ test.get_absolute_url }}">{{ test.chapter.subject.name }} {{ test.chapter.name }}</a> - {{ test.total_score}} / {{ test.choice_set.all.count }}</p>
-                                        <div class="progress rounded h-20">
-                                            <div class="progress-bar" style="width: {{ test.total_score|in_percent:test.choice_set.all.count }}%;" 
-                                            role="progressbar" 
-                                            aria-valuenow="{{ test.total_score|in_percent:test.choice_set.all.count }}"
-                                            aria-valuemin="0" aria-valuemax="100"
-                                            >
-                                            {{ test.total_score|in_percent:test.choice_set.all.count }}%
-                                            </div>
+                                    <p class="mb-4">{% trans "Test history" %}</p>
+                                    {% for test in tests %}
+                                    <p class="mb-1 fs-1r"><a class="text-decoration-none" href="{{ test.get_absolute_url }}">{{ test.chapter.subject.name }} {{ test.chapter.name }}</a> - {{ test.total_score}} / {{ test.choice_set.all.count }}</p>
+                                    <div class="progress rounded h-20">
+                                        <div class="progress-bar" style="width: {{ test.total_score|in_percent:test.choice_set.all.count }}%;" 
+                                        role="progressbar" 
+                                        aria-valuenow="{{ test.total_score|in_percent:test.choice_set.all.count }}"
+                                        aria-valuemin="0" aria-valuemax="100"
+                                        >
+                                        {{ test.total_score|in_percent:test.choice_set.all.count }}%
                                         </div>
+                                    </div>
                                     {% empty %}
                                         <p>{% trans "Not make any test yet" %}</p>
                                     {% endfor %}
