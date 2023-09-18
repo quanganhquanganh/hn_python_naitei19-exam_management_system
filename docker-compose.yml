@@ -17,6 +17,11 @@ services:
       - "3306:3306"
     networks:
       - exam-manage-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
   web:
     container_name: exam-manage-dev
     build:
@@ -38,7 +43,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     links:
       - db
     networks:

@@ -8,14 +8,54 @@
                 {{ chapter.name }} - {{ chapter.subject.name}}
             </h5>
             <div class="card-body">
-                <p class="card-text">{% trans "Total question" %}: {{ chapter.num_questions }}</p>
-                <p class="card-text">{% trans "Time limt" %}: {{ chapter.time_limit }} {% trans "minutes" %}</p>
+                <p class="card-text">{% trans "Total questions" %}: {{ chapter.num_questions }}</p>
+                <p class="card-text">{% trans "Time limit" %}: {{ chapter.time_limit }} {% trans "minutes" %}</p>
                 <p class="card-text">{% trans "Minium correct answers" %}: {{ chapter.min_correct_ans }}</p>
                 <form action="{% url 'create-exam' chapter.id %}" method="post">
                     {% csrf_token %}
-                    <button class="btn btn-primary" type="submit">{% trans "Go test" %}</button>
+                    <button class="btn btn-primary" type="submit">{% trans "Do test" %}</button>
                   </form>
             </div>
         </div>
+    </div>
+
+    <div class="mt-5">
+        <h3>{% trans "Exam History" %}</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{% trans "Date" %}</th>
+                    <th>{% trans "Score" %}</th>
+                    <th>{% trans "Finished Time" %}</th>
+                    <th>{% trans "Passed" %}</th>
+                    <th>{% trans "Details" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in tests %}
+                    <tr>
+                        <td>{{ test.created_at }}</td>
+                        <td>{{ test.total_score }} / {{ test.num_questions }}</td>
+                        <td>{{ test.time }}</td>
+                        <td>
+                            {% if test.passed %}
+                                Passed
+                            {% else %}
+                                Failed
+                            {% endif %}
+                        </td>            
+                        <td>
+                            <a href="{{ test.get_absolute_url }}">
+                                {% trans "View Details" %}
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="2">{% trans "No exam history available." %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
