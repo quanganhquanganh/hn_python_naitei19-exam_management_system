@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -15,7 +16,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from django.views.decorators.csrf import requires_csrf_token
-from main.models import Answer, Chapter, Choice, Enroll, Question, Subject, Test
+from main.models import Answer, Chapter, Choice, Enroll, Genre, Question, Subject, Test
 
 from .forms import NewUserForm
 
@@ -27,6 +28,28 @@ logger = logging.getLogger('mylogger')
 class SubjectListView(generic.ListView):
     model = Subject
     paginate_by = 6
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        genre_id = self.request.GET.get('genre')
+
+        if query:
+            queryset = queryset.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+
+        if genre_id:
+            queryset = queryset.filter(genres=genre_id)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context[
+            'genres'
+        ] = Genre.objects.all()
+        return context
 
 
 class EnrolledSubjectListView(LoginRequiredMixin, generic.ListView):

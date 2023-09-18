@@ -33,17 +33,30 @@
             <!-- Navbar Search-->
             <form
               class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
+              action="{% url 'subjects' %}" method="get"
             >
                 <div class="input-group">
                     {% trans "Search for..." as search %}
                     <input
                     class="form-control"
                     type="text"
+                    name="q"
                     placeholder="{{ search }}"
                     aria-label="Search for..."
                     aria-describedby="btnNavbarSearch"
+                    value="{{ request.GET.q }}"
                     />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button">
+                    <div class="input-group-append">
+                        <select class="form-control" name="genre">
+                            <option value="" {% if not request.GET.genre %}selected{% endif %}>{% trans "All Genres" %}</option>
+                            {% for genre in genres %}
+                                {% with request_genre=request.GET.genre|default:""|add:"0" %}
+                                <option value="{{ genre.id }}" {% if request_genre == genre.id %}selected{% endif %}>{{ genre.name }}</option>
+                                {% endwith %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit">
                     <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -165,7 +178,7 @@
                                     </span>
                                 </div>
                             {% endif %}
-                        {% endblock %}    
+                        {% endblock %}
                     </div>
                 </main>
               <footer class="py-4 bg-light mt-auto">
