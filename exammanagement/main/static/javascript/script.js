@@ -64,4 +64,7 @@ jQuery(document).ready(function ($) {
       $(this).prop("checked", true);
     }
   });
+  $("exam-form").on("submit", function () {
+    localStorage.clear();
+  });
 });

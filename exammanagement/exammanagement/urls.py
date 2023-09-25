@@ -13,26 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from main import views
+from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
-from django.conf import settings
-from django.conf.urls.static import static
-from django.conf.urls.i18n import i18n_patterns
+from main import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('main/', include('main.urls')),
-    path('', RedirectView.as_view(url='main/')),
-    path('register', views.register_request, name="register"),
-    path('login', views.login_request, name="login"),
-    path('logout', views.logout_request, name="logout"),
-    path('i18n/', include('django.conf.urls.i18n')),
+    path("admin/", admin.site.urls),
+    path("main/", include("main.urls")),
+    path("", RedirectView.as_view(url="main/")),
+    path("register", views.register_request, name="register"),
+    path("login", views.login_request, name="login"),
+    path("logout", views.logout_request, name="logout"),
+    path("activate/<uidb64>/<token>", views.activate_account, name="activate"),
+    path("i18n/", include("django.conf.urls.i18n")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += i18n_patterns(
-    path('main/', include('main.urls')),
-    path('register', views.register_request, name="register"),
-    path('login', views.login_request, name="login"),
+    path("main/", include("main.urls")),
+    path("register", views.register_request, name="register"),
+    path("login", views.login_request, name="login"),
 )
