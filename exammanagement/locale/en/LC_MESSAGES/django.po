@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-27 08:54+0700\n"
+"POT-Creation-Date: 2023-09-27 21:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,71 +18,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\exammanagement\settings.py:133
+#: .\exammanagement\settings.py:135
 msgid "English"
 msgstr ""
 
-#: .\exammanagement\settings.py:134
+#: .\exammanagement\settings.py:136
 msgid "Vietnamese"
 msgstr ""
 
-#: .\main\models.py:15
+#: .\main\models.py:17
+msgid "Date of Birth of user"
+msgstr ""
+
+#: .\main\models.py:26
 msgid "Genre of the subject (IT, Japanese, etc)"
 msgstr ""
 
-#: .\main\models.py:23
+#: .\main\models.py:34
 msgid "Title name of the subject"
 msgstr ""
 
-#: .\main\models.py:25
+#: .\main\models.py:36
 msgid "Description"
 msgstr ""
 
-#: .\main\models.py:27
+#: .\main\models.py:38
 msgid "Select genre for this subject"
 msgstr ""
 
-#: .\main\models.py:44
+#: .\main\models.py:55
 msgid "Title name of the chapter"
 msgstr ""
 
-#: .\main\models.py:47
+#: .\main\models.py:58
 msgid "Minimum correct answers to pass the test"
 msgstr ""
 
-#: .\main\models.py:49
+#: .\main\models.py:60
 msgid "Time limit for the test"
 msgstr ""
 
-#: .\main\models.py:61
+#: .\main\models.py:72
 msgid "Minimum correct answers must be less than number of questions"
 msgstr ""
 
-#: .\main\models.py:122
+#: .\main\models.py:133
 msgid "Detail of the question"
 msgstr ""
 
-#: .\main\models.py:128
+#: .\main\models.py:139
 msgid "Content of the answer"
 msgstr ""
 
-#: .\main\models.py:163
+#: .\main\models.py:174
 msgid "Not enough columns"
 msgstr ""
 
-#: .\main\models.py:180
+#: .\main\models.py:191
 msgid "All fields are required"
 msgstr ""
 
-#: .\main\models.py:184
+#: .\main\models.py:195
 msgid "Question ID already exists"
 msgstr ""
 
-#: .\main\models.py:192
+#: .\main\models.py:203
 msgid "Correct answers must be a list of numbers separated by comma"
 msgstr ""
 
-#: .\main\models.py:197
+#: .\main\models.py:208
 msgid "All answers are required"
 msgstr ""
 
@@ -190,6 +194,14 @@ msgstr ""
 msgid "No exam history available."
 msgstr ""
 
+#: .\main\templates\main\edit_profile.html:15
+msgid "Edit Profile"
+msgstr ""
+
+#: .\main\templates\main\edit_profile.html:19
+msgid "Save Changes"
+msgstr ""
+
 #: .\main\templates\main\subject_detail.html:15
 msgid "Enrolled"
 msgstr ""
@@ -245,98 +257,102 @@ msgstr ""
 msgid "Completed at"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:16
+#: .\main\templates\main\user_profile.html:19
 msgid "Edit profile"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:25
+#: .\main\templates\main\user_profile.html:28
 msgid "Username"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:33
+#: .\main\templates\main\user_profile.html:36
 msgid "Email"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:45
+#: .\main\templates\main\user_profile.html:44
+msgid "Date of birth"
+msgstr ""
+
+#: .\main\templates\main\user_profile.html:56
 msgid "Enrolled Subjects Status"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:55
+#: .\main\templates\main\user_profile.html:66
 msgid "Not enrolled any subject yet"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:63
+#: .\main\templates\main\user_profile.html:74
 msgid "Test history"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:76
+#: .\main\templates\main\user_profile.html:87
 msgid "Not make any test yet"
 msgstr ""
 
-#: .\main\views.py:84
+#: .\main\views.py:93
 msgid "Activate your account"
 msgstr ""
 
-#: .\main\views.py:85
+#: .\main\views.py:94
 msgid "This is a email from Exam management"
 msgstr ""
 
-#: .\main\views.py:87
+#: .\main\views.py:96
 msgid "Hi "
 msgstr ""
 
-#: .\main\views.py:91
+#: .\main\views.py:100
 msgid ""
 "Thank you for registering our website. Please activate your account by click "
 "to the link below."
 msgstr ""
 
-#: .\main\views.py:94
+#: .\main\views.py:103
 msgid "link activate"
 msgstr ""
 
-#: .\main\views.py:108
+#: .\main\views.py:117
 msgid ""
 "Registration successful. Please check your mail to activate the account."
 msgstr ""
 
-#: .\main\views.py:112
+#: .\main\views.py:121
 msgid "Unsuccessful registration. Invalid information."
 msgstr ""
 
-#: .\main\views.py:129
+#: .\main\views.py:138
 msgid "Activation sucessfully. Let's enjoy the app."
 msgstr ""
 
-#: .\main\views.py:131
+#: .\main\views.py:140
 msgid "Some error occured while activating"
 msgstr ""
 
-#: .\main\views.py:147
+#: .\main\views.py:156
 msgid "You are now logged in as "
 msgstr ""
 
-#: .\main\views.py:150
+#: .\main\views.py:159
 msgid "Invalid user or password"
 msgstr ""
 
-#: .\main\views.py:161
+#: .\main\views.py:170
 msgid "You have successfully logged out."
 msgstr ""
 
-#: .\main\views.py:199
+#: .\main\views.py:221
 msgid "Registration successful."
 msgstr ""
 
-#: .\main\views.py:225
+#: .\main\views.py:248
 msgid "You must enroll the test's subject first."
 msgstr ""
 
-#: .\main\views.py:240 .\main\views.py:262
+#: .\main\views.py:263 .\main\views.py:285
 msgid "Some errors have occured"
 msgstr ""
 
-#: .\main\views.py:251
+#: .\main\views.py:274
 msgid ""
 "You have a test still in progress. Please submit that test before creating a "
 "new test."
@@ -391,6 +407,10 @@ msgid ""
 "We've sent you an email with instructions on how to reset your password. "
 "Please check your email, including the spam folder, and follow the provided "
 "link."
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:9
+msgid "Hello,"
 msgstr ""
 
 #: .\templates\registration\password_reset_email.html:11

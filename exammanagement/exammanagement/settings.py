@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "sass_processor",
     "crispy_forms",
     "crispy_bootstrap5",
+    "widget_tweaks",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -150,7 +152,11 @@ LOCALE_PATHS = (BASE_DIR / "locale/",)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = "main/static/"
+STATIC_URL = "/static/"
+
+STATICFILES_DIR = [
+    BASE_DIR / "static",
+]
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -202,3 +208,15 @@ EMAIL_USE_TLS = True  # Use TLS encryption for security
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
+
+AWS_ACCESS_KEY_ID = os.getenv("LOCAL_AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("LOCAL_AWS_SECRET_ACCESS_KEY")
+AWS_S3_REGION_NAME = "ap-south-1"
+AWS_STORAGE_BUCKET_NAME = "exammanagement"
+AWS_S3_SIGNATURE_NAME = "s3v4"
+
+AWS_DEFAULT_ACL = None
+AWS_USE_PATH_STYLE_ENDPOINT = "False"
+
+MEDIA_URL = "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"

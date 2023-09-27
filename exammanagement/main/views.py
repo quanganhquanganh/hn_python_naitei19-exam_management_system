@@ -9,23 +9,32 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetView
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from django.views import View, generic
 from django.views.decorators.csrf import requires_csrf_token
-from main.models import Answer, Chapter, Choice, Enroll, Genre, Question, Subject, Test
+from main.models import (
+    Answer,
+    Chapter,
+    Choice,
+    Enroll,
+    Genre,
+    Profile,
+    Question,
+    Subject,
+    Test,
+)
 
-from .forms import NewUserForm
+from .forms import EditProfileForm, NewUserForm
 from .utils import token_generator
 
 logger = logging.getLogger("mylogger")
@@ -162,6 +171,19 @@ def logout_request(request):
     return HttpResponseRedirect(reverse("index"))
 
 
+@login_required
+def edit_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect("user-profile")
+    else:
+        form = EditProfileForm(instance=profile)
+    return render(request, "main/edit_profile.html", {"form": form})
+
+
 class SubjectDetailView(generic.DetailView):
     model = Subject
 
@@ -201,14 +223,15 @@ def enroll_subject(request, subject_id):
 
 
 def user_profile(request):
-    user = request.user
-    enrolled_subjects = Enroll.objects.filter(user=user).order_by("-id")[:3]
-    tests = Test.objects.filter(user=user).order_by("-completed_at")[:3]
+    profile = get_object_or_404(Profile, user=request.user)
+    enrolled_subjects = Enroll.objects.filter(user=profile.user).order_by("-id")[:3]
+    tests = Test.objects.filter(user=profile.user).order_by("-completed_at")[:3]
 
     context = {
-        "user": user,
+        "profile": profile,
         "enrolled_subjects": enrolled_subjects,
         "tests": tests,
+        "user": request.user,
     }
 
     return render(request, "main/user_profile.html", context)
