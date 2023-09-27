@@ -10,7 +10,7 @@
         <p class=" mb-5">{% trans "Please enter your login and password!" %}</p>
         {% include 'toast.html' %}
         {{ login_form|crispy }}
-        <p class="small"><a class="text-primary" href="#">{% trans "Forgot password?" %}</a></p>
+        <p class="small"><a class="text-primary" href="{% url 'password_reset' %}">{% trans "Forgot password?" %}</a></p>
         <div class="d-grid">
             <input class="btn btn-outline-dark" type="submit" value="Login" />
         </div>

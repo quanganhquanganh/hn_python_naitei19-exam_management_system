@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-14 20:27+0700\n"
+"POT-Creation-Date: 2023-09-27 08:54+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\exammanagement\settings.py:132
+#: .\exammanagement\settings.py:133
 msgid "English"
 msgstr ""
 
-#: .\exammanagement\settings.py:133
+#: .\exammanagement\settings.py:134
 msgid "Vietnamese"
 msgstr ""
 
@@ -42,47 +42,47 @@ msgstr ""
 msgid "Select genre for this subject"
 msgstr ""
 
-#: .\main\models.py:45
+#: .\main\models.py:44
 msgid "Title name of the chapter"
 msgstr ""
 
-#: .\main\models.py:48
+#: .\main\models.py:47
 msgid "Minimum correct answers to pass the test"
 msgstr ""
 
-#: .\main\models.py:50
+#: .\main\models.py:49
 msgid "Time limit for the test"
 msgstr ""
 
-#: .\main\models.py:62
+#: .\main\models.py:61
 msgid "Minimum correct answers must be less than number of questions"
 msgstr ""
 
-#: .\main\models.py:107
+#: .\main\models.py:122
 msgid "Detail of the question"
 msgstr ""
 
-#: .\main\models.py:113
+#: .\main\models.py:128
 msgid "Content of the answer"
 msgstr ""
 
-#: .\main\models.py:148
+#: .\main\models.py:163
 msgid "Not enough columns"
 msgstr ""
 
-#: .\main\models.py:154
+#: .\main\models.py:180
 msgid "All fields are required"
 msgstr ""
 
-#: .\main\models.py:158
+#: .\main\models.py:184
 msgid "Question ID already exists"
 msgstr ""
 
-#: .\main\models.py:165
+#: .\main\models.py:192
 msgid "Correct answers must be a list of numbers separated by comma"
 msgstr ""
 
-#: .\main\models.py:169
+#: .\main\models.py:197
 msgid "All answers are required"
 msgstr ""
 
@@ -90,72 +90,60 @@ msgstr ""
 msgid "Exam management"
 msgstr ""
 
-#: .\main\templates\base_generic.html:38
+#: .\main\templates\base_generic.html:39
 msgid "Search for..."
 msgstr ""
 
-#: .\main\templates\base_generic.html:69
+#: .\main\templates\base_generic.html:51
+msgid "All Genres"
+msgstr ""
+
+#: .\main\templates\base_generic.html:82
 msgid "Profile"
 msgstr ""
 
-#: .\main\templates\base_generic.html:71
+#: .\main\templates\base_generic.html:84
 msgid "Logout"
 msgstr ""
 
-#: .\main\templates\base_generic.html:76
+#: .\main\templates\base_generic.html:89
 msgid "Signin"
 msgstr ""
 
-#: .\main\templates\base_generic.html:86 .\main\templates\base_generic.html:91
+#: .\main\templates\base_generic.html:99 .\main\templates\base_generic.html:104
 msgid "Subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:99
-msgid "Add subjects"
-msgstr ""
-
-#: .\main\templates\base_generic.html:106
-msgid "Enrolled subjects"
-msgstr ""
-
-#: .\main\templates\base_generic.html:110
+#: .\main\templates\base_generic.html:107
 msgid "User"
 msgstr ""
 
+#: .\main\templates\base_generic.html:113
+msgid "Enrolled subjects"
+msgstr ""
+
 #: .\main\templates\base_generic.html:116
-msgid "User list"
+msgid "Settings"
 msgstr ""
 
-#: .\main\templates\base_generic.html:130
-msgid "User history"
-msgstr ""
-
-#: .\main\templates\base_generic.html:142
-msgid "Finished subjects"
-msgstr ""
-
-#: .\main\templates\base_generic.html:143
-msgid "Finished tests"
-msgstr ""
-
-#: .\main\templates\base_generic.html:158
+#: .\main\templates\base_generic.html:128
 msgid "Language"
 msgstr ""
 
-#: .\main\templates\base_generic.html:187
+#: .\main\templates\base_generic.html:157
 msgid "Logged in as"
 msgstr ""
 
-#: .\main\templates\base_generic.html:217
+#: .\main\templates\base_generic.html:187
 msgid "Copyright"
 msgstr ""
 
 #: .\main\templates\main\chapter_detail.html:11
-msgid "Total question"
+msgid "Total questions"
 msgstr ""
 
 #: .\main\templates\main\chapter_detail.html:12
-msgid "Time limt"
+msgid "Time limit"
 msgstr ""
 
 #: .\main\templates\main\chapter_detail.html:12
@@ -167,7 +155,39 @@ msgid "Minium correct answers"
 msgstr ""
 
 #: .\main\templates\main\chapter_detail.html:16
-msgid "Go test"
+msgid "Do test"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:23
+msgid "Exam History"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:27
+msgid "Date"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:28
+msgid "Score"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:29
+msgid "Finished Time"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:30
+msgid "Passed"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:31
+msgid "Details"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:49
+msgid "View Details"
+msgstr ""
+
+#: .\main\templates\main\chapter_detail.html:55
+msgid "No exam history available."
 msgstr ""
 
 #: .\main\templates\main\subject_detail.html:15
@@ -205,23 +225,23 @@ msgid "Add chapter"
 msgstr ""
 
 #: .\main\templates\main\subject_list.html:24
-msgid "There are no subjects in the web."
+msgid "No subjects"
 msgstr ""
 
 #: .\main\templates\main\take_exam.html:9
-#: .\main\templates\main\test-results.html:7
+#: .\main\templates\main\test_results.html:7
 msgid "Chapter"
 msgstr ""
 
-#: .\main\templates\main\test-results.html:9
+#: .\main\templates\main\test_results.html:9
 msgid "Total score"
 msgstr ""
 
-#: .\main\templates\main\test-results.html:11
+#: .\main\templates\main\test_results.html:11
 msgid "Created at"
 msgstr ""
 
-#: .\main\templates\main\test-results.html:12
+#: .\main\templates\main\test_results.html:12
 msgid "Completed at"
 msgstr ""
 
@@ -253,38 +273,73 @@ msgstr ""
 msgid "Not make any test yet"
 msgstr ""
 
-#: .\main\views.py:38 .\main\views.py:102
-msgid "Registration successful."
+#: .\main\views.py:84
+msgid "Activate your account"
 msgstr ""
 
-#: .\main\views.py:41
+#: .\main\views.py:85
+msgid "This is a email from Exam management"
+msgstr ""
+
+#: .\main\views.py:87
+msgid "Hi "
+msgstr ""
+
+#: .\main\views.py:91
+msgid ""
+"Thank you for registering our website. Please activate your account by click "
+"to the link below."
+msgstr ""
+
+#: .\main\views.py:94
+msgid "link activate"
+msgstr ""
+
+#: .\main\views.py:108
+msgid ""
+"Registration successful. Please check your mail to activate the account."
+msgstr ""
+
+#: .\main\views.py:112
 msgid "Unsuccessful registration. Invalid information."
 msgstr ""
 
-#: .\main\views.py:56
-msgid "You are now logged in as "
-msgstr ""
-
-#: .\main\views.py:59 .\main\views.py:61
-msgid "Invalid username or password."
-msgstr ""
-
-#: .\main\views.py:68
-msgid "You have successfully logged out."
+#: .\main\views.py:129
+msgid "Activation sucessfully. Let's enjoy the app."
 msgstr ""
 
 #: .\main\views.py:131
-msgid "You must enroll the subject of this test first."
+msgid "Some error occured while activating"
 msgstr ""
 
-#: .\main\views.py:142 .\main\views.py:159
+#: .\main\views.py:147
+msgid "You are now logged in as "
+msgstr ""
+
+#: .\main\views.py:150
+msgid "Invalid user or password"
+msgstr ""
+
+#: .\main\views.py:161
+msgid "You have successfully logged out."
+msgstr ""
+
+#: .\main\views.py:199
+msgid "Registration successful."
+msgstr ""
+
+#: .\main\views.py:225
+msgid "You must enroll the test's subject first."
+msgstr ""
+
+#: .\main\views.py:240 .\main\views.py:262
 msgid "Some errors have occured"
 msgstr ""
 
-#: .\main\views.py:151
+#: .\main\views.py:251
 msgid ""
-"You have a test is still doing. Please submit that test before create a new "
-"test."
+"You have a test still in progress. Please submit that test before creating a "
+"new test."
 msgstr ""
 
 #: .\templates\registration\login.html:10
@@ -301,6 +356,70 @@ msgstr ""
 
 #: .\templates\registration\login.html:20
 msgid "Sign Up"
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:5
+msgid "Password Reset Complete"
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:6
+msgid "Your password has been successfully reset."
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:7
+msgid "Log in"
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:7
+msgid "with your new password."
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:10
+msgid "Change your password"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:11
+msgid "Enter your new password below"
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:5
+msgid "Password Reset Request Sent"
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:6
+msgid ""
+"We've sent you an email with instructions on how to reset your password. "
+"Please check your email, including the spam folder, and follow the provided "
+"link."
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:11
+msgid ""
+"We received a request to reset your password. Please click the following "
+"link to reset your password:"
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:14
+msgid "Reset Password"
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:17
+msgid ""
+"If you didn't request a password reset, you can safely ignore this email."
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:19
+msgid "Best regards,"
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:10
+msgid "Forgot your password?"
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:11
+msgid ""
+"Enter your email address below, and we'll email instructions for setting a "
+"new one."
 msgstr ""
 
 #: .\templates\registration\register.html:11
