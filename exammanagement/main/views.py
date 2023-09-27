@@ -9,12 +9,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage, send_mail
 from django.db.models import Q
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.template.loader import render_to_string
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -81,8 +83,16 @@ def register_request(request):
             activate_url = "http://" + domain + link
             email_subject = _("Activate your account")
             email_message = _("This is a email from Exam management")
-            email_body = _(
-                f"Hi {user.username}!\nThank you for registering our website. Please activate your account by click to the link below.\n<a href={activate_url}>link activate</a>"
+            email_body = (
+                _("Hi ")
+                + user.username
+                + "!\n"
+                + _(
+                    "Thank you for registering our website. Please activate your account by click to the link below."
+                )
+                + f"\n<a href={activate_url}>"
+                + _("link activate")
+                + "</a>"
             )
             send_mail(
                 email_subject,
@@ -136,8 +146,6 @@ def login_request(request):
                 login(request, user)
                 messages.info(request, _("You are now logged in as ") + f"{username}.")
                 return HttpResponseRedirect(reverse("index"))
-            else:
-                messages.error(request, _("User is none."))
         else:
             messages.error(request, _("Invalid user or password"))
     form = AuthenticationForm()
