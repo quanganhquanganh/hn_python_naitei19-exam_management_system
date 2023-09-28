@@ -10,10 +10,13 @@
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <img src="{% static 'image/avatar.png' %}" alt="avatar"
-                            class="rounded-circle img-fluid w-150">
-                            <h2 class="my-3">{{ user.username }}</h2>
-                            <a href="#"><button class="btn btn-primary">{% trans "Edit profile" %}</button></a>
+                            <img src="{{ profile.avatar.url }}" alt="avatar"
+                            class="rounded-circle img-fluid w-150 h-150">
+                            <h2 class="my-3">{{ profile.user.username }}</h2>
+                            <hr>
+                            <h6 class="fw-normal">{{ profile.introduction }}</h6>
+                            <hr>
+                            <a href="{% url 'edit-profile' %}"><button class="btn btn-primary">{% trans "Edit profile" %}</button></a>
                         </div>
                     </div>
                 </div>
@@ -25,7 +28,7 @@
                                     <p class="mb-0">{% trans "Username" %}</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ user.username }}</p>
+                                    <p class="text-muted mb-0">{{ profile.user.username }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -33,7 +36,15 @@
                                     <p class="mb-0">{% trans "Email" %}</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ user.email }}</p>
+                                    <p class="text-muted mb-0">{{ profile.user.email }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">{% trans "Date of birth" %}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ profile.date_of_birth }}</p>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +53,7 @@
                         <div class="col-md-6">
                             <div class="card mb-4 mb-md-0">
                                 <div class="card-body">
-                                    <p class="mb-4">{% trans "Enrolled Subjects Status" %}</p>
+                                    <p class="mb-4 fw-bold">{% trans "Enrolled Subjects Status" %}</p>
                                     {% for enroll in enrolled_subjects %}
                                         <p class="mb-1 fs-1r"><a class="text-decoration-none" href="{{ enroll.subject.get_absolute_url }}">{{ enroll.subject.name }}</a> - {{ enroll.subject|in_progress:user }}%</p>
                                         <div class="progress rounded h-20">
@@ -60,12 +71,12 @@
                         <div class="col-md-6">
                             <div class="card mb-4 mb-md-0">
                                 <div class="card-body">
-                                    <p class="mb-4">{% trans "Test history" %}</p>
+                                    <p class="mb-4 fw-bold">{% trans "Test history" %}</p>
                                     {% for test in tests %}
                                     <p class="mb-1 fs-1r"><a class="text-decoration-none" href="{{ test.get_absolute_url }}">{{ test.chapter.subject.name }} {{ test.chapter.name }}</a> - {{ test.total_score}} / {{ test.choice_set.all.count }}</p>
                                     <div class="progress rounded h-20">
-                                        <div class="progress-bar" style="width: {{ test.total_score|in_percent:test.choice_set.all.count }}%;" 
-                                        role="progressbar" 
+                                        <div class="progress-bar" style="width: {{ test.total_score|in_percent:test.choice_set.all.count }}%;"
+                                        role="progressbar"
                                         aria-valuenow="{{ test.total_score|in_percent:test.choice_set.all.count }}"
                                         aria-valuemin="0" aria-valuemax="100"
                                         >

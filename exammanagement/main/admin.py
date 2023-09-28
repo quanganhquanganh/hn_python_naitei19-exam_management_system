@@ -7,6 +7,7 @@ from .models import (
     Chapter,
     Choice,
     Genre,
+    Profile,
     Question,
     QuestionSetImport,
     Subject,
@@ -16,38 +17,43 @@ from .models import (
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    list_filter = ('name',)
-    search_fields = ('name',)
-    ordering = ('name',)
-    fieldsets = ((None, {'fields': ('name',)}),)
+    list_display = ("name",)
+    list_filter = ("name",)
+    search_fields = ("name",)
+    ordering = ("name",)
+    fieldsets = ((None, {"fields": ("name",)}),)
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ("introduction", "date_of_birth", "avatar")
 
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
-    list_filter = ('genres',)
-    search_fields = ('name',)
-    ordering = ('name',)
-    fieldsets = ((None, {'fields': ('name', 'description', 'genres')}),)
+    list_display = ("name", "description")
+    list_filter = ("genres",)
+    search_fields = ("name",)
+    ordering = ("name",)
+    fieldsets = ((None, {"fields": ("name", "description", "genres")}),)
 
 
 @admin.register(Chapter)
 class ChapterAdmin(admin.ModelAdmin):
-    list_display = ('name', 'subject', 'min_correct_ans', 'time_limit', 'num_questions')
-    list_filter = ('subject',)
-    search_fields = ('name',)
-    ordering = ('name', 'subject', 'min_correct_ans', 'time_limit', 'num_questions')
+    list_display = ("name", "subject", "min_correct_ans", "time_limit", "num_questions")
+    list_filter = ("subject",)
+    search_fields = ("name",)
+    ordering = ("name", "subject", "min_correct_ans", "time_limit", "num_questions")
     fieldsets = (
         (
             None,
             {
-                'fields': (
-                    'name',
-                    'subject',
-                    'min_correct_ans',
-                    'time_limit',
-                    'num_questions',
+                "fields": (
+                    "name",
+                    "subject",
+                    "min_correct_ans",
+                    "time_limit",
+                    "num_questions",
                 )
             },
         ),
@@ -61,11 +67,11 @@ class AnswerInline(admin.TabularInline):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('description', 'chapter')
-    list_filter = ('chapter',)
-    search_fields = ('description',)
-    ordering = ('description', 'chapter')
-    fieldsets = ((None, {'fields': ('description', 'chapter')}),)
+    list_display = ("description", "chapter")
+    list_filter = ("chapter",)
+    search_fields = ("description",)
+    ordering = ("description", "chapter")
+    fieldsets = ((None, {"fields": ("description", "chapter")}),)
     inlines = [AnswerInline]
 
 
@@ -76,15 +82,23 @@ admin.site.register(QuestionSetImport)
 class TestInline(admin.TabularInline):
     model = Test
     readonly_fields = (
-        'chapter',
-        'total_score',
-        'num_questions',
-        'created_at',
-        'completed_at',
-        'status',
-        'passed',
+        "chapter",
+        "total_score",
+        "num_questions",
+        "created_at",
+        "completed_at",
+        "status",
+        "passed",
     )
-    list_display = ('chapter', 'total_score', 'num_questions', 'created_at', 'completed_at', 'status', 'passed')
+    list_display = (
+        "chapter",
+        "total_score",
+        "num_questions",
+        "created_at",
+        "completed_at",
+        "status",
+        "passed",
+    )
     extra = 0
 
 
