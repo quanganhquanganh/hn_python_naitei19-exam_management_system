@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('main', '0012_alter_choice_answer'),
+        ("main", "0012_alter_choice_answer"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='chapter',
-            name='is_passed',
+            model_name="chapter",
+            name="is_passed",
             field=models.BooleanField(default=False),
         ),
     ]

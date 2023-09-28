@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('main', '0013_chapter_is_passed'),
+        ("main", "0013_chapter_is_passed"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='chapter',
-            name='best_score',
+            model_name="chapter",
+            name="best_score",
             field=models.PositiveIntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='chapter',
-            name='do_times',
+            model_name="chapter",
+            name="do_times",
             field=models.PositiveIntegerField(default=0),
         ),
     ]

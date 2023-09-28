@@ -4,11 +4,9 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('main', '0004_alter_answer_is_correct_alter_chapter_num_questions_and_more'),
-        ('main', '0006_alter_enroll_unique_together'),
+        ("main", "0004_alter_answer_is_correct_alter_chapter_num_questions_and_more"),
+        ("main", "0006_alter_enroll_unique_together"),
     ]
 
-    operations = [
-    ]
+    operations = []

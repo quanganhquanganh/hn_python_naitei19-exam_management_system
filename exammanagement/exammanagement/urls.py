@@ -56,7 +56,6 @@ urlpatterns += i18n_patterns(
     path("register", views.register_request, name="register"),
     path("login", views.login_request, name="login"),
     path("activate/<uidb64>/<token>", views.activate_account, name="activate"),
-    path("i18n/", include("django.conf.urls.i18n")),
     path(
         "password_reset/",
         auth_views.PasswordResetView.as_view(

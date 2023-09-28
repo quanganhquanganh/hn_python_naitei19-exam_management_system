@@ -1,6 +1,7 @@
 -c test.txt
 -r test.in
 
+libsass
 black
 django-s3-storage
 isort

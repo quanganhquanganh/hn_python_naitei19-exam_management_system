@@ -151,7 +151,7 @@ class Choice(models.Model):
 class QuestionSetImport(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=512)
-    filename = models.FileField(max_length=512, upload_to="uploads/")
+    filename = models.FileField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -253,5 +253,7 @@ class QuestionSetImport(models.Model):
                     is_correct=((index + 1) in correct_answers),
                 )
                 answer.save()
+
+        self.filename = None
 
         super(QuestionSetImport, self).save(*args, **kwargs)

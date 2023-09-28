@@ -5,15 +5,14 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('main', '0005_alter_enroll_progress'),
+        ("main", "0005_alter_enroll_progress"),
     ]
 
     operations = [
         migrations.AlterUniqueTogether(
-            name='enroll',
-            unique_together={('user', 'subject')},
+            name="enroll",
+            unique_together={("user", "subject")},
         ),
     ]

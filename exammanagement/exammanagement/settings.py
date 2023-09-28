@@ -10,30 +10,33 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-
 import os
 from pathlib import Path
 
+import environs
+import pymysql
 from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _
-from dotenv import load_dotenv
 
-load_dotenv()
+# Read env variables
+# https://github.com/sloria/environs
+env = environs.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = env.path("BASE_DIR", Path(__file__).resolve().parent.parent)
 
+env.read_env(os.path.join(BASE_DIR, "..", ".env"), recurse=False)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = env.str("DJANGO_SECRET_KEY", default="")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG", "") != "False"
+DEBUG = env.bool("DJANGO_DEBUG", default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 
 
 # Application definition
@@ -101,13 +104,15 @@ WSGI_APPLICATION = "exammanagement.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_USER_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
-    }
+        "NAME": env.str("DB_NAME", default=""),
+        "USER": env.str("DB_USER", default=""),
+        "PASSWORD": env.str("DB_PASSWORD", default=""),
+        "HOST": env.str("DB_HOST", default=""),
+        "PORT": env.str("DB_PORT", default=""),
+    },
 }
+
+pymysql.install_as_MySQLdb()
 
 
 # Password validation
@@ -136,9 +141,9 @@ LANGUAGES = [
     ("vi", _("Vietnamese")),
 ]
 
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = env.str("DJANGO_LANGUAGE_CODE", default="en")
 
-TIME_ZONE = "UTC"
+TIME_ZONE = env.str("DJANGO_TIME_ZONE", default="UTC")
 
 USE_I18N = True
 
@@ -152,7 +157,7 @@ LOCALE_PATHS = (BASE_DIR / "locale/",)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = env.str("STATIC_URL", default="/static/")
 
 STATICFILES_DIR = [
     BASE_DIR / "static",
@@ -164,8 +169,31 @@ STATICFILES_FINDERS = [
     "sass_processor.finders.CssFinder",
 ]
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = env.str("STATIC_ROOT", default=str(os.path.join(BASE_DIR, "staticfiles")))
+
 SASS_PROCESSOR_ROOT = STATIC_ROOT
+
+AWS_DEFAULT_ACL = env.str("AWS_DEFAULT_ACL", default="public-read")
+
+if env.bool("ENABLE_COLLECTSTATIC_S3", default=False):
+    # https://github.com/etianen/django-s3-storage
+    STATICFILES_STORAGE = "django_s3_storage.storage.ManifestStaticS3Storage"
+    AWS_ACCESS_KEY_ID = env.str("AWS_S3_ACCESS_KEY_ID_STATIC")
+    AWS_SECRET_ACCESS_KEY = env.str("AWS_S3_SECRET_ACCESS_KEY_STATIC")
+    AWS_REGION = env.str("AWS_REGION_STATIC")
+    AWS_S3_BUCKET_NAME_STATIC = env.str("AWS_S3_BUCKET_NAME_STATIC")
+    AWS_S3_BUCKET_AUTH_STATIC = False
+    AWS_S3_PUBLIC_URL_STATIC = env.str("AWS_S3_PUBLIC_URL_STATIC", default="")
+    AWS_S3_KEY_PREFIX_STATIC = env.str("AWS_S3_KEY_PREFIX_STATIC", default="")
+elif env.bool("ENABLE_MANIFEST_STORAGE", default=False):
+    # https://docs.djangoproject.com/en/3.1/ref/contrib/staticfiles/#manifeststaticfilesstorage
+
+    STATICFILES_STORAGE = (
+        "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+    )
+
+
+FORCE_SCRIPT_NAME = env.str("FORCE_SCRIPT_NAME", default="")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -195,28 +223,34 @@ LOGGING = {
     "loggers": {
         "mylogger": {
             "handlers": ["console"],
-            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "level": env.str("LOGGING_LEVEL", default="INFO"),
             "propagate": True,
         },
     },
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = 587  # Use the appropriate port for your SMTP server
-EMAIL_USE_TLS = True  # Use TLS encryption for security
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST = env.str("EMAIL_HOST", "")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD", "")
+DEFAULT_FROM_EMAIL = env.str("EMAIL_HOST_USER", "")
 
-AWS_ACCESS_KEY_ID = os.getenv("LOCAL_AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.getenv("LOCAL_AWS_SECRET_ACCESS_KEY")
-AWS_S3_REGION_NAME = "ap-south-1"
-AWS_STORAGE_BUCKET_NAME = "exammanagement"
-AWS_S3_SIGNATURE_NAME = "s3v4"
+if not env.bool("ENABLE_COLLECTSTATIC_S3", default=False):
+    AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID_UPLOAD", default="")
+    AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY_UPLOAD", default="")
+    AWS_S3_REGION_NAME = env.str("AWS_REGION_UPLOAD", default="ap-south-1")
+    AWS_STORAGE_BUCKET_NAME = env.str(
+        "AWS_S3_BUCKET_NAME_UPLOAD", default="exammanagement"
+    )
+    AWS_S3_SIGNATURE_NAME = env.str("AWS_S3_SIGNATURE_NAME", default="s3v4")
 
-AWS_DEFAULT_ACL = None
-AWS_USE_PATH_STYLE_ENDPOINT = "False"
+    AWS_DEFAULT_ACL = env.str("AWS_DEFAULT_ACL", default=None)
+    AWS_USE_PATH_STYLE_ENDPOINT = env.bool("AWS_USE_PATH_STYLE_ENDPOINT", default=False)
 
-MEDIA_URL = "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    MEDIA_URL = "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
+
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])

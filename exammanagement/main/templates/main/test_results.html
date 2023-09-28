@@ -19,13 +19,13 @@
             {% for answer in c.question.answer_set.all %}
                 <div class="form-check mx-4 d-flex align-items-center">
                     <input class="form-check-input"
-                        disabled 
-                        type="radio" 
-                        name="question_{{ c.question.id }}" 
+                        disabled
+                        type="radio"
+                        name="question_{{ c.question.id }}"
                         value="{{ answer.id }}"
                         {% if c.answer.id == answer.id %} checked {% endif %}
                     >
-                    <label class="{% if c.answer.id == answer.id %} {% if answer.is_correct %} text-success {% else %} text-danger {% endif %} {% endif %} form-check-label ml-3" 
+                    <label class="{% if c.answer.id == answer.id %} {% if answer.is_correct %} text-success {% else %} text-danger {% endif %} {% endif %} form-check-label ml-3"
                         for="{{ answer.id }}">
                         {{answer.content}}
                     </label>
