@@ -2,18 +2,23 @@
 
 from django.db import migrations
 
+
 def forward_func(apps, schema_editor):
     # Add IT and Japanese genres
     Genre = apps.get_model("main", "Genre")
-    Genre.objects.bulk_create([
-        Genre(name="IT"),
-        Genre(name="Japanese"),
-    ])
+    Genre.objects.bulk_create(
+        [
+            Genre(name="IT"),
+            Genre(name="Japanese"),
+        ]
+    )
+
 
 def reverse_func(apps, schema_editor):
     # Remove IT and Japanese genres
     Genre = apps.get_model("main", "Genre")
     Genre.objects.filter(name__in=["IT", "Japanese"]).delete()
+
 
 class Migration(migrations.Migration):
     dependencies = [

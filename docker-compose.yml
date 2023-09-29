@@ -9,7 +9,7 @@ services:
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_USER_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
       - exam-manage-db:/var/lib/mysql
@@ -31,12 +31,23 @@ services:
       dockerfile: dev.Dockerfile
     image: "exam-manage-dev"
     environment:
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_USER_PASSWORD: ${DB_USER_PASSWORD}
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
+      - DJANGO_SECRET_KEY
+      - DB_NAME
+      - DB_USER
+      - DB_ROOT_USER
+      - DB_PASSWORD
+      - DB_ROOT_PASSWORD
+      - DB_HOST
+      - DB_PORT
+      - DJANGO_SUPERUSER_USERNAME
+      - DJANGO_SUPERUSER_PASSWORD
+      - DJANGO_SUPERUSER_EMAIL
+      - STATIC_URL
+      - STATIC_ROOT
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_DEFAULT_REGION
+
     command: bash -c "./exammanagement/manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./:/var/task

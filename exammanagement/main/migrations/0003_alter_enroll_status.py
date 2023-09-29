@@ -4,15 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('main', '0002_auto_20230908_1428'),
+        ("main", "0002_auto_20230908_1428"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='enroll',
-            name='status',
-            field=models.IntegerField(blank=True, choices=[(1, 'Completed'), (0, 'Incomplete')], default=0, max_length=1),
+            model_name="enroll",
+            name="status",
+            field=models.IntegerField(
+                blank=True,
+                choices=[(1, "Completed"), (0, "Incomplete")],
+                default=0,
+                max_length=1,
+            ),
         ),
     ]

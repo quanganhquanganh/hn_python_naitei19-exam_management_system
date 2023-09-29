@@ -17,14 +17,14 @@
                 {% for answer in c.question.answer_set.all %}
                     <div class="form-check mx-4 d-flex align-items-center">
                         {% if user_response %}
-                        <input class="form-check-input" 
-                            type="radio" 
-                            name="question_{{ c.question.id }}" 
+                        <input class="form-check-input"
+                            type="radio"
+                            name="question_{{ c.question.id }}"
                             value="{{ answer.id }}" {% if user_response|keyvalue:c.question.id == answer.id %} checked {% endif %}>
                         {% else %}
-                            <input class="form-check-input" 
-                                type="radio" 
-                                name="question_{{ c.question.id }}" 
+                            <input class="form-check-input"
+                                type="radio"
+                                name="question_{{ c.question.id }}"
                                 value="{{ answer.id }}"
                             >
                         {% endif %}

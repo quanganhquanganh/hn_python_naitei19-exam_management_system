@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('main', '0004_alter_test_status'),
+        ("main", "0004_alter_test_status"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='enroll',
-            name='progress',
+            model_name="enroll",
+            name="progress",
             field=models.PositiveIntegerField(default=0),
         ),
     ]
