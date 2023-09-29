@@ -16,6 +16,10 @@
         <link href="{% sass_src 'scss/styles.scss' %}" rel="stylesheet" type="text/css" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <script language="javascript" type="text/javascript" src="{% static 'javascript/jquery-3.7.1.js' %}"></script>
+        <!-- Include DataTables CSS -->
+        <link href="{% static 'css/dataTable.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Include DataTables JavaScript -->
+        <script src="{% static 'javascript/dataTable.js'%}"></script>
         <script src="{% static 'javascript/script.js'%}"></script>
     </head>
     <body>
@@ -80,7 +84,7 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdown"
                         >
-                            <li><a class="dropdown-item" href="{% url 'user-profile' %}">{% trans "Profile" %}</a></li>
+                            <li><a class="dropdown-item" href="{{ request.user.profile.get_absolute_url }}">{% trans "Profile" %}</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                         </ul>

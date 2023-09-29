@@ -20,6 +20,9 @@ class Profile(models.Model):
         upload_to="avatars/", default="avatars/avatar.png", blank=True, null=True
     )
 
+    def get_absolute_url(self):
+        return reverse("user-profile", args=[str(self.id)])
+
 
 class Genre(models.Model):
     name = models.CharField(

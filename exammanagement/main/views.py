@@ -195,6 +195,7 @@ class SubjectDetailView(generic.DetailView):
         context["is_enrolled"] = (
             context["subject"].enrollers.filter(id=user.id).exists()
         )
+        context["enrollers"] = context["subject"].enroll_set.all()
         return context
 
 
@@ -222,8 +223,8 @@ def enroll_subject(request, subject_id):
     return render(request, "enroll_form.html", {"subject": subject})
 
 
-def user_profile(request):
-    profile = get_object_or_404(Profile, user=request.user)
+def user_profile(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
     enrolled_subjects = Enroll.objects.filter(user=profile.user).order_by("-id")[:3]
     tests = Test.objects.filter(user=profile.user).order_by("-completed_at")[:3]
 
@@ -231,7 +232,7 @@ def user_profile(request):
         "profile": profile,
         "enrolled_subjects": enrolled_subjects,
         "tests": tests,
-        "user": request.user,
+        "user": profile.user,
     }
 
     return render(request, "main/user_profile.html", context)

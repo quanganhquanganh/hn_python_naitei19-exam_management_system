@@ -64,7 +64,15 @@ jQuery(document).ready(function ($) {
       $(this).prop("checked", true);
     }
   });
-  $("exam-form").on("submit", function () {
+  $("#exam-form").on("submit", function () {
     localStorage.clear();
+  });
+  $("#myTabs a").on("click", function (e) {
+    e.preventDefault();
+    $(this).tab("show");
+  });
+  $("#enrollTable").DataTable({
+    order: [[2, "asc"]],
+    ordering: true, // Enable sorting
   });
 });

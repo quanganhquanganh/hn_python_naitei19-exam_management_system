@@ -30,40 +30,90 @@
         </div>
     </section>
     <section>
-        <p class="fs-3 fw-bold">{% trans "Chapters list" %}</p>
-        <div class="card" >
-        <div class="card-header w-full">
-            {{ subject.name }}
-        </div>
-           <ul id="chapters-list" class="list-group list-group-flush">
-                {% for chapter in chapters %}
-                    <li id="lesson-{{ chapter.id }}" class="list-group-item">
-                        <div class="d-flex justify-content-between">
-                            <span class="mr-3 fw-bold align-self-center">
-                                <a href="{{ chapter.get_absolute_url }}">{{ chapter.name }}</a>
-                                {% if chapter.test_set|in_category:user|in_contain_more:chapter.min_correct_ans %}
-                                    <i class="fa-solid fa-check text-success ms-2"></i>
-                                {% endif %}
-                            </span>
-                            {% if user.is_superuser %}
-                            <div>
-                                <button type="button" class="btn btn-danger me-1">{% trans "Delete"%}</button>
-                                <button type="button" class="btn btn-primary">{% trans "Update"%}</button>
-                            </div>
-                            {% elif user.is_authenticated %}
-                                <a href="{{ chapter.get_absolute_url }}"><button type="button" class="btn btn-primary">{% trans "Detail"%}</button></a>
-                            {% endif %}
-                        </div>
-                    </li>
-                {% empty %}
-                    <h5>{% trans "There are no chapters in this subject" %}</h5>
-                {% endfor %}
+        <div class="container mt-3">
+            <ul class="nav nav-tabs" id="myTabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tab1">{% trans "Chapters list" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab2">{% trans "Leaderboard" %}</a>
+                </li>
+                <!-- Add more tabs as needed -->
             </ul>
-        </div>
-        {% if user.is_superuser %}
-            <div class="card mt-5 mb-3 w-half">
-                <button type="button" class="btn btn-primary">{% trans "Add chapter" %}</button>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab1">
+                    <!-- Content for Tab 1 -->
+                    <p class="fs-3 fw-bold">{% trans "Chapters list" %}</p>
+                    <div class="card" >
+                        <div class="card-header w-full">
+                            {{ subject.name }}
+                        </div>
+                        <ul id="chapters-list" class="list-group list-group-flush">
+                            {% for chapter in chapters %}
+                                <li id="lesson-{{ chapter.id }}" class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="mr-3 fw-bold align-self-center">
+                                            <a href="{{ chapter.get_absolute_url }}">{{ chapter.name }}</a>
+                                            {% if chapter.test_set|in_category:user|in_contain_more:chapter.min_correct_ans %}
+                                                <i class="fa-solid fa-check text-success ms-2"></i>
+                                            {% endif %}
+                                        </span>
+                                        {% if user.is_superuser %}
+                                        <div>
+                                            <button type="button" class="btn btn-danger me-1">{% trans "Delete"%}</button>
+                                            <button type="button" class="btn btn-primary">{% trans "Update"%}</button>
+                                        </div>
+                                        {% elif user.is_authenticated %}
+                                            <a href="{{ chapter.get_absolute_url }}"><button type="button" class="btn btn-primary">{% trans "Detail"%}</button></a>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% empty %}
+                                <h5>{% trans "There are no chapters in this subject" %}</h5>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% if user.is_superuser %}
+                        <div class="card mt-5 mb-3 w-half">
+                            <button type="button" class="btn btn-primary">{% trans "Add chapter" %}</button>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="tab-pane fade" id="tab2">
+                    <!-- Content for Tab 2 -->
+                    <p class="fs-3 fw-bold">{% trans "Leaderboard" %}</p>
+                    <div class="card" >
+                        <div class="card-header w-full">
+                            {{ subject.name }}
+                        </div>
+                        <table id="enrollTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{% trans "Username" %}</th>
+                                    <th>{% trans "Progress" %}</th>
+                                    <th>{% trans "Total scored" %}</th>
+                                    <th>{% trans "Times" %}</th>
+                                    <th>{% trans "Correct ratio" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for enroller in enrollers %}
+                                    <tr>
+                                        <td class="fw-bold"><a href="{{ enroller.user.profile.get_absolute_url }}">{{ enroller.user.username }}</a></td>
+                                        <td>{{ enroller.subject|in_progress:enroller.user }}%</td>
+                                        <td>{{enroller|total_correct_cal:enroller.subject}}</td>
+                                        <td>{{enroller|total_times:enroller.subject}}</td>
+                                        <td>{{enroller|correct_ratio:enroller.subject}}%</td>
+                                    </tr>
+                                {% empty %}
+                                    <h6>{% trans "There are no user enrolled this subject" %}</h6>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        {% endif %}
+        </div>
     </section>
 {% endblock %}
