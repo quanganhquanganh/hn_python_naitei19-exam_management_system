@@ -1,5 +1,6 @@
 from django import template
 from django.conf.global_settings import LANGUAGES
+from main.models import Test
 
 register = template.Library()
 
@@ -43,3 +44,27 @@ def replace_lang(path, lang):
             parts[i] = lang
             break
     return "/".join(parts)
+
+
+@register.filter
+def total_correct_cal(thing1, thing2):
+    tests = Test.objects.filter(user=thing1.user, chapter__in=thing2.chapter_set.all())
+    return sum(test.total_score for test in tests)
+
+
+@register.filter
+def total_times(thing1, thing2):
+    tests = Test.objects.filter(user=thing1.user, chapter__in=thing2.chapter_set.all())
+    return tests.count()
+
+
+@register.filter
+def correct_ratio(thing1, thing2):
+    tests = Test.objects.filter(user=thing1.user, chapter__in=thing2.chapter_set.all())
+    total_scores = 0
+    total_questions = 0
+    for test in tests:
+        total_scores += test.total_score
+        total_questions += test.chapter.num_questions
+
+    return int((total_scores / total_questions) * 100)
