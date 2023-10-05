@@ -10,7 +10,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -35,6 +34,7 @@ from main.models import (
     Test,
 )
 
+from .asynchronous import send_html_mail
 from .forms import EditProfileForm, NewUserForm
 from .utils import token_generator
 
@@ -88,7 +88,6 @@ def register_request(request):
             )
             activate_url = "http://" + domain + link
             email_subject = _("Activate your account")
-            email_message = _("This is a email from Exam management")
             email_body = (
                 _("Hi ")
                 + user.username
@@ -100,14 +99,7 @@ def register_request(request):
                 + _("link activate")
                 + "</a>"
             )
-            send_mail(
-                email_subject,
-                email_message,
-                "noreply@example.com",
-                [user.email],
-                fail_silently=False,
-                html_message=email_body,
-            )
+            send_html_mail(email_subject, email_body, [user.email])
             messages.success(
                 request,
                 _(
@@ -176,6 +168,7 @@ def edit_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == "POST":
         form = EditProfileForm(request.POST, request.FILES, instance=profile)
+
         if form.is_valid():
             form.save()
             return redirect("user-profile")
@@ -294,7 +287,9 @@ def __random_question(test):
     sample_list = []
     for question in Question.objects.filter(chapter=test.chapter):
         sample_list.append(question)
-    questions = random.sample(sample_list, 8)
+    if len(sample_list) < test.chapter.num_questions:
+        return sample_list
+    questions = random.sample(sample_list, test.chapter.num_questions)
     return questions
 
 
