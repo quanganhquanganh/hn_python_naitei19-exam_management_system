@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-29 14:05+0700\n"
+"POT-Creation-Date: 2023-10-05 02:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,474 +18,531 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\exammanagement\settings.py:140
-msgid "English"
-msgstr ""
-
-#: .\exammanagement\settings.py:141
-msgid "Vietnamese"
-msgstr ""
-
-#: .\main\models.py:17
-msgid "Date of Birth of user"
-msgstr ""
-
-#: .\main\models.py:29
-msgid "Genre of the subject (IT, Japanese, etc)"
-msgstr ""
-
-#: .\main\models.py:37
-msgid "Title name of the subject"
-msgstr ""
-
-#: .\main\models.py:39
-msgid "Description"
-msgstr ""
-
-#: .\main\models.py:41
-msgid "Select genre for this subject"
-msgstr ""
-
-#: .\main\models.py:58
-msgid "Title name of the chapter"
-msgstr ""
-
-#: .\main\models.py:61
-msgid "Minimum correct answers to pass the test"
-msgstr ""
-
-#: .\main\models.py:63
-msgid "Time limit for the test"
-msgstr ""
-
-#: .\main\models.py:75
-msgid "Minimum correct answers must be less than number of questions"
-msgstr ""
-
-#: .\main\models.py:136
-msgid "Detail of the question"
-msgstr ""
-
-#: .\main\models.py:142
-msgid "Content of the answer"
-msgstr ""
-
-#: .\main\models.py:177
-msgid "Not enough columns"
-msgstr ""
-
-#: .\main\models.py:194
-msgid "All fields are required"
-msgstr ""
-
-#: .\main\models.py:198
-msgid "Question ID already exists"
-msgstr ""
-
-#: .\main\models.py:206
-msgid "Correct answers must be a list of numbers separated by comma"
-msgstr ""
-
-#: .\main\models.py:211
-msgid "All answers are required"
-msgstr ""
-
-#: .\main\templates\base_generic.html:6
+#: dist/templates/base_generic.html:5
+#: exammanagement/main/templates/base_generic.html:6
 msgid "Exam management"
 msgstr ""
 
-#: .\main\templates\base_generic.html:44
+#: dist/templates/base_generic.html:39
+#: exammanagement/main/templates/base_generic.html:44
 msgid "Search for..."
 msgstr ""
 
-#: .\main\templates\base_generic.html:56
+#: dist/templates/base_generic.html:51
+#: exammanagement/main/templates/base_generic.html:56
 msgid "All Genres"
 msgstr ""
 
-#: .\main\templates\base_generic.html:87
+#: dist/templates/base_generic.html:82
+#: exammanagement/main/templates/base_generic.html:121
 msgid "Profile"
 msgstr ""
 
-#: .\main\templates\base_generic.html:89
+#: dist/templates/base_generic.html:84
+#: exammanagement/main/templates/base_generic.html:123
 msgid "Logout"
 msgstr ""
 
-#: .\main\templates\base_generic.html:94
+#: dist/templates/base_generic.html:89
+#: exammanagement/main/templates/base_generic.html:129
 msgid "Signin"
 msgstr ""
 
-#: .\main\templates\base_generic.html:104
-#: .\main\templates\base_generic.html:109
+#: dist/templates/base_generic.html:99 dist/templates/base_generic.html:104
+#: exammanagement/main/templates/base_generic.html:139
+#: exammanagement/main/templates/base_generic.html:144
 msgid "Subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:112
+#: dist/templates/base_generic.html:107
+#: exammanagement/main/templates/base_generic.html:147
 msgid "User"
 msgstr ""
 
-#: .\main\templates\base_generic.html:118
+#: dist/templates/base_generic.html:113
+#: exammanagement/main/templates/base_generic.html:153
 msgid "Enrolled subjects"
 msgstr ""
 
-#: .\main\templates\base_generic.html:121
+#: dist/templates/base_generic.html:116
+#: exammanagement/main/templates/base_generic.html:156
 msgid "Settings"
 msgstr ""
 
-#: .\main\templates\base_generic.html:133
+#: dist/templates/base_generic.html:128
+#: exammanagement/main/templates/base_generic.html:168
 msgid "Language"
 msgstr ""
 
-#: .\main\templates\base_generic.html:162
+#: dist/templates/base_generic.html:157
+#: exammanagement/main/templates/base_generic.html:197
 msgid "Logged in as"
 msgstr ""
 
-#: .\main\templates\base_generic.html:192
+#: dist/templates/base_generic.html:187
+#: exammanagement/main/templates/base_generic.html:227
 msgid "Copyright"
 msgstr ""
 
-#: .\main\templates\main\chapter_detail.html:11
-msgid "Total questions"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:12
-msgid "Time limit"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:12
-msgid "minutes"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:13
-msgid "Minium correct answers"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:16
-msgid "Do test"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:23
-msgid "Exam History"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:27
-msgid "Date"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:28
-msgid "Score"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:29
-msgid "Finished Time"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:30
-msgid "Passed"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:31
-msgid "Details"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:49
-msgid "View Details"
-msgstr ""
-
-#: .\main\templates\main\chapter_detail.html:55
-msgid "No exam history available."
-msgstr ""
-
-#: .\main\templates\main\edit_profile.html:15
-msgid "Edit Profile"
-msgstr ""
-
-#: .\main\templates\main\edit_profile.html:18
-msgid "Save Changes"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:15
-msgid "Enrolled"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:19
-msgid "Register"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:36
-#: .\main\templates\main\subject_detail.html:47
-msgid "Chapters list"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:39
-#: .\main\templates\main\subject_detail.html:85
-msgid "Leaderboard"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:64
-#: .\main\templates\main\subject_list.html:16
+#: dist/templates/main/subject_list.html:16
+#: exammanagement/main/templates/main/subject_detail.html:64
+#: exammanagement/main/templates/main/subject_list.html:16
 msgid "Delete"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:65
-msgid "Update"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:68
-#: .\main\templates\main\subject_list.html:18
+#: dist/templates/main/subject_list.html:18
+#: exammanagement/main/templates/main/subject_detail.html:68
+#: exammanagement/main/templates/main/subject_list.html:18
 msgid "Detail"
 msgstr ""
 
-#: .\main\templates\main\subject_detail.html:73
-msgid "There are no chapters in this subject"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:79
-msgid "Add chapter"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:93
-#: .\main\templates\main\user_profile.html:28
-msgid "Username"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:94
-msgid "Progress"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:95
-msgid "Total scored"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:96
-msgid "Times"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:97
-msgid "Correct ratio"
-msgstr ""
-
-#: .\main\templates\main\subject_detail.html:110
-msgid "There are no user enrolled this subject"
-msgstr ""
-
-#: .\main\templates\main\subject_list.html:25
+#: dist/templates/main/subject_list.html:25
+#: exammanagement/main/templates/main/subject_list.html:25
 msgid "No subjects"
 msgstr ""
 
-#: .\main\templates\main\take_exam.html:9
-#: .\main\templates\main\test_results.html:7
+#: exammanagement/exammanagement/settings.py:140
+msgid "English"
+msgstr ""
+
+#: exammanagement/exammanagement/settings.py:141
+msgid "Vietnamese"
+msgstr ""
+
+#: exammanagement/main/models.py:17
+msgid "Date of Birth of user"
+msgstr ""
+
+#: exammanagement/main/models.py:29
+msgid "Genre of the subject (IT, Japanese, etc)"
+msgstr ""
+
+#: exammanagement/main/models.py:37
+msgid "Title name of the subject"
+msgstr ""
+
+#: exammanagement/main/models.py:39
+msgid "Description"
+msgstr ""
+
+#: exammanagement/main/models.py:41
+msgid "Select genre for this subject"
+msgstr ""
+
+#: exammanagement/main/models.py:58
+msgid "Title name of the chapter"
+msgstr ""
+
+#: exammanagement/main/models.py:61
+msgid "Minimum correct answers to pass the test"
+msgstr ""
+
+#: exammanagement/main/models.py:63
+msgid "Time limit for the test"
+msgstr ""
+
+#: exammanagement/main/models.py:75
+msgid "Minimum correct answers must be less than number of questions"
+msgstr ""
+
+#: exammanagement/main/models.py:144
+msgid "Detail of the question"
+msgstr ""
+
+#: exammanagement/main/models.py:150
+msgid "Content of the answer"
+msgstr ""
+
+#: exammanagement/main/models.py:165
+msgid "Content of the notification"
+msgstr ""
+
+#: exammanagement/main/models.py:168
+msgid "URL of the notification"
+msgstr ""
+
+#: exammanagement/main/models.py:197
+msgid "Not enough columns"
+msgstr ""
+
+#: exammanagement/main/models.py:214
+msgid "All fields are required"
+msgstr ""
+
+#: exammanagement/main/models.py:218
+msgid "Question ID already exists"
+msgstr ""
+
+#: exammanagement/main/models.py:226
+msgid "Correct answers must be a list of numbers separated by comma"
+msgstr ""
+
+#: exammanagement/main/models.py:231
+msgid "All answers are required"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:11
+msgid "Total questions"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:12
+msgid "Time limit"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:12
+msgid "minutes"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:13
+msgid "Minium correct answers"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:16
+msgid "Do test"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:23
+msgid "Exam History"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:27
+msgid "Date"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:28
+msgid "Score"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:29
+msgid "Finished Time"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:30
+msgid "Passed"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:31
+msgid "Details"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:49
+msgid "View Details"
+msgstr ""
+
+#: exammanagement/main/templates/main/chapter_detail.html:55
+msgid "No exam history available."
+msgstr ""
+
+#: exammanagement/main/templates/main/edit_profile.html:15
+msgid "Edit Profile"
+msgstr ""
+
+#: exammanagement/main/templates/main/edit_profile.html:18
+msgid "Save Changes"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:15
+msgid "Enrolled"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:19
+msgid "Register"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:36
+#: exammanagement/main/templates/main/subject_detail.html:47
+msgid "Chapters list"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:39
+#: exammanagement/main/templates/main/subject_detail.html:85
+msgid "Leaderboard"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:65
+msgid "Update"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:73
+msgid "There are no chapters in this subject"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:79
+msgid "Add chapter"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:93
+#: exammanagement/main/templates/main/user_profile.html:28
+msgid "Username"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:94
+msgid "Progress"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:95
+msgid "Total scored"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:96
+msgid "Times"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:97
+msgid "Correct ratio"
+msgstr ""
+
+#: exammanagement/main/templates/main/subject_detail.html:110
+msgid "There are no user enrolled this subject"
+msgstr ""
+
+#: exammanagement/main/templates/main/take_exam.html:9
+#: exammanagement/main/templates/main/test_results.html:7
 msgid "Chapter"
 msgstr ""
 
-#: .\main\templates\main\test_results.html:9
+#: exammanagement/main/templates/main/test_results.html:9
 msgid "Total score"
 msgstr ""
 
-#: .\main\templates\main\test_results.html:11
+#: exammanagement/main/templates/main/test_results.html:11
 msgid "Created at"
 msgstr ""
 
-#: .\main\templates\main\test_results.html:12
+#: exammanagement/main/templates/main/test_results.html:12
 msgid "Completed at"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:19
+#: exammanagement/main/templates/main/user_profile.html:19
 msgid "Edit profile"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:36
+#: exammanagement/main/templates/main/user_profile.html:36
 msgid "Email"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:44
+#: exammanagement/main/templates/main/user_profile.html:44
 msgid "Date of birth"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:56
+#: exammanagement/main/templates/main/user_profile.html:56
 msgid "Enrolled Subjects Status"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:66
+#: exammanagement/main/templates/main/user_profile.html:66
 msgid "Not enrolled any subject yet"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:74
+#: exammanagement/main/templates/main/user_profile.html:74
 msgid "Test history"
 msgstr ""
 
-#: .\main\templates\main\user_profile.html:87
+#: exammanagement/main/templates/main/user_profile.html:87
 msgid "Not make any test yet"
 msgstr ""
 
-#: .\main\views.py:93
+#: exammanagement/main/templatetags/keyvalue_action.py:104
+msgid "Just now"
+msgstr ""
+
+#: exammanagement/main/templatetags/keyvalue_action.py:107
+msgid "seconds ago"
+msgstr ""
+
+#: exammanagement/main/templatetags/keyvalue_action.py:110
+msgid "minutes ago"
+msgstr ""
+
+#: exammanagement/main/templatetags/keyvalue_action.py:113
+msgid "hours ago"
+msgstr ""
+
+#: exammanagement/main/templatetags/keyvalue_action.py:116
+msgid "days ago"
+msgstr ""
+
+#: exammanagement/main/templatetags/keyvalue_action.py:119
+msgid "months ago"
+msgstr ""
+
+#: exammanagement/main/templatetags/keyvalue_action.py:121
+msgid "years ago"
+msgstr ""
+
+#: exammanagement/main/views.py:89
 msgid "Activate your account"
 msgstr ""
 
-#: .\main\views.py:94
+#: exammanagement/main/views.py:90
 msgid "This is a email from Exam management"
 msgstr ""
 
-#: .\main\views.py:96
+#: exammanagement/main/views.py:92
 msgid "Hi "
 msgstr ""
 
-#: .\main\views.py:100
+#: exammanagement/main/views.py:96
 msgid ""
 "Thank you for registering our website. Please activate your account by click "
 "to the link below."
 msgstr ""
 
-#: .\main\views.py:103
+#: exammanagement/main/views.py:99
 msgid "link activate"
 msgstr ""
 
-#: .\main\views.py:117
+#: exammanagement/main/views.py:113
 msgid ""
 "Registration successful. Please check your mail to activate the account."
 msgstr ""
 
-#: .\main\views.py:121
+#: exammanagement/main/views.py:117
 msgid "Unsuccessful registration. Invalid information."
 msgstr ""
 
-#: .\main\views.py:138
+#: exammanagement/main/views.py:134
 msgid "Activation sucessfully. Let's enjoy the app."
 msgstr ""
 
-#: .\main\views.py:140
+#: exammanagement/main/views.py:136
 msgid "Some error occured while activating"
 msgstr ""
 
-#: .\main\views.py:156
+#: exammanagement/main/views.py:152
 msgid "You are now logged in as "
 msgstr ""
 
-#: .\main\views.py:159
+#: exammanagement/main/views.py:155
 msgid "Invalid user or password"
 msgstr ""
 
-#: .\main\views.py:170
+#: exammanagement/main/views.py:166
 msgid "You have successfully logged out."
 msgstr ""
 
-#: .\main\views.py:222
+#: exammanagement/main/views.py:218
 msgid "Registration successful."
 msgstr ""
 
-#: .\main\views.py:249
+#: exammanagement/main/views.py:245
 msgid "You must enroll the test's subject first."
 msgstr ""
 
-#: .\main\views.py:264 .\main\views.py:286
+#: exammanagement/main/views.py:260 exammanagement/main/views.py:282
+#: exammanagement/main/views.py:406
 msgid "Some errors have occured"
 msgstr ""
 
-#: .\main\views.py:275
+#: exammanagement/main/views.py:271
 msgid ""
 "You have a test still in progress. Please submit that test before creating a "
 "new test."
 msgstr ""
 
-#: .\templates\registration\login.html:10
+#: exammanagement/main/views.py:405
+msgid "Marked as read"
+msgstr ""
+
+#: exammanagement/templates/registration/login.html:10
 msgid "Please enter your login and password!"
 msgstr ""
 
-#: .\templates\registration\login.html:13
+#: exammanagement/templates/registration/login.html:13
 msgid "Forgot password?"
 msgstr ""
 
-#: .\templates\registration\login.html:20
+#: exammanagement/templates/registration/login.html:20
 msgid "Don't have an account?"
 msgstr ""
 
-#: .\templates\registration\login.html:20
+#: exammanagement/templates/registration/login.html:20
 msgid "Sign Up"
 msgstr ""
 
-#: .\templates\registration\password_reset_complete.html:5
+#: exammanagement/templates/registration/password_reset_complete.html:5
 msgid "Password Reset Complete"
 msgstr ""
 
-#: .\templates\registration\password_reset_complete.html:6
+#: exammanagement/templates/registration/password_reset_complete.html:6
 msgid "Your password has been successfully reset."
 msgstr ""
 
-#: .\templates\registration\password_reset_complete.html:7
+#: exammanagement/templates/registration/password_reset_complete.html:7
 msgid "Log in"
 msgstr ""
 
-#: .\templates\registration\password_reset_complete.html:7
+#: exammanagement/templates/registration/password_reset_complete.html:7
 msgid "with your new password."
 msgstr ""
 
-#: .\templates\registration\password_reset_confirm.html:10
+#: exammanagement/templates/registration/password_reset_confirm.html:10
 msgid "Change your password"
 msgstr ""
 
-#: .\templates\registration\password_reset_confirm.html:11
+#: exammanagement/templates/registration/password_reset_confirm.html:11
 msgid "Enter your new password below"
 msgstr ""
 
-#: .\templates\registration\password_reset_done.html:5
+#: exammanagement/templates/registration/password_reset_done.html:5
 msgid "Password Reset Request Sent"
 msgstr ""
 
-#: .\templates\registration\password_reset_done.html:6
+#: exammanagement/templates/registration/password_reset_done.html:6
 msgid ""
 "We've sent you an email with instructions on how to reset your password. "
 "Please check your email, including the spam folder, and follow the provided "
 "link."
 msgstr ""
 
-#: .\templates\registration\password_reset_email.html:9
+#: exammanagement/templates/registration/password_reset_email.html:9
 msgid "Hello,"
 msgstr ""
 
-#: .\templates\registration\password_reset_email.html:11
+#: exammanagement/templates/registration/password_reset_email.html:11
 msgid ""
 "We received a request to reset your password. Please click the following "
 "link to reset your password:"
 msgstr ""
 
-#: .\templates\registration\password_reset_email.html:14
+#: exammanagement/templates/registration/password_reset_email.html:14
 msgid "Reset Password"
 msgstr ""
 
-#: .\templates\registration\password_reset_email.html:17
+#: exammanagement/templates/registration/password_reset_email.html:17
 msgid ""
 "If you didn't request a password reset, you can safely ignore this email."
 msgstr ""
 
-#: .\templates\registration\password_reset_email.html:19
+#: exammanagement/templates/registration/password_reset_email.html:19
 msgid "Best regards,"
 msgstr ""
 
-#: .\templates\registration\password_reset_form.html:10
+#: exammanagement/templates/registration/password_reset_form.html:10
 msgid "Forgot your password?"
 msgstr ""
 
-#: .\templates\registration\password_reset_form.html:11
+#: exammanagement/templates/registration/password_reset_form.html:11
 msgid ""
 "Enter your email address below, and we'll email instructions for setting a "
 "new one."
 msgstr ""
 
-#: .\templates\registration\register.html:11
+#: exammanagement/templates/registration/register.html:11
 msgid "Let's create an accounts!"
 msgstr ""
 
-#: .\templates\registration\register.html:20
+#: exammanagement/templates/registration/register.html:20
 msgid "If you already have an account,"
 msgstr ""
 
-#: .\templates\registration\register.html:20
+#: exammanagement/templates/registration/register.html:20
 msgid "login"
 msgstr ""
 
-#: .\templates\registration\register.html:20
+#: exammanagement/templates/registration/register.html:20
 msgid "instead"
 msgstr ""
 
-#: .\templates\registration_template.html:7
+#: exammanagement/templates/registration_template.html:7
 msgid "Exam management - login"
 msgstr ""

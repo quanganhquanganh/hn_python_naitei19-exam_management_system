@@ -40,3 +40,15 @@
 .exam-bg {
   background-color: hsl(0, 0%, 94%);
 }
+
+.notification-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  border-radius: 50%; /* Makes it circular */
+  padding: 2px 5px; /* Adjust padding as needed */
+  color: white;
+  font-size: 12px; /* Adjust font size as needed */
+  transform: translate(-50%, -50%);
+}
