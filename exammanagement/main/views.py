@@ -28,6 +28,7 @@ from main.models import (
     Choice,
     Enroll,
     Genre,
+    Notification,
     Profile,
     Question,
     Subject,
@@ -60,11 +61,6 @@ class SubjectListView(generic.ListView):
             queryset = queryset.filter(genres=genre_id)
 
         return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["genres"] = Genre.objects.all()
-        return context
 
 
 class EnrolledSubjectListView(LoginRequiredMixin, generic.ListView):
@@ -396,3 +392,15 @@ def take_exam_view(request, pk):
             "main/test_results.html",
             context={"test": test, "choices": choices},
         )
+
+
+@login_required
+@requires_csrf_token
+def mark_notification_as_read(request):
+    if request.method == "POST":
+        notification_id = request.POST.get("notification_id")
+        notification = get_object_or_404(Notification, id=notification_id)
+        notification.is_read = True
+        notification.save()
+        return JsonResponse({"message": _("Marked as read")})
+    return JsonResponse({"message": _("Some errors have occured")})
