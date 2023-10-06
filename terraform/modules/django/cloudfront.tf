@@ -7,7 +7,7 @@ resource "aws_cloudfront_distribution" "main" {
 
   origin {
     domain_name = "${aws_apigatewayv2_api.lambda[0].id}.execute-api.${var.aws_region}.amazonaws.com"
-    origin_id   = "0"
+    origin_id   = "django"
     custom_origin_config {
       http_port              = 80
       https_port             = 443
@@ -26,7 +26,7 @@ resource "aws_cloudfront_distribution" "main" {
   ]
 
   default_cache_behavior {
-    target_origin_id       = "0"
+    target_origin_id       = "django"
     viewer_protocol_policy = "redirect-to-https"
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
@@ -49,39 +49,6 @@ resource "aws_cloudfront_distribution" "main" {
 			}
     }
     compress = true
-  }
-
-  dynamic "ordered_cache_behavior" {
-    for_each = {
-      for key, value in local.dist_manifest : key => value if key != "0"
-    }
-
-    content {
-      path_pattern           = "/${ordered_cache_behavior.value}/*"
-      target_origin_id       = "${ordered_cache_behavior.value}"
-      viewer_protocol_policy = "redirect-to-https"
-      allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-      cached_methods   = ["GET", "HEAD", "OPTIONS"]
-      forwarded_values {
-        query_string = false
-        headers = ["Accept", "Origin", "Referer", "Authorization", "Content-Type"]
-        cookies {
-          forward = "whitelist"
-          whitelisted_names = [
-            "csrftoken",
-            "_app_session",
-            "_app_session.sig",
-            "sessionid",
-            "sessionid.sig",
-            "messages",
-            "messages.sig",
-            "django_language",
-            "django_language.sig",
-          ]
-        }
-      }
-      compress = true
-    }
   }
 
   restrictions {

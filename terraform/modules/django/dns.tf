@@ -2,7 +2,7 @@ locals {
   domain_name = "${var.app_name}.${var.hosted_zone}"
 }
 
-data "aws_route53_zone" "domain_name" {
+data "aws_route53_zone" "zone" {
   name         = var.hosted_zone
   private_zone = false
 }
@@ -33,7 +33,7 @@ resource "aws_route53_record" "default" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = data.aws_route53_zone.domain_name.zone_id
+  zone_id         = data.aws_route53_zone.zone.zone_id
 
 }
 
@@ -48,7 +48,7 @@ resource "aws_route53_record" "route53_record" {
     aws_cloudfront_distribution.main,
   ]
 
-  zone_id = data.aws_route53_zone.domain_name.zone_id
+  zone_id = data.aws_route53_zone.zone.zone_id
   name    = local.domain_name
   type    = "A"
 

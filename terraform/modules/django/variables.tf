@@ -12,7 +12,6 @@ variable "stage" {}
 variable "django_secret_key" {}
 variable "admin_email" {}
 variable "admin_password" {}
-variable "default_from_email" {}
 variable "enable_s3_endpoint" {default = false}
 variable "enable_dynamodb_endpoint" {default = false}
 variable "enable_ses_endpoint" {default = false}

@@ -10,5 +10,5 @@ module "django" {
   django_secret_key      = var.django_secret_key
   admin_email            = var.admin_email
   admin_password         = var.admin_password
-  default_from_email     = var.default_from_email
+  enable_ses_endpoint    = true
 }

@@ -100,7 +100,7 @@ locals {
       EMAIL_HOST_USER = var.enable_ses_endpoint ? aws_iam_access_key.ses[0].id : ""
       EMAIL_HOST_PASSWORD = var.enable_ses_endpoint ? aws_iam_access_key.ses[0].ses_smtp_password_v4 : ""
       EMAIL_USE_TLS = "True"
-      DEFAULT_FROM_EMAIL = var.default_from_email
+      DEFAULT_FROM_EMAIL  = "noreply@${var.app_name}.${var.hosted_zone}"
     }
     disabled = {}
   }
