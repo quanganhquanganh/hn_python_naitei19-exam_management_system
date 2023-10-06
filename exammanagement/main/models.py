@@ -122,7 +122,18 @@ class Test(models.Model):
 
     @property
     def time(self):
-        return (self.completed_at - self.created_at).seconds
+        if self.completed_at is None:
+            return _("Not completed yet")
+        time = (self.completed_at - self.created_at)
+
+        if time.seconds < 60:
+            return _("%d seconds") % time.seconds
+        elif time.seconds < 3600:
+            return _("%d minutes") % (time.seconds // 60)
+        else:
+            return _("%d hours") % (time.seconds // 3600) + _("%d minutes") % (
+                (time.seconds % 3600) // 60
+            )
 
     def get_absolute_url(self):
         return reverse("take-exam", args=[str(self.id)])
