@@ -169,8 +169,7 @@ STATICFILES_FINDERS = [
     "sass_processor.finders.CssFinder",
 ]
 
-STATIC_ROOT = env.str("STATIC_ROOT", default=str(
-    os.path.join(BASE_DIR, "staticfiles")))
+STATIC_ROOT = env.str("STATIC_ROOT", default=str(os.path.join(BASE_DIR, "staticfiles")))
 
 SASS_PROCESSOR_ROOT = STATIC_ROOT
 
@@ -248,8 +247,7 @@ if not env.bool("ENABLE_COLLECTSTATIC_S3", default=False):
     AWS_S3_SIGNATURE_NAME = env.str("AWS_S3_SIGNATURE_NAME", default="s3v4")
 
     AWS_DEFAULT_ACL = env.str("AWS_DEFAULT_ACL", default=None)
-    AWS_USE_PATH_STYLE_ENDPOINT = env.bool(
-        "AWS_USE_PATH_STYLE_ENDPOINT", default=False)
+    AWS_USE_PATH_STYLE_ENDPOINT = env.bool("AWS_USE_PATH_STYLE_ENDPOINT", default=False)
 
     MEDIA_URL = "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
 

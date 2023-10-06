@@ -48,7 +48,23 @@ jQuery(document).ready(function ($) {
       submitExamAndRedirect();
     }
   };
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  };
   updateCountdown();
+  const csrfToken = getCookie('csrftoken');
 
   $('input[type="radio"]').on("change", function () {
     var questionId = $(this).attr("name").replace("question_", "");
@@ -74,5 +90,43 @@ jQuery(document).ready(function ($) {
   $("#enrollTable").DataTable({
     order: [[2, "asc"]],
     ordering: true, // Enable sorting
+  });
+  $(".mark-as-read").on("click", function (e) {
+    e.preventDefault();
+
+    var postUrl = $(this).data("post-url");
+    var notificationId = $(this).data("notification-id");
+    var notificationUrl = $(this).data("notification-url");
+
+    $.ajax({
+        type: "POST",
+        url: postUrl,
+        data: {
+            notification_id: notificationId,
+            csrfmiddlewaretoken: csrfToken,
+        },
+        success: function (data) {
+            var notificationBadge = $(".notification-badge");
+            var notificationCount = parseInt(notificationBadge.text());
+
+            notificationCount = notificationCount - 1;
+
+            notificationBadge.text(notificationCount);
+
+            if (notificationCount <= 0) {
+                notificationBadge.hide();
+                var notificationDropdown = $(".notification-dropdown");
+                var noNewNotifications = $("<li><a class='dropdown-item' href='#'>No new notifications</a></li>");
+                notificationDropdown.empty();
+                notificationDropdown.append(noNewNotifications);
+            }
+            $("#notification-" + notificationId).remove();
+            window.location.href = notificationUrl;
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            // Handle error (e.g., show an error message)
+            console.error("Error: " + errorThrown);
+        }
+    });
   });
 });
