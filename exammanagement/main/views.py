@@ -87,7 +87,8 @@ def register_request(request):
             domain = get_current_site(request).domain
             link = reverse(
                 "activate",
-                kwargs={"uidb64": uidb64, "token": token_generator.make_token(user)},
+                kwargs={"uidb64": uidb64,
+                        "token": token_generator.make_token(user)},
             )
             activate_url = "http://" + domain + link
             email_subject = _("Activate your account")
@@ -118,7 +119,8 @@ def register_request(request):
                 ),
             )
             return HttpResponseRedirect(reverse("index"))
-        messages.error(request, _("Unsuccessful registration. Invalid information."))
+        messages.error(request, _(
+            "Unsuccessful registration. Invalid information."))
     form = NewUserForm()
     return render(
         request=request,
@@ -135,7 +137,8 @@ def activate_account(request, uidb64, token):
             user.is_active = True
             user.save()
             login(request, user)
-            messages.success(request, _("Activation sucessfully. Let's enjoy the app."))
+            messages.success(request, _(
+                "Activation sucessfully. Let's enjoy the app."))
         else:
             messages.error(request, _("Some error occured while activating"))
         return redirect("index")
@@ -153,7 +156,8 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, _("You are now logged in as ") + f"{username}.")
+                messages.info(request, _(
+                    "You are now logged in as ") + f"{username}.")
                 return HttpResponseRedirect(reverse("index"))
         else:
             messages.error(request, _("Invalid user or password"))
@@ -199,7 +203,7 @@ class SubjectDetailView(generic.DetailView):
         return context
 
 
-class ChapterDetailView(generic.DetailView):
+class ChapterDetailView(LoginRequiredMixin, generic.DetailView):
     model = Chapter
 
     def get_context_data(self, **kwargs):
@@ -225,8 +229,10 @@ def enroll_subject(request, subject_id):
 
 def user_profile(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
-    enrolled_subjects = Enroll.objects.filter(user=profile.user).order_by("-id")[:3]
-    tests = Test.objects.filter(user=profile.user).order_by("-completed_at")[:3]
+    enrolled_subjects = Enroll.objects.filter(
+        user=profile.user).order_by("-id")[:3]
+    tests = Test.objects.filter(
+        user=profile.user).order_by("-completed_at")[:3]
 
     context = {
         "profile": profile,
@@ -246,7 +252,8 @@ def create_exam_view(request, pk):
     if request.method == "POST":
         # kiem tra nguoi dung da dang ky chu de chua
         if not chapter.subject.enrollers.filter(id=user.id).exists():
-            messages.error(request, _("You must enroll the test's subject first."))
+            messages.error(request, _(
+                "You must enroll the test's subject first."))
             return render(
                 request, "main/chapter_detail.html", context={"chapter": chapter}
             )
@@ -305,7 +312,8 @@ def __countdown_session(request, test):
     )
     current_time = timezone.now().timestamp()
     elapsed_time_seconds = current_time - exam_start_time
-    remaining_time_seconds = (exam_duration_minutes * 60) - elapsed_time_seconds
+    remaining_time_seconds = (
+        exam_duration_minutes * 60) - elapsed_time_seconds
     return remaining_time_seconds
 
 
