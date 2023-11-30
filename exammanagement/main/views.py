@@ -10,7 +10,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -28,12 +27,14 @@ from main.models import (
     Choice,
     Enroll,
     Genre,
+    Notification,
     Profile,
     Question,
     Subject,
     Test,
 )
 
+from .asynchronous import send_html_mail
 from .forms import EditProfileForm, NewUserForm
 from .utils import token_generator
 
@@ -61,11 +62,6 @@ class SubjectListView(generic.ListView):
 
         return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["genres"] = Genre.objects.all()
-        return context
-
 
 class EnrolledSubjectListView(LoginRequiredMixin, generic.ListView):
     model = Subject
@@ -87,11 +83,11 @@ def register_request(request):
             domain = get_current_site(request).domain
             link = reverse(
                 "activate",
-                kwargs={"uidb64": uidb64, "token": token_generator.make_token(user)},
+                kwargs={"uidb64": uidb64,
+                        "token": token_generator.make_token(user)},
             )
             activate_url = "http://" + domain + link
             email_subject = _("Activate your account")
-            email_message = _("This is a email from Exam management")
             email_body = (
                 _("Hi ")
                 + user.username
@@ -103,14 +99,7 @@ def register_request(request):
                 + _("link activate")
                 + "</a>"
             )
-            send_mail(
-                email_subject,
-                email_message,
-                "noreply@example.com",
-                [user.email],
-                fail_silently=False,
-                html_message=email_body,
-            )
+            send_html_mail(email_subject, email_body, [user.email])
             messages.success(
                 request,
                 _(
@@ -118,7 +107,8 @@ def register_request(request):
                 ),
             )
             return HttpResponseRedirect(reverse("index"))
-        messages.error(request, _("Unsuccessful registration. Invalid information."))
+        messages.error(request, _(
+            "Unsuccessful registration. Invalid information."))
     form = NewUserForm()
     return render(
         request=request,
@@ -135,7 +125,8 @@ def activate_account(request, uidb64, token):
             user.is_active = True
             user.save()
             login(request, user)
-            messages.success(request, _("Activation sucessfully. Let's enjoy the app."))
+            messages.success(request, _(
+                "Activation sucessfully. Let's enjoy the app."))
         else:
             messages.error(request, _("Some error occured while activating"))
         return redirect("index")
@@ -153,7 +144,8 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, _("You are now logged in as ") + f"{username}.")
+                messages.info(request, _(
+                    "You are now logged in as ") + f"{username}.")
                 return HttpResponseRedirect(reverse("index"))
         else:
             messages.error(request, _("Invalid user or password"))
@@ -176,9 +168,10 @@ def edit_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == "POST":
         form = EditProfileForm(request.POST, request.FILES, instance=profile)
+
         if form.is_valid():
             form.save()
-            return redirect("user-profile")
+            return redirect("user-profile", pk=profile.pk)
     else:
         form = EditProfileForm(instance=profile)
     return render(request, "main/edit_profile.html", {"form": form})
@@ -195,10 +188,11 @@ class SubjectDetailView(generic.DetailView):
         context["is_enrolled"] = (
             context["subject"].enrollers.filter(id=user.id).exists()
         )
+        context["enrollers"] = context["subject"].enroll_set.all()
         return context
 
 
-class ChapterDetailView(generic.DetailView):
+class ChapterDetailView(LoginRequiredMixin, generic.DetailView):
     model = Chapter
 
     def get_context_data(self, **kwargs):
@@ -222,16 +216,18 @@ def enroll_subject(request, subject_id):
     return render(request, "enroll_form.html", {"subject": subject})
 
 
-def user_profile(request):
-    profile = get_object_or_404(Profile, user=request.user)
-    enrolled_subjects = Enroll.objects.filter(user=profile.user).order_by("-id")[:3]
-    tests = Test.objects.filter(user=profile.user).order_by("-completed_at")[:3]
+def user_profile(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    enrolled_subjects = Enroll.objects.filter(
+        user=profile.user).order_by("-id")[:3]
+    tests = Test.objects.filter(
+        user=profile.user).order_by("-completed_at")[:3]
 
     context = {
         "profile": profile,
         "enrolled_subjects": enrolled_subjects,
         "tests": tests,
-        "user": request.user,
+        "user": profile.user,
     }
 
     return render(request, "main/user_profile.html", context)
@@ -245,7 +241,8 @@ def create_exam_view(request, pk):
     if request.method == "POST":
         # kiem tra nguoi dung da dang ky chu de chua
         if not chapter.subject.enrollers.filter(id=user.id).exists():
-            messages.error(request, _("You must enroll the test's subject first."))
+            messages.error(request, _(
+                "You must enroll the test's subject first."))
             return render(
                 request, "main/chapter_detail.html", context={"chapter": chapter}
             )
@@ -290,7 +287,9 @@ def __random_question(test):
     sample_list = []
     for question in Question.objects.filter(chapter=test.chapter):
         sample_list.append(question)
-    questions = random.sample(sample_list, 8)
+    if len(sample_list) < test.chapter.num_questions:
+        return sample_list
+    questions = random.sample(sample_list, test.chapter.num_questions)
     return questions
 
 
@@ -304,7 +303,8 @@ def __countdown_session(request, test):
     )
     current_time = timezone.now().timestamp()
     elapsed_time_seconds = current_time - exam_start_time
-    remaining_time_seconds = (exam_duration_minutes * 60) - elapsed_time_seconds
+    remaining_time_seconds = (
+        exam_duration_minutes * 60) - elapsed_time_seconds
     return remaining_time_seconds
 
 
@@ -395,3 +395,15 @@ def take_exam_view(request, pk):
             "main/test_results.html",
             context={"test": test, "choices": choices},
         )
+
+
+@login_required
+@requires_csrf_token
+def mark_notification_as_read(request):
+    if request.method == "POST":
+        notification_id = request.POST.get("notification_id")
+        notification = get_object_or_404(Notification, id=notification_id)
+        notification.is_read = True
+        notification.save()
+        return JsonResponse({"message": _("Marked as read")})
+    return JsonResponse({"message": _("Some errors have occured")})

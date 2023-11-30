@@ -160,7 +160,7 @@ LOCALE_PATHS = (BASE_DIR / "locale/",)
 STATIC_URL = env.str("STATIC_URL", default="/static/")
 
 STATICFILES_DIR = [
-    BASE_DIR / "static",
+    BASE_DIR / "/main/static",
 ]
 
 STATICFILES_FINDERS = [
@@ -235,7 +235,7 @@ EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 EMAIL_HOST_USER = env.str("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD", "")
-DEFAULT_FROM_EMAIL = env.str("EMAIL_HOST_USER", "")
+DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL", default="")
 
 if not env.bool("ENABLE_COLLECTSTATIC_S3", default=False):
     AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID_UPLOAD", default="")

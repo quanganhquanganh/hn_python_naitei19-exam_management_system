@@ -16,6 +16,10 @@
         <link href="{% sass_src 'scss/styles.scss' %}" rel="stylesheet" type="text/css" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <script language="javascript" type="text/javascript" src="{% static 'javascript/jquery-3.7.1.js' %}"></script>
+        <!-- Include DataTables CSS -->
+        <link href="{% static 'css/dataTable.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Include DataTables JavaScript -->
+        <script src="{% static 'javascript/dataTable.js'%}"></script>
         <script src="{% static 'javascript/script.js'%}"></script>
     </head>
     <body>
@@ -50,11 +54,9 @@
                     <div class="input-group-append">
                         <select class="form-control" name="genre">
                             <option value="" {% if not request.GET.genre %}selected{% endif %}>{% trans "All Genres" %}</option>
-                            {% for genre in genres %}
-                                {% with request_genre=request.GET.genre|default:""|add:"0" %}
-                                <option value="{{ genre.id }}" {% if request_genre == genre.id %}selected{% endif %}>{{ genre.name }}</option>
-                                {% endwith %}
-                            {% endfor %}
+                            {% with request_genre=request.GET.genre|default:""|add:"0" %}
+                            {% genre_options request_genre %}
+                            {% endwith %}
                         </select>
                     </div>
                     <button class="btn btn-primary" id="btnNavbarSearch" type="submit">
@@ -62,9 +64,46 @@
                     </button>
                 </div>
             </form>
-            <!-- Navbar-->
+            <!-- Navbar -->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 {% if request.user.is_authenticated %}
+                {% with unread=request.user|unread %}
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            id="navbarDropdown"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <i class="fas fa-bell fa-fw"></i>
+                            <span class="notification-badge" {% if unread|length == 0 %}style="display: none;"{% endif %}>
+                                {{ unread|length }}
+                            </span>
+                        </a>
+                        <ul
+                            class="dropdown-menu dropdown-menu-end notification-dropdown"
+                            aria-labelledby="navbarDropdown"
+                        >
+                        {% if unread|length == 0 %}
+                            <li><a class="dropdown-item" >No new notifications</a></li>
+                        {% endif %}
+                        {% for notif in unread %}
+                            <li>
+                                <a class="dropdown-item mark-as-read"
+                                    id="notification-{{ notif.id }}"
+                                    data-post-url="{% url 'mark-read' %}"
+                                    data-notification-url="{{ notif.updated_chapter.get_absolute_url }}"
+                                    data-notification-id="{{ notif.id }}"
+                                >
+                                    {{ notif.created_at|make_notification_time }} - {{ notif.content }}
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                        {% endfor %}
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown">
                         <a
                             class="nav-link dropdown-toggle"
@@ -80,11 +119,12 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdown"
                         >
-                            <li><a class="dropdown-item" href="{% url 'user-profile' %}">{% trans "Profile" %}</a></li>
+                            <li><a class="dropdown-item" href="{{ request.user.profile.get_absolute_url }}">{% trans "Profile" %}</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                         </ul>
                     </li>
+                {% endwith %}
                 {% else %}
                       <li class="nav-item">
                           <a class="nav-link" href="{% url 'login' %}">{% trans "Signin" %}</a>

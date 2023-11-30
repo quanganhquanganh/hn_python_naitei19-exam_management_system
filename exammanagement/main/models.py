@@ -20,6 +20,9 @@ class Profile(models.Model):
         upload_to="avatars/", default="avatars/avatar.png", blank=True, null=True
     )
 
+    def get_absolute_url(self):
+        return reverse("user-profile", args=[str(self.id)])
+
 
 class Genre(models.Model):
     name = models.CharField(
@@ -119,10 +122,29 @@ class Test(models.Model):
 
     @property
     def time(self):
-        return (self.completed_at - self.created_at).seconds
+        if self.completed_at is None:
+            return _("Not completed yet")
+        time = (self.completed_at - self.created_at)
+
+        if time.seconds < 60:
+            return _("%d seconds") % time.seconds
+        elif time.seconds < 3600:
+            return _("%d minutes") % (time.seconds // 60)
+        else:
+            return _("%d hours") % (time.seconds // 3600) + _("%d minutes") % (
+                (time.seconds % 3600) // 60
+            )
 
     def get_absolute_url(self):
         return reverse("take-exam", args=[str(self.id)])
+
+    def calculate_total_score(self):
+        choices = Choice.objects.filter(test=self)
+        total_score = 0
+        for choice in choices:
+            if choice.answer and choice.answer.is_correct:
+                total_score += 1
+        return total_score
 
 
 class Question(models.Model):
@@ -146,6 +168,21 @@ class Choice(models.Model):
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True)
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField(
+        max_length=1000, help_text=_("Content of the notification")
+    )
+    url = models.CharField(
+        max_length=1000, help_text=_("URL of the notification"), null=True
+    )
+    updated_chapter = models.ForeignKey(
+        Chapter, on_delete=models.CASCADE, null=True, blank=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
 
 
 class QuestionSetImport(models.Model):

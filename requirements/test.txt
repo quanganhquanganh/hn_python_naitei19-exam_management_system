@@ -74,9 +74,9 @@ dj-email-url==1.0.6 \
     # via
     #   -c requirements/base.txt
     #   environs
-django==4.2.5 \
-    --hash=sha256:5e5c1c9548ffb7796b4a8a4782e9a2e5a3df3615259fc1bfd3ebc73b646146c1 \
-    --hash=sha256:b6b2b5cae821077f137dc4dade696a1c2aa292f892eca28fa8d7bfdf2608ddd4
+django==4.2.6 \
+    --hash=sha256:08f41f468b63335aea0d904c5729e0250300f6a1907bf293a65499496cdbc68f \
+    --hash=sha256:a64d2487cdb00ad7461434320ccc38e60af9c404773a2f95ab0093b4453a3215
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.in
@@ -137,9 +137,9 @@ django-sass-processor==1.2.2 \
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.in
-django-storages==1.14 \
-    --hash=sha256:11280a883b13812df548f3cfe9c10280afc0d4727c8babdee369a75e71158f16 \
-    --hash=sha256:6c97e5faad829c923a1262206281742c484d76d43b332a196ddcc242b909c551
+django-storages==1.14.1 \
+    --hash=sha256:18cb6c305fbb2f114c11b5b7b647b6271aa251972dcd4a5651b9cee2b0bd3a8a \
+    --hash=sha256:a2c327d67792eec04c7f5f5bb2900b21f426de8a3a811cea85fac7904bdccf36
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.in
@@ -195,9 +195,9 @@ openpyxl==3.0.10 \
     #   -c requirements/base.txt
     #   -r requirements/base.in
     #   pyexcel-xlsx
-packaging==23.1 \
-    --hash=sha256:994793af429502c4ea2ebf6bf664629d07c1a9fe974af92966e4b8d2df7edc61 \
-    --hash=sha256:a392980d2b6cffa644431898be54b0045151319d1e7ec34f0cfed48767dd334f
+packaging==23.2 \
+    --hash=sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5 \
+    --hash=sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7
     # via
     #   -c requirements/base.txt
     #   marshmallow
@@ -374,9 +374,9 @@ sqlparse==0.4.4 \
     # via
     #   -c requirements/base.txt
     #   django
-texttable==1.6.7 \
-    --hash=sha256:290348fb67f7746931bcdfd55ac7584ecd4e5b0846ab164333f0794b121760f2 \
-    --hash=sha256:b7b68139aa8a6339d2c320ca8b1dc42d13a7831a346b446cb9eb385f0c76310c
+texttable==1.7.0 \
+    --hash=sha256:2d2068fb55115807d3ac77a4ca68fa48803e84ebb0ee2340f858107a36522638 \
+    --hash=sha256:72227d592c82b3d7f672731ae73e4d1f88cd8e2ef5b075a7a7f01a23a3743917
     # via
     #   -c requirements/base.txt
     #   pyexcel
