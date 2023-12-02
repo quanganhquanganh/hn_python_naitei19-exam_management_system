@@ -38,7 +38,7 @@
             <!-- Navbar Search-->
             <form
               class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
-              action="{% url 'subjects' %}" method="get"
+              action="{% customurl 'subjects' %}" method="get"
             >
                 <div class="input-group">
                     {% trans "Search for..." as search %}
@@ -93,7 +93,7 @@
                             <li>
                                 <a class="dropdown-item mark-as-read"
                                     id="notification-{{ notif.id }}"
-                                    data-post-url="{% url 'mark-read' %}"
+                                    data-post-url="{% customurl 'mark-read' %}"
                                     data-notification-url="{{ notif.updated_chapter.get_absolute_url }}"
                                     data-notification-id="{{ notif.id }}"
                                 >
@@ -121,13 +121,13 @@
                         >
                             <li><a class="dropdown-item" href="{{ request.user.profile.get_absolute_url }}">{% trans "Profile" %}</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+                            <li><a class="dropdown-item" href="{% customurl 'logout' %}">{% trans "Logout" %}</a></li>
                         </ul>
                     </li>
                 {% endwith %}
                 {% else %}
                       <li class="nav-item">
-                          <a class="nav-link" href="{% url 'login' %}">{% trans "Signin" %}</a>
+                          <a class="nav-link" href="{% customurl 'login' %}">{% trans "Signin" %}</a>
                       </li>
                 {% endif %}
             </ul>
@@ -138,7 +138,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">{% trans "Subjects" %}</div>
-                            <a class="nav-link" href="{% url 'subjects' %}">
+                            <a class="nav-link" href="{% customurl 'subjects' %}">
                                 <div class="sb-nav-link-icon">
                                     <i class="fas fa-tachometer-alt"></i>
                                 </div>
@@ -147,7 +147,7 @@
                             {% if request.user.is_authenticated %}
                             <div class="sb-sidenav-menu-heading">{% trans "User" %}</div>
                                 <!-- href is subjects/enrolled -->
-                                <a class="nav-link" href="{% url 'enrolled-subjects' %}">
+                                <a class="nav-link" href="{% customurl 'enrolled-subjects' %}">
                                     <div class="sb-nav-link-icon">
                                         <i class="fas fa-tachometer-alt"></i>
                                     </div>

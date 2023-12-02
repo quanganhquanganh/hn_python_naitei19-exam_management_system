@@ -36,6 +36,31 @@ resource "aws_apigatewayv2_stage" "lambda" {
   }
 }
 
+resource "aws_apigatewayv2_domain_name" "lambda" {
+  count = var.create_lambda_function ? 1 : 0
+  domain_name = local.domain_name
+  domain_name_configuration {
+    certificate_arn = aws_acm_certificate.default.arn
+    endpoint_type   = "REGIONAL"
+    security_policy = "TLS_1_2"
+  }
+}
+
+resource "aws_apigatewayv2_api_mapping" "lambda" {
+  count = var.create_lambda_function ? 1 : 0
+  api_id      = aws_apigatewayv2_api.lambda[0].id
+  domain_name = aws_apigatewayv2_domain_name.lambda[0].id
+  stage       = aws_apigatewayv2_stage.lambda[0].id
+}
+
+resource "aws_apigatewayv2_api_mapping" "lambda_default" {
+  count = var.create_lambda_function ? length(keys(local.dist_manifest)) - 1 : 0
+  api_id      = aws_apigatewayv2_api.lambda[0].id
+  domain_name = aws_apigatewayv2_domain_name.lambda[0].id
+  stage       = aws_apigatewayv2_stage.lambda[count.index + 1].id
+  api_mapping_key = "${keys(local.dist_manifest)[count.index + 1]}"
+}
+
 resource "aws_apigatewayv2_deployment" "lambda" {
   count = var.create_lambda_function ? 1 : 0
   api_id      = aws_apigatewayv2_api.lambda[0].id

@@ -3,9 +3,10 @@ import uuid
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from pyexcel_xlsx import get_data
+
+from .customreverse import customreverse as reverse
 
 # Create your models here.
 
@@ -124,7 +125,7 @@ class Test(models.Model):
     def time(self):
         if self.completed_at is None:
             return _("Not completed yet")
-        time = (self.completed_at - self.created_at)
+        time = self.completed_at - self.created_at
 
         if time.seconds < 60:
             return _("%d seconds") % time.seconds

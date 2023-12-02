@@ -1,22 +1,23 @@
 {% extends "registration_template.html" %}
 {% load i18n %}
+{% load keyvalue_action %}
 {% load crispy_forms_tags %}
 {% load bootstrap5 %}
 
 {% block content %}
-    <form method="post" action="{% url 'login' %}" class="mb-3 mt-md-4">
+    <form method="post" action="{% customurl 'login' %}" class="mb-3 mt-md-4">
         {% csrf_token %}
         <h2 class="fw-bold mb-2 text-uppercase ">Exam management</h2>
         <p class=" mb-5">{% trans "Please enter your login and password!" %}</p>
         {% include 'toast.html' %}
         {{ login_form|crispy }}
-        <p class="small"><a class="text-primary" href="{% url 'password_reset' %}">{% trans "Forgot password?" %}</a></p>
+        <p class="small"><a class="text-primary" href="{% customurl 'password_reset' %}">{% trans "Forgot password?" %}</a></p>
         <div class="d-grid">
             <input class="btn btn-outline-dark" type="submit" value="Login" />
         </div>
         <input type="hidden" name="next" value="{{ next }}" />
     </form>
     <div>
-        <p class="mb-0  text-center">{% trans "Don't have an account?" %} <a href="{% url 'register' %}" class="text-primary fw-bold">{% trans "Sign Up" %}</a></p>
+        <p class="mb-0  text-center">{% trans "Don't have an account?" %} <a href="{% customurl 'register' %}" class="text-primary fw-bold">{% trans "Sign Up" %}</a></p>
     </div>
 {% endblock %}

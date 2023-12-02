@@ -9,7 +9,9 @@ class AppTokenGenerator(PasswordResetTokenGenerator):
 
 
 def send_notification(user, content, url=None, updated_chapter=None):
-    Notification.objects.create(user=user, content=content, url=url, updated_chapter=updated_chapter)
+    Notification.objects.create(
+        user=user, content=content, url=url, updated_chapter=updated_chapter
+    )
 
 
 token_generator = AppTokenGenerator()

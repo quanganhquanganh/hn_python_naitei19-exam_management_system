@@ -21,18 +21,27 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from django.views.generic import RedirectView
 from main import views
+from main.customreverse import customreverse_lazy as reverse
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("main/", include("main.urls")),
+    path("0/admin/", admin.site.urls),
     path("", RedirectView.as_view(url="main/")),
+    path("main/", include("main.urls")),
     path("register", views.register_request, name="register"),
     path("login", views.login_request, name="login"),
     path("logout", views.logout_request, name="logout"),
     path("activate/<uidb64>/<token>", views.activate_account, name="activate"),
     path("i18n/", include("django.conf.urls.i18n")),
     path(
-        "password_reset/", auth_views.PasswordResetView.as_view(), name="password_reset"
+        "password_reset/",
+        auth_views.PasswordResetView.as_view(
+            template_name="registration/password_reset_form.html",
+            html_email_template_name="registration/password_reset_email.html",
+            email_template_name="registration/password_reset_email.html",
+            success_url=reverse("password_reset_done"),
+        ),
+        name="password_reset",
     ),
     path(
         "password_reset/done/",
@@ -41,7 +50,9 @@ urlpatterns = [
     ),
     path(
         "reset/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(),
+        auth_views.PasswordResetConfirmView.as_view(
+            success_url=reverse("password_reset_complete"),
+        ),
         name="password_reset_confirm",
     ),
     path(
@@ -62,6 +73,7 @@ urlpatterns += i18n_patterns(
             template_name="registration/password_reset_form.html",
             html_email_template_name="registration/password_reset_email.html",
             email_template_name="registration/password_reset_email.html",
+            success_url=reverse("password_reset_done"),
         ),
         name="password_reset",
     ),
@@ -72,7 +84,9 @@ urlpatterns += i18n_patterns(
     ),
     path(
         "reset/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(),
+        auth_views.PasswordResetConfirmView.as_view(
+            success_url=reverse("password_reset_complete"),
+        ),
         name="password_reset_confirm",
     ),
     path(

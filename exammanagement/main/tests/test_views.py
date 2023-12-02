@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 from django.urls import reverse
 from main.models import Chapter, Profile, Subject, Test
 
@@ -56,12 +56,20 @@ class SubjectDetailViewTest(TestCase):
 
     def test_view_url_acessible_by_name(self):
         response = self.client.get(
-            reverse("subject-detail", kwargs={"pk": self.subject.pk},))
+            reverse(
+                "subject-detail",
+                kwargs={"pk": self.subject.pk},
+            )
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
         response = self.client.get(
-            reverse("subject-detail", kwargs={"pk": self.subject.pk},))
+            reverse(
+                "subject-detail",
+                kwargs={"pk": self.subject.pk},
+            )
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "main/subject_detail.html")
 
@@ -69,8 +77,7 @@ class SubjectDetailViewTest(TestCase):
 class ChapterDetailViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.subject = Subject.objects.create(
-            name="Subject 1", description="Goodbye")
+        cls.subject = Subject.objects.create(name="Subject 1", description="Goodbye")
         cls.chapter = Chapter.objects.create(
             name="Chapter 1",
             min_correct_ans=20,
@@ -80,23 +87,32 @@ class ChapterDetailViewTest(TestCase):
         )
         cls.client = Client()
         cls.user = User.objects.create_user(
-            username='testuser', password='testpassword')
+            username="testuser", password="testpassword"
+        )
 
     def test_view_url_exists_at_desired_location(self):
-        self.client.login(username='testuser', password='testpassword')
+        self.client.login(username="testuser", password="testpassword")
         response = self.client.get(f"/main/chapter/{self.chapter.pk}")
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_acessible_by_name(self):
-        self.client.login(username='testuser', password='testpassword')
+        self.client.login(username="testuser", password="testpassword")
         response = self.client.get(
-            reverse("chapter-detail", kwargs={"pk": self.chapter.pk},))
+            reverse(
+                "chapter-detail",
+                kwargs={"pk": self.chapter.pk},
+            )
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        self.client.login(username='testuser', password='testpassword')
+        self.client.login(username="testuser", password="testpassword")
         response = self.client.get(
-            reverse("chapter-detail", kwargs={"pk": self.chapter.pk},))
+            reverse(
+                "chapter-detail",
+                kwargs={"pk": self.chapter.pk},
+            )
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "main/chapter_detail.html")
 
@@ -115,11 +131,19 @@ class ProfileViewTest(TestCase):
 
     def test_view_url_acessible_by_name(self):
         response = self.client.get(
-            reverse("user-profile", kwargs={"pk": self.profile.pk},))
+            reverse(
+                "user-profile",
+                kwargs={"pk": self.profile.pk},
+            )
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
         response = self.client.get(
-            reverse("user-profile", kwargs={"pk": self.profile.pk},))
+            reverse(
+                "user-profile",
+                kwargs={"pk": self.profile.pk},
+            )
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "main/user_profile.html")

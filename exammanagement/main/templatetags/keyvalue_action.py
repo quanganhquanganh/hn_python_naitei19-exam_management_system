@@ -1,5 +1,7 @@
 from django import template
+from django.conf import settings
 from django.conf.global_settings import LANGUAGES
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -102,10 +104,10 @@ def make_notification_time(date):
     time = timezone.now() - date
     if time.seconds < 5:
         return _("Just now")
-    
+
     if time.seconds < 60:
         return f"{time.seconds} " + _("seconds ago")
-    
+
     if time.seconds < 3600:
         return f"{time.seconds // 60} " + _("minutes ago")
 
@@ -119,3 +121,19 @@ def make_notification_time(date):
         return f"{time.days // 30} " + _("months ago")
 
     return f"{time.days // 365} " + _("years ago")
+
+
+# Modify the original url tag to remove FORCE_SCRIPT_NAME from the url
+@register.simple_tag(takes_context=True)
+def customurl(context, view_name, *args, **kwargs):
+    request = context["request"] if "request" in context else None
+
+    url = (
+        request.build_absolute_uri(reverse(view_name, args=args, kwargs=kwargs))
+        if request
+        else reverse(view_name, args=args, kwargs=kwargs)
+    )
+
+    if settings.FORCE_SCRIPT_NAME:
+        url = url.replace(settings.FORCE_SCRIPT_NAME, "/")
+    return url

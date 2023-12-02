@@ -44,19 +44,13 @@ resource "aws_acm_certificate_validation" "default" {
 }
 
 resource "aws_route53_record" "route53_record" {
-  depends_on = [
-    aws_cloudfront_distribution.main,
-  ]
-
+  name  = aws_apigatewayv2_domain_name.lambda[0].domain_name
+  type  = "A"
   zone_id = data.aws_route53_zone.zone.zone_id
-  name    = local.domain_name
-  type    = "A"
 
   alias {
-    name    = aws_cloudfront_distribution.main[0].domain_name
-    zone_id = "Z2FDTNDATAQYW2"
-
-    //HardCoded value for CloudFront
+    name    = aws_apigatewayv2_domain_name.lambda[0].domain_name_configuration[0].target_domain_name
+    zone_id = aws_apigatewayv2_domain_name.lambda[0].domain_name_configuration[0].hosted_zone_id
     evaluate_target_health = false
   }
 }

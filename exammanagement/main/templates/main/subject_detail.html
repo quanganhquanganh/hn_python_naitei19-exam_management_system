@@ -14,7 +14,7 @@
                         {% if is_enrolled %}
                             <button class="btn btn-primary" disabled>{% trans "Enrolled" %}</button>
                         {% else %}
-                            <form method="post" id="registration-form" data-registration-url="{% url 'subject-registration' subject.id %}">
+                            <form method="post" id="registration-form" data-registration-url="{% customurl 'subject-registration' subject.id %}">
                                 {% csrf_token %}
                                 <button class="btn btn-primary" id="enroll-button" type="submit">{% trans "Register" %}</button>
                             </form>

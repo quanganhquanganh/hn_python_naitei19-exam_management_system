@@ -1,8 +1,9 @@
 {% extends "admin/base.html" %}
 {% load i18n %}
+{% load keyvalue_action %}
 {% block userlinks %}
 {{ block.super }}
-/ <form action="{% url 'set_language' %}" method="post" style="display:inline">{% csrf_token %}
+/ <form action="{% customurl 'set_language' %}" method="post" style="display:inline">{% csrf_token %}
     <input name="next" type="hidden" value="{{ request.path }}">
     <select name="language" onchange="this.form.submit()">
         {% get_current_language as LANGUAGE_CODE %}
