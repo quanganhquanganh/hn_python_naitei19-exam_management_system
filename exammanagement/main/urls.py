@@ -22,4 +22,7 @@ urlpatterns = [
     path("exam/<int:pk>", views.take_exam_view, name="take-exam"),
     path("edit-profile", views.edit_profile, name="edit-profile"),
     path("mark-read", views.mark_notification_as_read, name="mark-read"),
+    path(
+        "get-image-upload-url", views.get_image_upload_url, name="get-image-upload-url"
+    ),
 ]

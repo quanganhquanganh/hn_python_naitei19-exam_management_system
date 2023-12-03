@@ -4,16 +4,29 @@
 {% load crispy_forms_tags %}
 {% load bootstrap5 %}
 {% load widget_tweaks %}
+{% load keyvalue_action %}
 
 {% block content %}
 <div class="container">
-    <form method="POST" enctype="multipart/form-data">
+    <form
+        id="profile-form"
+        method="POST"
+        enctype="multipart/form-data"
+        data-post-url="{% customurl 'get-image-upload-url' %}"
+    >
         {% csrf_token %}
         <input type="hidden" name="_method" value="PATCH">
         <div class="row">
             <div class="col-8 offset-2">
                 <div class="row fw-bold fs-3">{% trans "Edit Profile" %}</div>
                     {{ form|crispy }}
+                    <img
+                        id="preview"
+                        width="200"
+                        style="display:block;"
+                        src="{{ user.profile.avatar }}"
+                        onerror="this.src='{% static 'image/avatar.png' %}'"
+                    />
                 <div class="row pt-3">
                     <button class="btn btn-primary" type="submit">{% trans "Save Changes" %}</button>
                 </div>
@@ -21,4 +34,9 @@
         </div>
     </form>
 </div>
+<style>
+    #id_avatar {
+        display: none;
+    }
+</style>
 {% endblock %}

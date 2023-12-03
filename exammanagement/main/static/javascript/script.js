@@ -129,4 +129,53 @@ jQuery(document).ready(function ($) {
         }
     });
   });
+  var fileInput = $('<br><input type="file" id="file-input" accept="image/*">');
+  $('#id_avatar').after(fileInput);
+  $('#id_avatar').val('');
+  fileInput.on('change', function() {
+      var file = this.files[0];
+      var reader = new FileReader();
+      reader.onload = function(e) {
+          $('#preview').attr('src', e.target.result);
+      };
+      reader.readAsDataURL(file);
+  });
+  var postUrl = $('#profile-form').data('post-url');
+
+  $('#profile-form').on('submit', function(e) {
+      e.preventDefault();
+
+      // Get the file from the new file input field
+      var file = $('#file-input')[0].files[0];
+
+      // Get the presigned URL
+      $.ajax({
+          url: postUrl,
+          type: 'POST',
+          data: {
+              filename: file.name,
+              content_type: file.type,
+              csrfmiddlewaretoken: csrfToken,
+          },
+          success: function(data) {
+            // Put the fileType in the headers for the upload
+            var headers = { 'Content-Type': file.type };
+            var url = data.url;
+            var getUrl = data.get_url;
+            // Upload the file to S3
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                headers: headers,
+                data: file,
+                processData: false,
+                success: function(data) {
+                    // Now that the file is uploaded, submit the form
+                    $('#id_avatar').val(getUrl);
+                    $('#profile-form').unbind('submit').submit();
+                }
+            });
+          }
+      });
+  });
 });

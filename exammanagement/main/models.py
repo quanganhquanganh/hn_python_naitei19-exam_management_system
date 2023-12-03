@@ -17,9 +17,7 @@ class Profile(models.Model):
     date_of_birth = models.DateField(
         help_text=_("Date of Birth of user"), blank=True, null=True
     )
-    avatar = models.ImageField(
-        upload_to="avatars/", default="avatars/avatar.png", blank=True, null=True
-    )
+    avatar = models.URLField(blank=True, null=True, max_length=1000)
 
     def get_absolute_url(self):
         return reverse("user-profile", args=[str(self.id)])

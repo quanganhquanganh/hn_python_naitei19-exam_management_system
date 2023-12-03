@@ -27,6 +27,15 @@ module "s3_bucket_upload" {
   versioning_enabled     = false
   allowed_bucket_actions = ["s3:DeleteObject", "s3:GetObject", "s3:ListBucket", "s3:PutObject"]
   block_public_acls      = false
+  cors_configuration = [
+    {
+      allowed_headers = ["*"]
+      allowed_methods = ["GET", "HEAD", "PUT"]
+      allowed_origins = ["*"]
+      expose_headers  = ["ETag"]
+      max_age_seconds = 3000
+    }
+  ]
   name                   = "upload"
   stage                  = var.stage
   namespace              = var.lambda_function_name

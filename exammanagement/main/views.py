@@ -36,13 +36,12 @@ from main.models import (
 from .asynchronous import send_html_mail
 from .customreverse import customreverse as reverse
 from .forms import EditProfileForm, NewUserForm
-from .utils import token_generator
+from .utils import S3, token_generator
 
 logger = logging.getLogger("mylogger")
 
+
 # Create your views here.
-
-
 class SubjectListView(generic.ListView):
     model = Subject
     paginate_by = 6
@@ -167,7 +166,7 @@ def edit_profile(request):
 
         if form.is_valid():
             form.save()
-            return redirect("user-profile", pk=profile.pk)
+            return HttpResponseRedirect(reverse("user-profile", args=[str(profile.id)]))
     else:
         form = EditProfileForm(instance=profile)
     return render(request, "main/edit_profile.html", {"form": form})
@@ -399,3 +398,27 @@ def mark_notification_as_read(request):
         notification.save()
         return JsonResponse({"message": _("Marked as read")})
     return JsonResponse({"message": _("Some errors have occured")})
+
+
+@login_required
+@requires_csrf_token
+def get_image_upload_url(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid method"}, status=400)
+
+    file_name = request.POST.get("filename")
+    file_type = request.POST.get("content_type")
+
+    if not file_name:
+        return JsonResponse({"error": "Missing file name"}, status=400)
+    if not file_type or file_type not in ["image/png", "image/jpeg"]:
+        return JsonResponse({"error": "Invalid file type"}, status=400)
+    file_name = f"{datetime.datetime.now().timestamp()}"
+    url = S3().get_presigned_url(file_name, "avatars")
+    get_url = S3().get_file(file_name, "avatars")
+    return JsonResponse(
+        {
+            "url": url,
+            "get_url": get_url,
+        }
+    )

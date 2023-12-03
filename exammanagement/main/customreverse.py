@@ -11,4 +11,5 @@ def customreverse(viewname, urlconf=None, args=None, kwargs=None, current_app=No
         url = url.replace(settings.FORCE_SCRIPT_NAME, "/")
     return url
 
+
 customreverse_lazy = lazy(customreverse, str)
